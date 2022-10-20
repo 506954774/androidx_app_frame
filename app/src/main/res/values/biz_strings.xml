@@ -1,0 +1,56 @@
+<resources>
+
+
+
+    <!--业务字符串-->
+    <string name="launch_hint">军事体育训练综合考试评估系统</string>
+    <string name="launch_tel">联系电话: 400 800 8585</string>
+
+    <string name="init_title">动作考核分系统</string>
+    <string name="init_face_featrue">初始化人脸特征值</string>
+    <string name="init_select_subject">开始动作科目考核</string>
+    <string name="init_comp">深圳市令令科技有限公司</string>
+
+    <string name="select_subject_title">请选择考核科目</string>
+    <string name="select_subject_fuwocheng">俯卧撑</string>
+    <string name="select_subject_yintixiangshang">引体向上</string>
+    <string name="select_subject_shuanggangbiqushen">双杠臂屈伸</string>
+
+
+    <string name="exam_title">考核页面</string>
+    <string name="exam_subject">考核科目:</string>
+    <string name="exam_fuwocheng">俯卧撑</string>
+    <string name="exam_yintixiangshang">引体向上</string>
+    <string name="exam_shuanggangbiqushen">双杠臂屈伸</string>
+    <string name="exam_name">考生姓名:</string>
+    <string name="exam_sucessed_count">成功个数:</string>
+    <string name="exam_failed_count">失败个数:</string>
+    <string name="exam_score">考试成绩:</string>
+    <string name="exam_time_left">剩余时间:</string>
+    <string name="exam_latest_result">最近结果:</string>
+    <string name="exam_result_details">详情</string>
+    <string name="exam_status">状态:</string>
+    <string name="exam_examming">考核中...</string>
+    <string name="exam_finised">提前结束</string>
+    <string name="exam_error_info">当前错误:</string>
+    <string name="exam_error_info_all">查看全部错误明细</string>
+    <string name="exam_stu_face_hint">考生人脸识别</string>
+    <string name="exam_commit_exam_result">提交考试结果</string>
+    <string name="exam_not_supported">暂时不支持此科目的考试</string>
+    <string name="exam_start">开始考试</string>
+    <string name="exam_time_no_limit">不限</string>
+    <string name="exam_student_not_exsit">该考生的信息已被删除,请退出app,重新初始化app</string>
+    <string name="exam_student_not_in_this_plan">该考生不在此科目的考试计划之中</string>
+    <string name="exam_result_upload">成绩提交中</string>
+    <string name="exam_result_succed">成绩提交成功</string>
+    <string name="exam_result_failed">成绩提交失败:</string>
+    <string name="exam_result_counting">当前考试尚未结束,请倒计时结束后再提交</string>
+    <string name="exam_status_no_student">当前状态:准备中,请先点击考生人脸识别按钮</string>
+    <string name="exam_status_ready">当前状态:考生认证成功,请点击开始考试</string>
+    <string name="exam_status_examming">当前状态:考试中</string>
+
+
+
+    <string name="setting_title">考试设置</string>
+
+</resources>

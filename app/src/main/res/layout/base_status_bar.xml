@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+   >
+
+    <RelativeLayout
+        android:id="@+id/rl_root"
+        android:layout_width="match_parent"
+        android:layout_height="70px"
+        android:background="@color/white"
+        android:paddingLeft="50px"
+        android:paddingRight="80px">
+
+
+
+        <com.ilinklink.tg.widget.WifiView
+            android:layout_marginRight="20px"
+            android:layout_toLeftOf="@+id/commen_bar_title"
+            android:layout_marginLeft="30px"
+            android:id="@+id/wifiView"
+            android:layout_width="60px"
+            android:layout_height="60px"
+            />
+
+        <TextView
+
+            android:id="@+id/commen_bar_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:layout_alignParentRight="true"
+
+            android:layout_alignParentBottom="true"
+            android:gravity="center_vertical"
+            android:singleLine="true"
+            android:text="10:10"
+            android:layout_marginBottom="10px"
+
+            android:textColor="@color/cor333333"
+            android:textSize="32px" />
+
+
+    </RelativeLayout>
+</RelativeLayout>

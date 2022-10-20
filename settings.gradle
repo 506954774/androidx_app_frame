@@ -1,0 +1,6 @@
+rootProject.name='ztsb_easy'
+include ':app'
+//include ':poseSDK'
+
+
+

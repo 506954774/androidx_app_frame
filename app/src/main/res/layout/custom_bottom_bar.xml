@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<cn.bingoogolapple.badgeview.BGABadgeRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/badgeRelativeLayout"
+    android:layout_width="match_parent"
+    android:layout_height="144px">
+
+    <RadioGroup xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/downbar"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_centerVertical="true"
+        android:background="@color/cor_E8E8E8"
+        android:orientation="horizontal">
+
+        <cn.bingoogolapple.badgeview.BGABadgeRadioButton
+
+            android:id="@+id/rb_fragment_home"
+            style="@style/radio_btn_main"
+            android:layout_gravity="center"
+            android:textSize="28px"
+            android:drawablePadding="18px"
+            android:drawableTop="@drawable/main_rb_home_selector"
+            android:text="@string/fragment_home"/>
+
+        <cn.bingoogolapple.badgeview.BGABadgeRadioButton
+            android:id="@+id/rb_fragment_mine"
+            style="@style/radio_btn_main"
+            android:drawableTop="@drawable/main_rb_mine_selector"
+            android:textSize="28px"
+            android:drawablePadding="18px"
+            android:layout_gravity="center"
+            android:text="@string/fragment_mine"/>
+
+        <cn.bingoogolapple.badgeview.BGABadgeRadioButton
+            android:id="@+id/rb_fragment_set"
+            style="@style/radio_btn_main"
+            android:textSize="28px"
+            android:drawablePadding="18px"
+            android:layout_gravity="center"
+            android:drawableTop="@drawable/main_rb_set_selector"
+            android:text="@string/fragment_set"/>
+    </RadioGroup>
+
+</cn.bingoogolapple.badgeview.BGABadgeRelativeLayout>
+

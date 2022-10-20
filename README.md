@@ -1,3 +1,1 @@
-# app_pad
-
-新兵训练pad端app
+pad端demo，仅供前期pad端边缘计算调试用

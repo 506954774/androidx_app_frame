@@ -1,0 +1,11 @@
+<resources>
+
+    <!--广告轮播控件-->
+    <dimen name="pop_top_listview_item_height">200dp</dimen>
+
+    <!-- 引导页圆点的大小 -->
+    <dimen name="guide_point_bulk">10dp</dimen>
+    <dimen name="standardTextSize">15dp</dimen>
+
+    <dimen name="grid_expected_size">120dp</dimen>
+</resources>

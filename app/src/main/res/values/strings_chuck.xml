@@ -1,0 +1,328 @@
+<resources>
+    <string name="cpv_title">左臂力度</string>
+    <string name="cpv_title2">右臂力度</string>
+    <string name="cpv_limit">单杠模式</string>
+    <string name="cpv_turn_off">关闭</string>
+    <string name="cpv_total_score">总评分</string>
+
+    <!--站立摄像头准备-->
+    <string name="standby_hint">请调整您的位置\n让您的全身在摄像头拍摄范围内</string>
+
+    <!--课程详情-->
+    <string name="course_details_title">课程详情</string>
+    <string name="course_details_start">开始训练</string>
+    <string name="course_details_target">目标:</string>
+    <string name="course_details_position">部位:</string>
+    <string name="course_details_level">难度:</string>
+    <string name="course_details_duration">时长:</string>
+    <string name="course_details_follows">当前已有{0}人练过</string>
+    <string name="course_details_update_time">更新时间:&#x0020;{0}</string>
+    <string name="course_details_desc">课程介绍</string>
+    <string name="course_details_group">课程分组</string>
+    <string name="course_details_group_count">共{0}组</string>
+    <string name="course_details_group_index">第{0}组</string>
+    <string name="course_details_related_recommendations">相关推荐</string>
+    <string name="course_details_show_more">查看更多</string>
+    <string name="course_details_group_name">第{0}组&#x0020;&#x0020;{1}</string>
+    <string name="download_failed">下载失败</string>
+    <string name="_downloading_">资源下载中</string>
+    <string name="_downloading_f">下载中:{0}%</string>
+    <string name="training_group_title">{0}/{1}&#x0020;&#x0020;{2}</string>
+    <string name="training_group_time">{0}/{1}\"</string>
+    <string name="training_quit">退出训练</string>
+    <string name="training_continue">继续训练</string>
+    <string name="training_tips">动作讲解</string>
+    <string name="training_quit_content">现在退出将无法保存记录，加油坚持练习吧！</string>
+    <string name="training_quit_left">确认退出</string>
+    <string name="training_quit_right">继续练习</string>
+
+    <!--课程评分数据-->
+    <string name="course_score_title">训练数据详情</string>
+    <string name="course_score_show_details">查看课程</string>
+    <string name="course_score_update_time">更新时间:&#x0020;{0}</string>
+    <string name="course_score_target">目标</string>
+    <string name="course_score_position">部位</string>
+    <string name="course_score_level">难度</string>
+    <string name="course_score_duration">时长</string>
+    <string name="course_score_data">训练数据</string>
+    <string name="course_score_arvel">总评分</string>
+    <string name="course_score_unit">分</string>
+    <string name="course_score_group">分组数据</string>
+    <string name="course_score_group_index">第{0}组</string>
+    <string name="course_score_group_name">第{0}组&#x0020;&#x0020;{1}</string>
+    <string name="course_score_format">{0}分</string>
+    <string name="course_score_ng_action">不合格动作</string>
+    <string name="course_score_arm_value">左臂{0}kg/右臂{1}kg</string>
+
+    <string name="image_edit_next">下一步</string>
+
+    <!--课程完成数据-->
+    <string name="course_complete_hint">恭喜你，完成第{0}次训练！</string>
+    <string name="course_complete_basic_info">基本信息</string>
+    <string name="course_complete_course_name">课 程</string>
+    <string name="course_complete_level">难 度</string>
+    <string name="course_complete_duration">练习时长</string>
+    <string name="course_complete_completed_time">完成时间</string>
+
+
+
+
+
+    <string name="dialog_title">温馨提示</string>
+    <string name="cancel">取消</string>
+    <string name="save">保存</string>
+    <string name="error">操作异常</string>
+    <string name="more">查看更多</string>
+    <string name="more1">查看更多 ></string>
+    <string name="minute">分钟</string>
+    <string name="back">返回</string>
+    <string name="kg">kg</string>
+    <string name="cm">cm</string>
+    <string name="bfh">%</string>
+
+    <!--各种弹框-->
+    <string name="dialog_got_it">知道了</string>
+    <string name="dialog_cancel">否</string>
+
+    <!--启动页面-->
+    <string name="permission_tips1">为了提高用户体验,请允许相关权限</string>
+    <string name="permission_tips2">为了提高用户体验,请设置相关权限</string>
+    <string name="permission_tips3">为了提高用户体验,请前往应用-设置-打开权限</string>
+    <string name="permission_tips_camera">为了提高用户体验,请设置相机权限</string>
+    <string name="permission_tips_audio">为了提高用户体验,请设置麦克风权限</string>
+
+    <!--拍照-->
+    <string name="camera_permission">您需要授权益拍访问:\n</string>
+    <string name="camera_permission_camera">相机</string>
+    <string name="camera_permission_microphone">麦克风</string>
+    <string name="camera_permission_sd_card">媒体存储</string>
+    <string name="camera_permission_tips">温馨提示</string>
+    <string name="camera_permission_setting">设置</string>
+    <string name="camera_permission_sd_cancel">取消</string>
+    <string name="camera_ratio_4_3_hint">4:3</string>
+    <string name="camera_ratio_3_4_hint">3:4</string>
+    <string name="camera_ratio_1_1_hint">1:1</string>
+    <string name="camera_cut_hint">裁剪</string>
+    <string name="camera_filter_hint">滤镜</string>
+    <string name="camera_failed">拍摄失败!</string>
+    <string name="photo_edit">相片编辑</string>
+    <string name="photo_loading">加载中...</string>
+    <string name="photo_video_hint">长按拍摄视频(时长需大于2秒)</string>
+    <string name="photo_video_is_to_short">该视频段太短了</string>
+    <string name="photo_video_limit">已达到拍摄总时长</string>
+    <string name="photo_too_big_to_edit">该图片太大,无法编辑!</string>
+    <string name="photo_saved">保存成功</string>
+    <string name="offline_title">下线通知</string>
+    <string name="offline_hint">您的账号已在其他设备登录,如非本人操作,则密码可能已泄露,建议您立即修改密码。</string>
+    <string name="offline_confirm">确定</string>
+    <string name="video_must_be_loger_than_2_secs">视频至少拍摄2秒</string>
+
+    <!--定位授权弹框-->
+    <string name="dialog_location_hint">定位服务未开启</string>
+    <string name="location_srtting_hint">请在系统设置中开启定位服务</string>
+    <string name="location_cancel">暂不</string>
+    <string name="go_to_setting">去设置</string>
+    <string name="location_failed">定位获取失败</string>
+    <string name="location_permission_dialog_title">定位服务未开启</string>
+    <string name="location_permission_dialog_content">请在系统设置中开启定位服务</string>
+    <string name="location_permission_dialog_cancel_btn">暂不</string>
+    <string name="location_permission_dialog_confirm_btn">去设置</string>
+
+    <!--支付-->
+    <string name="pay_failed">支付失败</string>
+    <string name="pay_canceled">取消支付</string>
+    <string name="pay_success">支付成功</string>
+    <string name="pay_wechat_client_version_too_low">微信版本不支持支付，请下载最新版本</string>
+    <string name="pay_info_confirm">支付订单确认中</string>
+
+    <!--登录-->
+    <string name="login_login">登录</string>
+    <string name="login_logining">登录中...</string>
+    <string name="login_phone">手机号</string>
+    <string name="login_phone_hint">请输入手机号</string>
+    <string name="login_pwd">密码</string>
+    <string name="login_pwd_hint">请输入密码</string>
+    <string name="login_reset_pwd">忘记密码</string>
+    <string name="login_regist_now">立即注册</string>
+    <string name="login_failed">登录失败</string>
+    <string name="login_sucess">登录成功</string>
+    <string name="account_login_phone_error">该账号不正确</string>
+
+    <string name="splash_copyright">Copyright © Linklink All Rights Reserved.</string>
+    <string name="unknown_exception">很抱歉, 程序出现了问题.\n日志正在保存,\n请联系客服以获取帮助.</string>
+
+    <!--wifi列表-->
+    <string name="wifi_refresh">刷新列表</string>
+    <string name="wifi_set">网络设置</string>
+    <string name="wifi_input_title">输入WiFi密码</string>
+    <string name="wifi_input_hint">请输入WiFi密码</string>
+    <string name="wifi_connect">连接</string>
+    <string name="wifi_hand_tag">手动设置</string>
+    <string name="wifi_hand">手动</string>
+    <string name="wifi_auto">自动</string>
+    <string name="wifi_IPV4">IPV4地址</string>
+    <string name="wifi_mask">子网掩码</string>
+    <string name="wifi_gateway">默认网关</string>
+    <string name="wifi_dns">DNS服务器</string>
+    <string name="wifi_ignore">忽略此网络</string>
+    <string name="wifi_address">192.168.0.1</string>
+    <string name="wifi_zero">0.0.0.0</string>
+    <string name="wifi_255">255.255.255.0</string>
+    <string name="wifi_ip_tip">请输入IP</string>
+    <string name="wifi_mask_tip">请输入子网掩码</string>
+    <string name="wifi_gateway_tip">请输入网关</string>
+    <string name="wifi_dns_tip">请输入DNS</string>
+
+    <!--登录-->
+    <string name="login_title">账号登录</string>
+    <string name="login_title_swap">扫码登录</string>
+    <string name="login_swap">扫码登录</string>
+    <string name="login_account_hint">请输入账号</string>
+    <string name="login_psw_hint">请输入密码</string>
+    <string name="login_forget_psw">忘记密码?</string>
+    <string name="login_regist_btn">注册</string>
+    <string name="login_btn">登录</string>
+    <string name="login_by_account">账号密码登录</string>
+    <string name="login_swap_tip">请使用手机APP端进行扫码登录</string>
+
+    <!--注册,忘记密码-->
+    <string name="regist_title">注册账号</string>
+    <string name="regist_phone_hint">请输入手机号码</string>
+    <string name="regist_pic_code_hint">请输入图形验证码</string>
+    <string name="regist_code_hint">请输入短信验证码</string>
+    <string name="regist_psw_hint">请输入登录密码</string>
+    <string name="regist_get_code">获取验证码</string>
+    <string name="reset_title">重置密码</string>
+    <string name="reset">重置</string>
+    <string name="get_code_error">获取验证码失败</string>
+    <string name="phone_error">请输入正确的手机号码</string>
+    <string name="reget_code_after">s后重新发送</string>
+    <string name="reget_pic_code_error">图形验证码错误</string>
+    <string name="get_pic_code_error">获取图形验证码失败,请重试!</string>
+
+    <!--main-->
+    <string name="fragment_home">首页</string>
+    <string name="fragment_mine">个人中心</string>
+    <string name="fragment_set">设置</string>
+
+    <!--设置-->
+    <string name="set_wifi">网络设置</string>
+    <string name="set_device_check">设备检测</string>
+    <string name="set_new_version">系统更新</string>
+    <string name="set_normal">正常</string>
+    <string name="set_error">异常</string>
+    <string name="set_shutdown">关机</string>
+    <string name="set_reboot">重启</string>
+    <string name="set_checking">正在检测...</string>
+    <string name="set_device_status">服务连接状态</string>
+    <string name="set_camera_status">摄像头状态</string>
+    <string name="set_recheck">重新检测</string>
+
+    <!--健康资料-->
+    <string name="healthy_title">健康资料</string>
+    <string name="healthy_gender">性别</string>
+    <string name="healthy_birthday">出生日期</string>
+    <string name="healthy_height">身高</string>
+    <string name="healthy_weight">体重</string>
+    <string name="healthy_bust">胸围</string>
+    <string name="healthy_waistline">腰围</string>
+    <string name="healthy_hipline">臀围</string>
+    <string name="healthy_age">年龄</string>
+    <string name="healthy_male">男</string>
+    <string name="healthy_female">女</string>
+    <string name="healthy_save_success">保存成功</string>
+
+    <!--首页-->
+    <string name="home_practice">最近练习</string>
+    <string name="home_recommend">为你推荐</string>
+    <string name="home_screen">课程筛选</string>
+    <string name="home_target">目标</string>
+    <string name="home_position">部位</string>
+    <string name="home_type"></string>
+    <string name="home_category">品类</string>
+    <string name="home_difficulty">难度</string>
+    <string name="home_sort">排序</string>
+    <string name="sort_default">默认</string>
+    <string name="sort_update">最近更新</string>
+    <string name="sort_hot">最热门</string>
+    <string name="search_hint">请输入搜索关键词</string>
+
+    <!--个人中心-->
+    <string name="user_id">ID: %1s</string>
+    <string name="user_sport_time">运动时长</string>
+    <string name="user_practice_count">课程练习(个)</string>
+    <string name="user_complete_count">完成次数(次)</string>
+    <string name="user_day_count">累计天数(天)</string>
+    <string name="user_healthy_info">健康资料</string>
+    <string name="user_collect">收藏课程</string>
+    <string name="user_practice">练习课程</string>
+    <string name="user_recommend">推荐课程</string>
+    <string name="user_practice_time">练习时长: %1s</string>
+    <string name="user_difficulty">难度: %1s</string>
+    <string name="user_a_score_format">平均得分: %1s</string>
+    <string name="user_a_score">平均得分: </string>
+    <string name="user_complete_time">完成时间: %1s</string>
+    <string name="user_age">%1d岁</string>
+    <string name="user_weight">%1sKG</string>
+    <string name="user_height">%1scm</string>
+
+    <!--账号信息-->
+    <string name="user_detail_title">账号信息</string>
+    <string name="user_detail_id">用户ID</string>
+    <string name="user_detail_header">头像</string>
+    <string name="user_detail_nickname">昵称</string>
+    <string name="user_detail_city">所在城市</string>
+    <string name="user_detail_account">登录账号</string>
+    <string name="user_detail_password">登录密码</string>
+    <string name="user_detail_logout">退出登录</string>
+    <string name="user_detail_password_hint">******</string>
+    <string name="user_detail_password_modify">修改密码</string>
+    <string name="user_detail_password_old">请输入原密码</string>
+    <string name="user_detail_password_new">请输入新密码</string>
+    <string name="user_detail_password_new_again">请再次输入新密码</string>
+    <string name="user_detail_password_tip">登录密码支持数字及大小写字母，长度限制为6-20位</string>
+    <string name="user_detail_logout_tip">是否退出登录?</string>
+    <string name="user_detail_modify_success">修改成功</string>
+
+    <!--课程-->
+
+    <string name="check_course">查看课程</string>
+    <string name="practice_data">训练数据</string>
+    <string name="collect_count">当前已有%1d人练过</string>
+    <string name="collect_target">目标：%1s</string>
+    <string name="collect_position">部位：%1s</string>
+    <string name="collect_difficulty">难度：%1s</string>
+    <string name="course_unsale">抱歉，该课程已下架~</string>
+
+    <!--tips-->
+    <string name="gender_tip">请选择性别</string>
+    <string name="birth_tip">请选择出生日期</string>
+    <string name="height_tip">请选择身高</string>
+    <string name="weight_tip">请选择体重</string>
+    <string name="bust_tip">请选择胸围</string>
+    <string name="waist_tip">请选择腰围</string>
+    <string name="hipline_tip">请选择臀围</string>
+
+    <!--系统更新-->
+    <string name="update_title">系统更新</string>
+    <string name="update_current_version">系统当前版本</string>
+    <string name="update_new_version">最新版本</string>
+    <string name="update_update_content">更新内容</string>
+    <string name="update_update_btn">升级版本</string>
+    <string name="update_no_version">已是当前最新版本</string>
+    <string name="version_init">系统正在初始化</string>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</resources>

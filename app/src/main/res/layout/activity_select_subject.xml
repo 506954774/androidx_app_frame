@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:chuck="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="click"
+            type="android.view.View.OnClickListener" />
+
+    </data>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@mipmap/bg_green_theme">
+
+        <RelativeLayout
+            android:layout_marginTop="35dp"
+            android:id="@+id/rl_title"
+            android:gravity="center_vertical"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+          >
+            <com.ilinklink.tg.widget.customClick.CustomClickImageView
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="20dp"
+                android:layout_width="45dp"
+                android:layout_height="40dp"
+                android:id="@+id/iv_back"
+                android:onClick="@{click.onClick}"
+
+                android:src="@mipmap/icon_select_sub_back"
+                >
+
+            </com.ilinklink.tg.widget.customClick.CustomClickImageView>
+
+            <TextView
+
+                android:text="@string/select_subject_title"
+                style="@style/ztsb_title" />
+
+            <com.ilinklink.tg.widget.customClick.CustomClickImageView
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="15dp"
+                android:layout_marginTop="20dp"
+                android:layout_width="45dp"
+                android:layout_height="40dp"
+                android:id="@+id/iv_setting"
+                android:onClick="@{click.onClick}"
+                android:visibility="invisible"
+
+                android:src="@mipmap/icon_select_sub_setting"
+                >
+
+            </com.ilinklink.tg.widget.customClick.CustomClickImageView>
+
+        </RelativeLayout>
+
+
+        <RelativeLayout style="@style/main_container">
+
+            <LinearLayout
+                android:visibility="gone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="20dp"
+                android:orientation="vertical">
+
+
+                <LinearLayout
+                    android:layout_marginTop="15dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="2">
+
+
+                    <com.ilinklink.tg.widget.customClick.CustomClickTextView
+                        android:onClick="@{click.onClick}"
+
+                        android:id="@+id/tv_fuwocheng"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:layout_marginRight="5dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/green_btn_selector"
+                        android:gravity="center"
+                        android:padding="6dp"
+                        android:text="@string/select_subject_fuwocheng"
+                        android:textColor="@color/green_659B43"
+                        android:textSize="20sp" />
+
+
+                    <com.ilinklink.tg.widget.customClick.CustomClickTextView
+                        android:onClick="@{click.onClick}"
+
+                        android:id="@+id/tv_yintixiangshang"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:layout_marginLeft="5dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/green_btn_selector"
+                        android:gravity="center"
+                        android:padding="6dp"
+                        android:text="@string/select_subject_yintixiangshang"
+                        android:textColor="@color/green_659B43"
+                        android:textSize="20sp" />
+
+
+                </LinearLayout>
+
+
+
+                <LinearLayout
+                    android:layout_marginTop="15dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="2">
+
+
+                    <com.ilinklink.tg.widget.customClick.CustomClickTextView
+                        android:onClick="@{click.onClick}"
+
+                        android:id="@+id/tv_shuanggangbiqushen"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:layout_marginRight="5dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/green_btn_selector"
+                        android:gravity="center"
+                        android:padding="6dp"
+                        android:text="@string/select_subject_shuanggangbiqushen"
+                        android:textColor="@color/green_659B43"
+                        android:textSize="20sp" />
+
+
+
+
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycler_exams"
+                android:layout_margin="20dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="100dp"
+                />
+
+
+        </RelativeLayout>
+
+
+    </RelativeLayout>
+
+</layout>

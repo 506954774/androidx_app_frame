@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:chuck="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="click"
+            type="android.view.View.OnClickListener" />
+
+    </data>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@mipmap/startup_img_bg">
+
+        <ImageView
+            android:layout_width="170px"
+            android:layout_height="55px"
+            android:layout_marginTop="50px"
+            android:layout_marginLeft="50px"
+            android:background="@mipmap/login_img_logo" />
+
+        <LinearLayout
+            android:id="@+id/ll_psw"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_marginLeft="70px"
+            android:layout_marginRight="70px"
+            android:gravity="center_horizontal"
+            android:orientation="vertical"
+            android:visibility="visible">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="48px"
+                android:text="@string/login_title"
+                android:textSize="44px"
+                android:textColor="@color/white" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="60px"
+                android:background="@drawable/shape_round_gray_hollow_5"
+                android:orientation="vertical">
+
+                <com.ilinklink.tg.widget.customClick.CustomClickRelativeLayout
+                    android:id="@+id/rl_swap_code"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:onClick="@{click.onClick}">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_toLeftOf="@+id/iv_qrcode"
+                        android:text="@string/login_swap"
+                        android:textColor="@color/white"
+                        android:textSize="32px" />
+
+                    <ImageView
+                        android:id="@+id/iv_qrcode"
+                        android:layout_width="136px"
+                        android:layout_height="136px"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginLeft="31px" />
+                </com.ilinklink.tg.widget.customClick.CustomClickRelativeLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="50px"
+                    android:background="@drawable/shape_round_gray_btn_10"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="30px"
+                    android:paddingRight="30px">
+
+                    <ImageView
+                        android:layout_width="44px"
+                        android:layout_height="44px"
+                        android:src="@mipmap/login_icon_account" />
+
+                    <EditText
+                        android:id="@+id/account"
+                        android:layout_width="match_parent"
+                        android:layout_height="90px"
+                        android:background="@null"
+                        android:hint="@string/login_account_hint"
+                        android:paddingLeft="30px"
+                        android:textSize="32px" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="50px"
+                    android:background="@drawable/shape_round_gray_btn_10"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="30px"
+                    android:paddingRight="30px">
+
+                    <ImageView
+                        android:layout_width="44px"
+                        android:layout_height="44px"
+                        android:src="@mipmap/login_icon_password" />
+
+                    <EditText
+                        android:id="@+id/pwd"
+                        android:layout_width="match_parent"
+                        android:layout_height="90px"
+                        android:inputType="textPassword"
+                        android:background="@null"
+                        android:hint="@string/login_psw_hint"
+                        android:paddingLeft="30px"
+                        android:textSize="32px" />
+                </LinearLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="30px">
+
+                    <com.ilinklink.tg.widget.customClick.CustomClickTextView
+                        android:id="@+id/custom_tv_reset_pwd"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:onClick="@{click.onClick}"
+                        android:text="@string/login_forget_psw"
+                        android:textColor="@color/cor_FC7EBC"
+                        android:textSize="32px" />
+                </RelativeLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="30px">
+
+                    <com.ilinklink.tg.widget.customClick.CustomClickTextView
+                        android:id="@+id/custom_tv_register"
+                        android:layout_width="300px"
+                        android:layout_height="100px"
+                        android:background="@drawable/shape_round_white_btn_10"
+                        android:gravity="center"
+                        android:textSize="40px"
+                        android:onClick="@{click.onClick}"
+                        android:text="@string/login_regist_btn" />
+
+                    <com.ilinklink.tg.widget.customClick.CustomClickTextView
+                        android:id="@+id/custom_tv_login"
+                        android:layout_width="300px"
+                        android:layout_height="100px"
+                        android:layout_marginLeft="120px"
+                        android:background="@drawable/select_color_btn_10"
+                        android:gravity="center"
+                        android:textSize="40px"
+                        android:onClick="@{click.onClick}"
+                        android:text="@string/login_btn" />
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_swap"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:gravity="center_horizontal"
+            android:padding="70px"
+            android:visibility="gone"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="48px"
+                android:textSize="44px"
+                android:layout_centerHorizontal="true"
+                android:text="@string/login_title_swap"
+                android:textColor="@color/white" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="60px"
+                android:background="@drawable/shape_round_gray_hollow_5"
+                android:orientation="vertical">
+                <com.ilinklink.tg.widget.customClick.CustomClickRelativeLayout
+                    android:id="@+id/rl_by_account"
+                    android:onClick="@{click.onClick}"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:layout_toLeftOf="@+id/iv_tag"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="32px"
+                        android:textColor="@color/white"
+                        android:layout_marginRight="25px"
+                        android:text="@string/login_by_account"/>
+                    <ImageView
+                        android:id="@+id/iv_tag"
+                        android:layout_width="40px"
+                        android:layout_height="40px"
+                        android:layout_alignParentRight="true"
+                        android:src="@mipmap/login_icon_lock"/>
+                </com.ilinklink.tg.widget.customClick.CustomClickRelativeLayout>
+                <ImageView
+                    android:id="@+id/iv_swap_qrcode"
+                    android:layout_width="440px"
+                    android:layout_height="440px"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="75px" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="72px"
+                    android:textSize="28px"
+                    android:textColor="@color/white"
+                    android:text="@string/login_swap_tip"/>
+            </LinearLayout>
+
+        </LinearLayout>
+    </RelativeLayout>
+
+</layout>

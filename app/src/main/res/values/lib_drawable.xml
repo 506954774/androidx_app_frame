@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources >
+    <item name="list_item_normal_bg" type="drawable">#ffffff</item>
+    <item name="list_item_pressed_bg" type="drawable">#ebebeb</item>
+    <!-- 半透明 -->
+
+    <!-- 我的关注：关注技师列表弹出框上按钮上字体所用的颜色 -->
+
+</resources>

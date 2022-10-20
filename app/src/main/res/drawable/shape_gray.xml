@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:state_pressed="false">
+        <shape>
+
+            <!--设置背景颜色渐变-->
+            <gradient
+                android:startColor="#50111111"
+                android:centerColor="#28111111"
+                android:endColor="#00111111"
+                android:angle="270"/>
+        </shape>
+    </item>
+</selector>

@@ -1,0 +1,381 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:chuck="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="click"
+            type="android.view.View.OnClickListener" />
+
+    </data>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@mipmap/bg_green_theme">
+
+        <RelativeLayout
+            android:layout_marginTop="35dp"
+            android:id="@+id/rl_title"
+            android:gravity="center_vertical"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+          >
+            <com.ilinklink.tg.widget.customClick.CustomClickImageView
+                android:visibility="invisible"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="20dp"
+                android:onClick="@{click.onClick}"
+
+                android:layout_width="45dp"
+                android:layout_height="40dp"
+                android:id="@+id/iv_back"
+                android:src="@mipmap/icon_select_sub_back"
+                >
+
+            </com.ilinklink.tg.widget.customClick.CustomClickImageView>
+
+            <TextView
+
+                android:text="@string/exam_title"
+                style="@style/ztsb_title"/>
+
+            <com.ilinklink.tg.widget.customClick.CustomClickImageView
+                android:id="@+id/iv_setting"
+                android:layout_width="45dp"
+
+                android:layout_height="40dp"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="15dp"
+                android:layout_marginTop="20dp"
+                android:onClick="@{click.onClick}"
+                android:src="@mipmap/icon_select_sub_setting"
+
+                android:visibility="visible">
+
+            </com.ilinklink.tg.widget.customClick.CustomClickImageView>
+
+        </RelativeLayout>
+
+
+        <RelativeLayout
+            style="@style/main_container"
+            android:padding="15dp">
+
+
+            <LinearLayout
+                android:id="@+id/ll_student_info"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/exam_subject"
+                    android:textColor="@color/green_659B43"
+                    android:textSize="20sp"></TextView>
+
+                <TextView
+                    android:id="@+id/tv_subject_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:text="@string/exam_fuwocheng"
+                    android:textColor="@color/white"
+                    android:textSize="24sp"></TextView>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:text="@string/exam_name"
+
+                    android:textColor="@color/green_659B43"
+                    android:textSize="20sp"></TextView>
+
+                <TextView
+                    android:id="@+id/tv_student_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:textColor="@color/white"
+                    android:textSize="24sp"></TextView>
+
+
+            </LinearLayout>
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/ll_student_info"
+                android:layout_marginTop="12dp">
+
+
+                <RelativeLayout
+
+                    android:layout_width="200dp"
+                    android:layout_height="30dp"
+                    android:layout_alignBottom="@+id/tv_exam_timer"
+                    android:layout_alignTop="@+id/tv_exam_timer"
+                    android:layout_marginLeft="20dp"
+                    android:layout_toRightOf="@+id/tv_exam_timer"
+                    android:gravity="center_vertical">
+
+                    <ProgressBar
+                        android:id="@+id/progressbar_hint"
+                        style="?android:attr/progressBarStyleHorizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="30dp"
+                        android:layout_centerVertical="true"
+                        android:max="100"
+                        android:progress="100"
+                        android:progressDrawable="@drawable/jc_hint_bottom_progress1" />
+
+
+                    <TextView
+                        android:id="@+id/tv_time"
+                        android:layout_width="match_parent"
+                        android:layout_height="30dp"
+                        android:gravity="center"
+
+                        android:text="@string/exam_time_no_limit"
+                        android:textColor="@color/white"
+                        android:textSize="20sp"></TextView>
+
+                </RelativeLayout>
+
+                <TextView
+                    android:id="@+id/tv_exam_sucessed_count"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@+id/tv_exam_sucessed_count_hint"
+                    android:layout_marginLeft="20dp"
+                    android:layout_toRightOf="@+id/tv_exam_sucessed_count_hint"
+                    android:text="0"
+                    android:textColor="@color/green_07A805"
+                    android:textSize="20sp"></TextView>
+
+
+                <TextView
+                    android:id="@+id/tv_exam_failed_count_hint"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/tv_exam_sucessed_count_hint"
+                    android:layout_marginTop="12dp"
+                    android:text="@string/exam_failed_count"
+                    android:textColor="@color/green_659B43"
+                    android:textSize="20sp"></TextView>
+
+                <TextView
+                    android:id="@+id/tv_exam_failed_count"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@+id/tv_exam_failed_count_hint"
+                    android:layout_marginLeft="20dp"
+
+                    android:layout_toRightOf="@+id/tv_exam_failed_count_hint"
+                    android:text="0"
+                    android:textColor="@color/red"
+                    android:textSize="20sp"></TextView>
+
+
+                <TextView
+                    android:id="@+id/tv_exam_score_hint"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/tv_exam_failed_count_hint"
+                    android:layout_marginTop="12dp"
+                    android:text="@string/exam_score"
+                    android:textColor="@color/green_659B43"
+                    android:textSize="20sp"
+                    android:visibility="gone"></TextView>
+
+                <TextView
+                    android:id="@+id/tv_exam_score"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@+id/tv_exam_score_hint"
+                    android:layout_marginLeft="20dp"
+                    android:layout_toRightOf="@+id/tv_exam_score_hint"
+
+                    android:text="0"
+                    android:textColor="@color/green_07A805"
+                    android:textSize="20sp"
+                    android:visibility="gone"></TextView>
+
+                <TextView
+                    android:id="@+id/tv_exam_timer"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_below="@+id/tv_exam_score_hint"
+                    android:layout_marginTop="12dp"
+
+                    android:text="@string/exam_time_left"
+                    android:textColor="@color/green_659B43"
+                    android:textSize="20sp"></TextView>
+
+
+                <TextView
+                    android:id="@+id/tv_exam_sucessed_count_hint"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/exam_sucessed_count"
+                    android:textColor="@color/green_659B43"
+                    android:textSize="20sp"></TextView>
+
+                <TextView
+                    android:id="@+id/tv_exam_failed_desc_hint"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/tv_exam_timer"
+                    android:layout_marginTop="12dp"
+                    android:text="@string/exam_error_info"
+                    android:textColor="@color/green_659B43"
+                    android:textSize="20sp"></TextView>
+
+                <TextView
+                    android:id="@+id/tv_exam_failed_desc"
+                    android:layout_width="200dp"
+                    android:layout_height="100dp"
+                    android:layout_alignTop="@+id/tv_exam_failed_desc_hint"
+                    android:layout_marginLeft="20dp"
+
+                    android:layout_toRightOf="@+id/tv_exam_failed_desc_hint"
+                    android:text=""
+                    android:textColor="@color/red"
+                    android:textSize="20sp"></TextView>
+
+
+            </RelativeLayout>
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <RelativeLayout
+                    android:id="@+id/rl_count_total"
+                    android:layout_width="wrap_content"
+                    android:layout_height="50dp"
+                    android:layout_alignParentRight="true"
+                    android:background="@color/green_659B43">
+
+
+                    <TextView
+                        android:id="@+id/tv_count_total"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:gravity="center"
+                        android:text="0"
+                        android:textColor="@color/white"
+                        android:textSize="35sp"></TextView>
+
+
+                </RelativeLayout>
+
+
+                <RelativeLayout
+                    android:id="@+id/rl_preview"
+                    style="@style/preview_style">
+
+
+                    <include layout="@layout/activity_vision_live_preview"></include>
+
+
+                </RelativeLayout>
+
+                <TextView
+                    android:id="@+id/tv_exam_status"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_above="@+id/tv_stu_face"
+                    android:layout_marginBottom="15dp"
+                    android:text="@string/exam_status_no_student"
+                    android:textColor="@color/red"
+                    android:textSize="20sp"></TextView>
+
+
+                <com.ilinklink.tg.widget.customClick.CustomClickTextView
+                    android:id="@+id/tv_stu_face"
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginRight="15dp"
+                    android:background="@drawable/green_btn_selector"
+                    android:gravity="center"
+                    android:onClick="@{click.onClick}"
+                    android:padding="6dp"
+                    android:text="@string/exam_stu_face_hint"
+                    android:textColor="@color/green_659B43"
+                    android:textSize="20sp" />
+
+
+                <com.ilinklink.tg.widget.customClick.CustomClickTextView
+                    android:id="@+id/tv_start_exam"
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginRight="15dp"
+                    android:layout_toRightOf="@+id/tv_stu_face"
+                    android:background="@drawable/green_btn_selector"
+                    android:gravity="center"
+                    android:onClick="@{click.onClick}"
+                    android:padding="6dp"
+                    android:text="@string/exam_start"
+                    android:textColor="@color/green_659B43"
+                    android:textSize="20sp" />
+
+
+                <com.ilinklink.tg.widget.customClick.CustomClickTextView
+                    android:id="@+id/tv_commit_exam_result"
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginRight="5dp"
+                    android:layout_toRightOf="@+id/tv_start_exam"
+                    android:background="@drawable/green_btn_selector"
+                    android:gravity="center"
+                    android:onClick="@{click.onClick}"
+                    android:padding="6dp"
+                    android:text="@string/exam_commit_exam_result"
+                    android:textColor="@color/green_659B43"
+                    android:textSize="20sp" />
+
+                <com.ilinklink.tg.widget.customClick.CustomClickTextView
+                    android:id="@+id/tv_show_error_list"
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginRight="5dp"
+                    android:background="@drawable/green_btn_selector"
+                    android:gravity="center"
+                    android:onClick="@{click.onClick}"
+                    android:padding="6dp"
+                    android:text="@string/exam_error_info_all"
+                    android:textColor="@color/green_659B43"
+                    android:textSize="20sp"
+                    android:visibility="gone" />
+
+
+            </RelativeLayout>
+
+
+        </RelativeLayout>
+
+
+    </RelativeLayout>
+
+</layout>

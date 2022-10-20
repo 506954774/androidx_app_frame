@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:chuck="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="click"
+            type="android.view.View.OnClickListener" />
+
+    </data>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@mipmap/bg_green_theme">
+
+        <RelativeLayout
+            android:layout_marginTop="35dp"
+            android:id="@+id/rl_title"
+            android:gravity="center_vertical"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+          >
+            <com.ilinklink.tg.widget.customClick.CustomClickImageView
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="20dp"
+                android:onClick="@{click.onClick}"
+
+                android:visibility="invisible"
+                android:layout_width="45dp"
+                android:layout_height="40dp"
+                android:id="@+id/iv_back"
+                android:src="@mipmap/icon_select_sub_back"
+                >
+
+            </com.ilinklink.tg.widget.customClick.CustomClickImageView>
+
+            <TextView
+
+                android:visibility="invisible"
+                android:text="@string/init_title"
+                style="@style/ztsb_title"/>
+
+            <com.ilinklink.tg.widget.customClick.CustomClickImageView
+                android:visibility="invisible"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="15dp"
+                android:layout_marginTop="20dp"
+                android:layout_width="45dp"
+                android:layout_height="40dp"
+                android:id="@+id/iv_setting"
+                android:onClick="@{click.onClick}"
+
+                android:src="@mipmap/icon_select_sub_setting"
+                >
+
+            </com.ilinklink.tg.widget.customClick.CustomClickImageView>
+
+        </RelativeLayout>
+
+
+        <RelativeLayout style="@style/main_container">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tv_hint_title"
+                android:layout_centerInParent="true"
+                android:orientation="horizontal">
+
+
+                <ProgressBar
+                    android:id="@+id/progressbar_hint"
+                    style="?android:attr/progressBarStyleHorizontal"
+                    android:layout_width="300dp"
+                    android:layout_height="10dp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginTop="10dp"
+                    android:max="100"
+                    android:progress="10"
+                    android:progressDrawable="@drawable/jc_hint_bottom_progress2" />
+
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/tv_featrue_total"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_margin="12dp"
+                android:gravity="center"
+                android:textColor="@color/white"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/tv_featrue_sucessed"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_margin="12dp"
+                android:layout_marginLeft="15dp"
+                android:layout_toRightOf="@+id/tv_featrue_total"
+                android:gravity="center"
+                android:textColor="@color/green_07A805"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/tv_featrue_failed"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_margin="12dp"
+                android:layout_marginLeft="15dp"
+                android:layout_toRightOf="@+id/tv_featrue_sucessed"
+                android:gravity="center"
+                android:textColor="@color/red"
+                android:textSize="18sp" />
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentRight="true"
+                android:layout_margin="12dp"
+                android:gravity="center"
+                android:text="@string/init_comp"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                android:visibility="invisible" />
+
+            <TextView
+
+                android:id="@+id/tv_hint_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:gravity="center"
+                android:text="@string/init_face_featrue"
+                android:textColor="@color/white"
+                android:textSize="25sp" />
+
+
+        </RelativeLayout>
+
+
+    </RelativeLayout>
+
+</layout>

@@ -1,0 +1,36 @@
+<resources>
+    <style name="AppTheme" parent="Theme.AppCompat.NoActionBar"/>
+
+    <style name="main_container">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_marginBottom">50dp</item>
+        <item name="android:layout_marginLeft">50dp</item>
+        <item name="android:layout_marginRight">50dp</item>
+        <item name="android:layout_marginTop">120dp</item>
+        <item name="android:background">@drawable/shape_round_5px_normal_green</item>
+    </style>
+
+    <style name="ztsb_title">
+        <item name="android:layout_marginTop">20dp</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">23sp</item>
+        <item name="android:gravity">center</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+    </style>
+
+    <style name="preview_style">
+        <item name="android:layout_alignParentRight">true</item>
+        <item name="android:layout_marginTop">20dp</item>
+        <item name="android:layout_below">@+id/rl_count_total</item>
+        <item name="android:background">@color/green_659B43</item>
+        <item name="android:layout_width">400dp</item>
+        <item name="android:layout_height">match_parent</item>
+    </style>
+
+    <style name="MyEditTextStyle">
+        <item name="colorControlNormal">@color/gray_text_color</item>
+        <item name="colorControlActivated">@color/gray_text_color</item>
+    </style>
+</resources>

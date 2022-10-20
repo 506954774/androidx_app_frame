@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:chuck="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="click"
+            type="android.view.View.OnClickListener" />
+
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#22000000">
+
+        <RelativeLayout
+            android:id="@+id/rl"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_marginLeft="70px"
+            android:layout_marginRight="70px"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="120px"
+                android:paddingLeft="56px"
+                android:paddingRight="56px"
+                android:paddingBottom="60px"
+                android:paddingTop="134px"
+                android:background="@drawable/shape_round_white_hollow_5"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tv_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="39px"
+                    android:layout_gravity="center_horizontal"
+                    android:text="@string/dialog_title"
+                    android:textSize="32px"
+                    android:textColor="@color/cor333333" />
+
+                <TextView
+                    android:id="@+id/tv_content"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="28px"
+                    android:layout_marginTop="15px"
+                    android:layout_gravity="center_horizontal"
+                    android:textColor="@color/cor333333"
+                    android:text=""/>
+
+
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="60px">
+
+                    <com.ilinklink.tg.widget.customClick.CustomClickTextView
+                        android:id="@+id/custom_tv_cancel"
+                        android:layout_width="300px"
+                        android:layout_height="100px"
+                        android:background="@drawable/shape_round_white_btn_10"
+                        android:gravity="center"
+                        android:textSize="40px"
+                        android:layout_marginRight="120px"
+                        android:onClick="@{click.onClick}"
+                        android:text="@string/cancel" />
+
+                    <com.ilinklink.tg.widget.customClick.CustomClickTextView
+                        android:id="@+id/custom_tv_ok"
+                        android:layout_width="300px"
+                        android:layout_height="100px"
+                        android:background="@drawable/select_color_btn_10"
+                        android:gravity="center"
+                        android:textSize="40px"
+                        android:onClick="@{click.onClick}"
+                        android:text="@string/ok" />
+                </LinearLayout>
+            </LinearLayout>
+            <ImageView
+                android:id="@+id/iv_boy"
+                android:layout_width="140px"
+                android:layout_height="220px"
+                android:layout_centerHorizontal="true"
+                android:src="@mipmap/pop_img_boy"
+                android:visibility="visible"/>
+        </RelativeLayout>
+    </RelativeLayout>
+
+</layout>

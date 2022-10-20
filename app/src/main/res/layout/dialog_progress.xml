@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+
+        <variable
+            name="click"
+            type="android.view.View.OnClickListener" />
+
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#22000000">
+
+        <RelativeLayout
+            android:id="@+id/rl"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_marginLeft="70px"
+            android:layout_marginRight="70px"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="120px"
+                android:background="@drawable/shape_round_white_hollow_5"
+                android:orientation="vertical"
+                android:paddingBottom="60px"
+                android:paddingLeft="56px"
+                android:paddingRight="56px"
+                android:paddingTop="134px">
+
+                <TextView
+                    android:id="@+id/tv_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginBottom="39px"
+                    android:text="@string/update_title"
+                    android:textColor="@color/cor333333"
+                    android:textSize="32px" />
+
+
+                <LinearLayout
+                    android:id="@+id/ll_update_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tv_content"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginTop="15px"
+                        android:text="发现新版本"
+                        android:textColor="@color/cor333333"
+                        android:textSize="28px" />
+
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginTop="60px">
+
+                        <com.ilinklink.tg.widget.customClick.CustomClickTextView
+                            android:id="@+id/custom_tv_cancel"
+                            android:layout_width="300px"
+                            android:layout_height="100px"
+                            android:layout_marginRight="120px"
+                            android:background="@drawable/shape_round_white_btn_10"
+                            android:gravity="center"
+                            android:onClick="@{click.onClick}"
+                            android:text="@string/cancel"
+                            android:textSize="40px" />
+
+                        <com.ilinklink.tg.widget.customClick.CustomClickTextView
+                            android:id="@+id/custom_tv_ok"
+                            android:layout_width="300px"
+                            android:layout_height="100px"
+                            android:background="@drawable/select_color_btn_10"
+                            android:gravity="center"
+                            android:onClick="@{click.onClick}"
+                            android:text="@string/ok"
+                            android:textSize="40px" />
+                    </LinearLayout>
+                </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/ll_progressBar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:visibility="gone"
+                    android:layout_gravity="center_horizontal">
+                    <ProgressBar
+                        android:id="@+id/progressBar"
+                        android:layout_width="600px"
+                        style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+                        android:progressDrawable="@drawable/seekbar_progress_drawable"
+                        android:layout_height="15px" />
+                    <TextView
+                        android:id="@+id/tv_progress"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/cor_FC7EBC"
+                        android:textSize="18px"
+                        android:layout_marginLeft="10px"
+                        android:text="50"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/cor_FC7EBC"
+                        android:textSize="18px"
+                        android:text="@string/bfh"/>
+                </LinearLayout>
+            </LinearLayout>
+
+            <ImageView
+                android:id="@+id/iv_boy"
+                android:layout_width="140px"
+                android:layout_height="220px"
+                android:layout_centerHorizontal="true"
+                android:src="@mipmap/pop_img_boy"
+                android:visibility="visible" />
+        </RelativeLayout>
+    </RelativeLayout>
+
+</layout>

@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:custom="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="click"
+            type="android.view.View.OnClickListener" />
+    </data>
+
+<LinearLayout
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:background="@drawable/dialog_back"
+              android:orientation="vertical"
+    >
+
+    <!--标题-->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal">
+
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:ellipsize="end"
+            android:gravity="center"
+            android:singleLine="true"
+            android:text="@string/title_downloading"
+            android:textColor="#262626"
+            android:textSize="15sp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_below="@+id/tv_title"
+            android:layout_marginTop="10dp"
+            android:background="#dadada"/>
+
+
+
+
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center">
+
+
+
+        <RelativeLayout
+            android:id="@+id/rl_et"
+            android:padding="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_width="match_parent"
+            android:gravity="center_vertical"
+            android:layout_height="wrap_content">
+
+
+           <!-- custom:progress_text_size="14sp"
+            custom:progress_reached_bar_height="@dimen/commen_With_Height3"
+            custom:default_unreached_bar_height="@dimen/commen_With_Height3_5"-->
+            <com.qdong.communal.library.widget.progressbar.NumberProgressBar
+                android:id="@+id/progressBar"
+                android:layout_marginRight="20dp"
+                android:layout_marginLeft="20dp"
+                android:layout_height="50dp"
+                custom:progress_current="0"
+
+                custom:progress_text_size="14sp"
+
+                android:layout_width="match_parent"
+                style="@style/NumberProgressBar_Passing_Green"
+                android:visibility="gone"
+
+
+                />
+
+            <ProgressBar
+
+                android:id="@+id/progressBarRound"
+                style="?android:attr/progressBarStyle"
+                android:layout_width="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_height="wrap_content"
+
+                />
+
+
+        </RelativeLayout>
+
+
+
+
+
+
+        <TextView
+            android:id="@+id/tv_content_center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="20dp"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            android:singleLine="false"
+            android:textColor="#262626"
+            android:textSize="15sp"/>
+
+
+    </RelativeLayout>
+
+
+    <TextView
+
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+
+        android:visibility="gone"
+        android:layout_alignParentBottom="true"
+        android:background="@color/time_picker_dialog_boundry_color"
+        />
+
+
+    <LinearLayout
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal"
+        android:weightSum="2"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
+        android:paddingBottom="15dp"
+
+        >
+
+
+
+        <Button
+            android:onClick="@{click.onClick}"
+            android:id="@+id/btn_commit"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_weight="1"
+            android:layout_marginRight="5dp"
+            android:text="@string/commit"
+            style="@style/btn_style__green_whitetext_40dpheight"
+
+            />
+        <Button
+            android:onClick="@{click.onClick}"
+            android:id="@+id/btn_cancel"
+
+            android:layout_marginLeft="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginRight="0.5dp"
+            android:layout_weight="1"
+            android:text="@string/time_cancel"
+            style="@style/btn_style__red_whitetext_40dpheight"
+            />
+
+    </LinearLayout>
+
+
+</LinearLayout>
+
+
+</layout>

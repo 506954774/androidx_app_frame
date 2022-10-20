@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:chuck="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="click"
+            type="android.view.View.OnClickListener" />
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <!-- android:src="@mipmap/welcome_picture"-->
+
+        <ImageView
+            android:id="@+id/iv_back"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="fitXY" />
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#66000000"
+            android:scaleType="fitXY" />
+
+        <RelativeLayout
+            android:layout_width="900px"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:orientation="vertical">
+
+
+
+            <LinearLayout
+                android:layout_marginTop="250px"
+                android:layout_width="match_parent"
+                android:padding="50px"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:background="@drawable/shape_round_white_15px"
+                android:orientation="vertical">
+
+
+                <TextView
+                    android:layout_marginTop="110px"
+
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="接下来一组动作将使用力臂训练，请调整一下力臂吧！"
+                    android:textColor="#ff666666"
+                    android:textSize="32px"
+                    />
+
+
+                <LinearLayout
+                    android:layout_marginTop="80px"
+                    android:weightSum="2"
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+
+                    <RelativeLayout
+                        android:layout_weight="1"
+                        android:layout_width="0dp"
+                        android:gravity="center"
+                        android:layout_height="wrap_content">
+
+                        <com.ilinklink.tg.widget.CircularProgressView
+                            android:id="@+id/CircularProgressView"
+                            android:layout_width="360px"
+                            android:layout_height="360px"
+                            android:background="@color/white"
+                            chuck:scaleLineCorlor="@color/common_txt_hint"
+                            chuck:textCorlor="@color/gray_424242"
+                            chuck:title="@string/cpv_title"
+                            chuck:touchable="true"
+                            />
+
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_weight="1"
+                        android:layout_width="0dp"
+                        android:gravity="center"
+
+                        android:layout_height="wrap_content">
+
+                        <com.ilinklink.tg.widget.CircularProgressView
+                            android:id="@+id/CircularProgressView2"
+                            android:layout_width="360px"
+                            android:layout_height="360px"
+                            android:background="@color/white"
+                            chuck:scaleLineCorlor="@color/common_txt_hint"
+                            chuck:textCorlor="@color/gray_424242"
+                            chuck:title="@string/cpv_title2"
+                            chuck:touchable="true"
+                            />
+
+                    </RelativeLayout>
+
+                </LinearLayout>
+
+
+                <RelativeLayout
+                    android:layout_marginTop="10dp"
+                    android:layout_width="match_parent"
+
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+
+                    <com.ilinklink.tg.widget.customClick.CustomClickTextView
+                        android:id="@+id/custom_tv_send_arm_of_force"
+                        android:layout_width="768px"
+                        android:layout_height="104px"
+                        android:textSize="40px"
+                        android:text="调整好了，开始练习"
+                        android:onClick="@{click.onClick}"
+                        android:gravity="center"
+                        android:layout_marginBottom="20px"
+                        android:background="@drawable/selector_send_btn"/>
+
+                </RelativeLayout>
+
+
+            </LinearLayout>
+
+            <ImageView
+                android:layout_centerHorizontal="true"
+                android:src="@mipmap/pop_img_boy"
+                android:layout_width="140px"
+                android:layout_height="220px"/>
+
+
+        </RelativeLayout>
+
+
+    </RelativeLayout>
+
+</layout>

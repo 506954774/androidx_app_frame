@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:cl="http://schemas.android.com/apk/res-auto">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:id="@+id/ll_activity_root"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+
+
+        </LinearLayout>
+
+
+        <!--loadingView-->
+        <com.qdong.communal.library.widget.custommask.CustomMaskLayerView
+            android:id="@+id/loading_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="gone"
+            >
+
+        </com.qdong.communal.library.widget.custommask.CustomMaskLayerView>
+
+        <!--loadingView-->
+        <com.qdong.communal.library.widget.custommask.CustomMaskLayerView2
+            android:id="@+id/loading_view2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="gone"
+            >
+
+        </com.qdong.communal.library.widget.custommask.CustomMaskLayerView2>
+
+    </RelativeLayout>
+</layout>

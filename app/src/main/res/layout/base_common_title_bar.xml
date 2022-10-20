@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/default_titleBgColor">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="145px"
+        android:background="@color/white"
+        android:paddingLeft="32px"
+        android:paddingRight="32px">
+
+        <com.ilinklink.tg.widget.customClick.CustomClickLinearLayout
+            android:id="@+id/ll_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true">
+            <ImageView
+                android:id="@+id/commen_bar_back"
+                android:layout_width="48px"
+                android:layout_height="48px"
+                android:src="@mipmap/com_icon_back_gray" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="40px"
+                android:layout_marginLeft="25px"
+                android:text="@string/back"
+                android:textColor="@color/cor999999"/>
+        </com.ilinklink.tg.widget.customClick.CustomClickLinearLayout>
+        
+        <com.ilinklink.tg.widget.customClick.CustomClickTextView
+            android:id="@+id/commen_bar_tv_right"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:gravity="center_vertical"
+            android:text="编辑"
+            android:textColor="@color/cor999999"
+            android:textSize="40px"
+            android:visibility="gone" />
+
+        <TextView
+
+            android:id="@+id/commen_bar_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_centerInParent="true"
+            android:ellipsize="end"
+            android:gravity="center"
+            android:maxLength="12"
+            android:singleLine="true"
+            android:text="登录"
+            android:textColor="@color/cor333333"
+            android:textSize="48px" />
+
+        <ImageView
+            android:id="@+id/iv_right"
+            android:layout_width="48px"
+            android:layout_height="48px"
+            android:layout_alignParentRight="true"
+            android:gravity="center"
+            android:layout_centerVertical="true"
+            android:src="@mipmap/ease_default_image"
+            android:visibility="gone" />
+
+    </RelativeLayout>
+</RelativeLayout>

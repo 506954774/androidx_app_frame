@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="click"
+            type="android.view.View.OnClickListener" />
+
+        <variable
+            name="ListBean"
+            type="com.ilinklink.tg.entity.RecommendCourse.CourseListBean" />
+    </data>
+
+    <LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="16px"
+            android:background="@color/transparent" />
+        <LinearLayout
+        android:id="@+id/root"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+            android:layout_marginLeft="16px"
+            android:layout_marginRight="16px"
+        android:background="@drawable/shape_round_white_hollow_5"
+        android:paddingBottom="38px"
+        android:paddingLeft="32px"
+        android:orientation="vertical"
+        android:paddingRight="32px"
+        android:paddingTop="19px">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.ilinklink.tg.widget.RoundOvalImageView
+                android:id="@+id/iv_cover"
+                android:layout_width="448px"
+                android:layout_height="296px"
+                app:shapeType="1"
+                app:roundRadius="16px"/>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:orientation="vertical"
+                android:layout_alignParentRight="true">
+
+            <com.ilinklink.tg.widget.customClick.CustomClickTextView
+                android:id="@+id/custom_tv_train"
+                android:layout_width="300px"
+                android:layout_height="100px"
+                android:background="@drawable/select_color_btn_10"
+                android:gravity="center"
+                android:textSize="40px"
+                android:text="@string/check_course" />
+
+            <com.ilinklink.tg.widget.customClick.CustomClickImageView
+                android:id="@+id/custom_tv_cancel"
+                android:layout_width="60px"
+                android:layout_height="60px"
+                android:layout_marginTop="32px"
+                android:layout_gravity="center_horizontal"
+                android:background="@mipmap/com_icon_collect"
+                android:gravity="center"
+                android:textSize="40px"
+                />
+            </LinearLayout>
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32px">
+            <TextView
+                android:id="@+id/tv_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textSize="44px"
+                android:textColor="@color/cor333333"/>
+            <TextView
+                android:id="@+id/tv_count"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:layout_centerVertical="true"
+                android:layout_alignParentRight="true"
+                android:textSize="24px"
+                android:textColor="@color/cor999999"/>
+        </RelativeLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="37px">
+            <TextView
+                android:id="@+id/tv_target"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/cor333333"
+                android:textSize="28px"
+                android:text=""/>
+            <View
+                android:layout_width="2px"
+                android:layout_height="40px"
+                android:layout_marginLeft="32px"
+                android:layout_marginRight="32px"
+                android:background="@drawable/select_colorful_vertical"/>
+            <TextView
+                android:id="@+id/tv_position"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/cor333333"
+                android:textSize="28px"
+                android:text=""/>
+            <View
+                android:layout_width="2px"
+                android:layout_height="40px"
+                android:layout_marginLeft="32px"
+                android:layout_marginRight="32px"
+                android:background="@drawable/select_colorful_vertical"/>
+            <TextView
+                android:id="@+id/tv_difficulty"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/cor333333"
+                android:textSize="28px"
+                android:text=""/>
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>
+</layout>

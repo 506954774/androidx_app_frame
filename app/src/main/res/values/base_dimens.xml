@@ -1,0 +1,21 @@
+<resources>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+
+
+    <!--登录界面左右边距-->
+
+    <!--保单详情左右边距-->
+
+
+    <dimen name="text_size13">13sp</dimen>
+    <dimen name="text_size14">14sp</dimen>
+
+    <!-- 标题栏高度 -->
+    <dimen name="title_bar_height">145px</dimen>
+    <dimen name="default_padding">10dp</dimen>
+    <dimen name="default_topBarHeight">48dp</dimen>
+    <!-- 公用dimen大小 -->
+    <dimen name="commen_With_Height10">10dp</dimen>
+    <!-- 公用dimen大小  end -->
+
+</resources>

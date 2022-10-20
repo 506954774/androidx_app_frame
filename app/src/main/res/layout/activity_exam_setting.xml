@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:chuck="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="click"
+            type="android.view.View.OnClickListener" />
+
+    </data>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@mipmap/bg_green_theme">
+
+        <RelativeLayout
+            android:layout_marginTop="35dp"
+            android:id="@+id/rl_title"
+            android:gravity="center_vertical"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+          >
+            <com.ilinklink.tg.widget.customClick.CustomClickImageView
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="20dp"
+                android:layout_width="45dp"
+                android:layout_height="40dp"
+                android:id="@+id/iv_back"
+                android:onClick="@{click.onClick}"
+
+                android:src="@mipmap/icon_select_sub_back"
+                >
+
+            </com.ilinklink.tg.widget.customClick.CustomClickImageView>
+
+            <TextView
+
+                android:id="@+id/tv_setting_title"
+                style="@style/ztsb_title"
+                android:text="@string/setting_title" />
+
+            <com.ilinklink.tg.widget.customClick.CustomClickImageView
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="15dp"
+                android:layout_marginTop="20dp"
+                android:layout_width="45dp"
+                android:layout_height="40dp"
+                android:id="@+id/iv_setting"
+                android:onClick="@{click.onClick}"
+                android:visibility="invisible"
+
+                android:src="@mipmap/icon_select_sub_setting"
+                >
+
+            </com.ilinklink.tg.widget.customClick.CustomClickImageView>
+
+        </RelativeLayout>
+
+
+        <RelativeLayout style="@style/main_container">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="20dp"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:orientation="horizontal"
+                    android:weightSum="2">
+
+
+                    <com.ilinklink.tg.widget.customClick.CustomClickTextView
+                        android:id="@+id/tv_fuwocheng"
+
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:layout_marginRight="5dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/green_btn_selector"
+                        android:gravity="center"
+                        android:onClick="@{click.onClick}"
+                        android:padding="6dp"
+                        android:text="@string/select_subject_fuwocheng"
+                        android:textColor="@color/green_659B43"
+                        android:textSize="20sp" />
+
+
+                    <com.ilinklink.tg.widget.customClick.CustomClickTextView
+                        android:id="@+id/tv_yintixiangshang"
+
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:layout_marginLeft="5dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/green_btn_selector"
+                        android:gravity="center"
+                        android:onClick="@{click.onClick}"
+                        android:padding="6dp"
+                        android:text="@string/select_subject_yintixiangshang"
+                        android:textColor="@color/green_659B43"
+                        android:textSize="20sp" />
+
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:orientation="horizontal"
+                    android:weightSum="2">
+
+
+                    <com.ilinklink.tg.widget.customClick.CustomClickTextView
+                        android:id="@+id/tv_shuanggangbiqushen"
+
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:layout_marginRight="5dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/green_btn_selector"
+                        android:gravity="center"
+                        android:onClick="@{click.onClick}"
+                        android:padding="6dp"
+                        android:text="@string/select_subject_shuanggangbiqushen"
+                        android:textColor="@color/green_659B43"
+                        android:textSize="20sp" />
+
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="40dp"
+
+                android:layout_marginRight="40dp"
+                android:layout_marginTop="26dp"
+                android:orientation="horizontal"
+                android:paddingBottom="5dp"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:paddingTop="5dp">
+
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="6dp">
+
+                    <TextView
+                        android:id="@+id/tv_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:text="难度阈值"
+                        android:textColor="#ffffffff"
+                        android:textSize="50px" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="6dp">
+
+                    <TextView
+                        android:layout_width="1dp"
+
+                        android:layout_height="20dp"
+                        android:layout_centerVertical="true"
+                        android:background="#868686"
+                        android:visibility="invisible">
+
+                    </TextView>
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="6dp">
+
+                    <EditText
+                        android:id="@+id/et_threshold"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:cursorVisible="true"
+                        android:hint="请输入难度阈值,取值范围:10.5~40.5"
+                        android:inputType="numberDecimal"
+                        android:paddingLeft="20px"
+                        android:textColor="@color/green_07A805"
+                        android:textSize="50px"
+                        android:theme="@style/MyEditTextStyle" />
+
+                </RelativeLayout>
+
+
+            </LinearLayout>
+
+
+            <!--设置难度阈值-->
+            <!--密码-->
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycler_exams"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="20dp"
+                android:visibility="invisible" />
+
+
+        </RelativeLayout>
+
+
+    </RelativeLayout>
+
+</layout>
