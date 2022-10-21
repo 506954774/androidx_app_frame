@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:chuck="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="click"
+            type="android.view.View.OnClickListener" />
+
+    </data>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@mipmap/bg_green_theme"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:id="@+id/rl_title"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="35dp"
+            android:gravity="center_vertical">
+
+
+            <com.ilinklink.tg.widget.customClick.CustomClickTextView
+                android:id="@+id/btn_back"
+                style="@style/titleRightBtn"
+                android:onClick="@{click.onClick}"
+                android:paddingLeft="15dp"
+                android:paddingTop="5dp"
+                android:paddingRight="15dp"
+                android:paddingBottom="5dp"
+                android:text="@string/back" />
+
+            <TextView
+                android:id="@+id/title"
+                style="@style/ztsb_title"
+                android:text="@string/history_exam_list_title" />
+
+
+        </RelativeLayout>
+
+
+        <LinearLayout
+            android:id="@+id/con"
+            style="@style/main_container"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:id="@+id/table_head"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="1dp"
+                android:background="@drawable/green_btn_selector"
+                android:orientation="horizontal">
+
+                <Space
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1" />
+
+                <com.ilinklink.tg.widget.customClick.CustomClickTextView
+                    android:id="@+id/tv_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    android:gravity="center"
+                    android:paddingTop="6dp"
+                    android:paddingBottom="6dp"
+                    android:text=" 姓名 "
+                    android:textColor="@color/white"
+                    android:textSize="20sp" />
+
+                <Space
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1" />
+
+                <TextView
+                    android:id="@+id/examNo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="50dp"
+                    android:text="编号        "
+                    android:textColor="@color/white"
+                    android:textSize="20sp" />
+
+                <Space
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1" />
+
+                <TextView
+                    android:id="@+id/exam_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="100dp"
+                    android:text="    考试时间 "
+                    android:textColor="@color/white"
+                    android:textSize="20sp" />
+
+                <Space
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1" />
+
+                <TextView
+                    android:id="@+id/tvSource1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="60dp"
+                    android:text="    俯卧撑"
+                    android:textColor="@color/white"
+                    android:textSize="20sp" />
+
+                <Space
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1" />
+
+                <TextView
+                    android:id="@+id/tvSource2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="30dp"
+                    android:text="   仰卧起坐"
+                    android:textColor="@color/white"
+                    android:textSize="20sp" />
+
+                <Space
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1" />
+
+                <TextView
+                    android:id="@+id/tvSource3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:text="    单杠引体向上 "
+                    android:textColor="@color/white"
+                    android:textSize="20sp" />
+
+                <Space
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1" />
+
+                <TextView
+                    android:id="@+id/tvSource4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="双杠臂屈伸 "
+                    android:textColor="@color/white"
+                    android:textSize="20sp" />
+
+                <Space
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1" />
+
+            </LinearLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycler_exams_list"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/table_head"
+                android:layout_marginBottom="20dp" />
+
+
+            <com.ilinklink.tg.widget.customClick.CustomClickTextView
+                android:id="@+id/btn_upload"
+                style="@style/titleCenterBtn"
+                android:layout_marginBottom="20dp"
+                android:gravity="center_horizontal"
+                android:onClick="@{click.onClick}"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:text="@string/uploaddata" />
+
+        </LinearLayout>
+    </RelativeLayout>
+
+</layout>

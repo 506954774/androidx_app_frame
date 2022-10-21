@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="click"
+            type="android.view.View.OnClickListener" />
+
+        <variable
+            name="studentExamRecord"
+            type="com.ilinklink.greendao.StudentExamRecord" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="1dp"
+        android:background="@drawable/green_btn_selector"
+        android:orientation="horizontal"
+        android:padding="3dp">
+
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+
+        <com.ilinklink.tg.widget.customClick.CustomClickTextView
+            android:id="@+id/tv_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:gravity="center"
+            android:paddingTop="6dp"
+            android:paddingBottom="6dp"
+            android:text=" 姓名 "
+            android:textColor="@color/white"
+            android:textSize="20sp" />
+
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+
+        <TextView
+            android:id="@+id/examNo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="编号        "
+            android:textColor="@color/white"
+            android:textSize="20sp" />
+
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+
+        <TextView
+            android:id="@+id/exam_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="考试时间       "
+            android:textColor="@color/white"
+            android:textSize="20sp" />
+
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+
+        <TextView
+            android:id="@+id/tvSource1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="俯卧撑    "
+            android:textColor="@color/white"
+            android:textSize="20sp" />
+
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+
+        <TextView
+            android:id="@+id/tvSource2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="仰卧起坐    "
+            android:textColor="@color/white"
+            android:textSize="20sp" />
+
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+
+        <TextView
+            android:id="@+id/tvSource3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="单杠引体向上 "
+            android:textColor="@color/white"
+            android:textSize="20sp" />
+
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+
+        <TextView
+            android:id="@+id/tvSource4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="双杠臂屈伸 "
+            android:textColor="@color/white"
+            android:textSize="20sp" />
+
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+
+    </LinearLayout>
+</layout>

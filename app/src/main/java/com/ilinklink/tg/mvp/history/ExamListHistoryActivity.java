@@ -10,12 +10,13 @@ import android.view.View;
 import androidx.annotation.RequiresApi;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import com.ilinklink.greendao.ExamInfo;
+
+import com.ilinklink.greendao.ExamRecord;
 import com.ilinklink.tg.base.BaseMvpActivity;
 import com.ilinklink.tg.green_dao.DBHelper;
 import com.ilinklink.tg.mvp.BasePresenter;
 import com.ilinklink.tg.mvp.selectsubject.SpaceItemDecoration;
-import com.qdong.communal.library.util.DensityUtil;
+import com.qdong.communal.library.module.BaseRefreshableListFragment.adapter.BaseQuickAdapter2;
 import com.spc.pose.demo.BR;
 import com.spc.pose.demo.R;
 import com.spc.pose.demo.databinding.ActivityExamListHistoryBinding;
@@ -28,6 +29,7 @@ import java.util.List;
  */
 public class ExamListHistoryActivity extends BaseMvpActivity<ActivityExamListHistoryBinding> implements View.OnClickListener {
     ExamListHistoryAdapter mAdapter;
+
     @Override
     protected boolean isRelativeStatusBar() {
         return true;
@@ -56,30 +58,34 @@ public class ExamListHistoryActivity extends BaseMvpActivity<ActivityExamListHis
     }
 
     private void initData() {
-        List<ExamInfo> examInfoList = DBHelper.getInstance(this).getExamInfoList();
-        Log.e("TAG","长度是"+examInfoList.size());
-        for (ExamInfo examInfo : examInfoList) {
-            Log.e("TAG",examInfo+"");
+        List<ExamRecord> examInfoList = DBHelper.getInstance(this).getExamRecordList();
+        Log.e("TAG", "长度是" + examInfoList.size());
+        for (ExamRecord examInfo : examInfoList) {
+            Log.e("TAG", examInfo + "");
         }
-        ExamInfo examInfo = new ExamInfo();
-        examInfo.setName("考核1");
-        examInfo.setStartTimeMs(System.currentTimeMillis());
-        examInfoList.add(examInfo);
-
-        ExamInfo examInfo2 = new ExamInfo();
-        examInfo2.setName("考核2");
-        examInfo2.setStartTimeMs(System.currentTimeMillis()+10000);
-        examInfoList.add(examInfo2);
+        examInfoList.add(examInfoList.get(0));
+        examInfoList.add(examInfoList.get(0));
+        examInfoList.add(examInfoList.get(0));
+        examInfoList.add(examInfoList.get(0));
         mAdapter = new ExamListHistoryAdapter(examInfoList, R.layout.item_exam_list_history, BR.ExamInfo);
+        mAdapter.setOnItemClickListener(new BaseQuickAdapter2.OnItemClickListener() {
+            @Override
+            public void onItemClick(BaseQuickAdapter2 adapter, View view, int position) {
+                Intent intent = new Intent(ExamListHistoryActivity.this, ExamInfoHistoryActivity.class);
+                intent.putExtra("title", examInfoList.get(position).getName());
+                intent.putExtra(ExamInfoHistoryActivity.KEY_EXAM_ID, examInfoList.get(position).getExamUUID());
+                ExamListHistoryActivity.this.startActivity(intent);
+            }
+        });
         mViewBind.recyclerExamsList.setAdapter(mAdapter);
+
     }
 
     private void initView() {
         mViewBind.setClick(this);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
         mViewBind.recyclerExamsList.setLayoutManager(layoutManager);
-        SpaceItemDecoration itemDecoration=new SpaceItemDecoration(DensityUtil.dp2px(this,30),2);
-        mViewBind.recyclerExamsList.addItemDecoration(itemDecoration);
+        mViewBind.recyclerExamsList.addItemDecoration(new SpaceItemDecoration(20, 1));
 
     }
 

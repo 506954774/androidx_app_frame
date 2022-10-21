@@ -10,15 +10,14 @@
 
         <variable
             name="ExamInfo"
-            type="com.ilinklink.greendao.ExamInfo" />
+            type="com.ilinklink.greendao.ExamRecord" />
     </data>
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/green_btn_selector"
         android:orientation="horizontal"
-        android:padding="5dp">
+        android:padding="3dp">
 
         <com.ilinklink.tg.widget.customClick.CustomClickTextView
             android:id="@+id/tv_name"
@@ -50,8 +49,8 @@
             android:layout_gravity="center"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
-            android:text="《"
-            android:textColor="@color/green_659B43"
+            android:text=" > "
+            android:textColor="@color/blue_328FC9"
             android:textSize="20sp" />
 
     </LinearLayout>
