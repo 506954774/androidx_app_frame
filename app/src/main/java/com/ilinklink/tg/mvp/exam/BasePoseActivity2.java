@@ -40,6 +40,7 @@ import com.blankj.utilcode.util.ToastUtils;
 import com.google.mlkit.vision.pose.Pose;
 import com.ilinklink.greendao.ExamInfo;
 import com.ilinklink.greendao.StudentExam;
+import com.ilinklink.greendao.StudentExamRecord;
 import com.ilinklink.greendao.StudentInfo;
 import com.ilinklink.tg.base.BaseMvpActivity;
 import com.ilinklink.tg.green_dao.DBHelper;
@@ -86,6 +87,9 @@ import rx.schedulers.Schedulers;
 public  class BasePoseActivity2 extends BaseMvpActivity<ActivityFuwochengBinding> implements View.OnClickListener  ,OnRequestPermissionsResultCallback, OnItemSelectedListener, CompoundButton.OnCheckedChangeListener, ExamContract
         .ExamView {
 
+    public static final String EXAM_DATA = "EXAM_DATA";
+
+
     public static final String EXAM_UUID = "EXAM_UUID";
     public static final String EXAM_NAME = "EXAM_NAME";
 
@@ -123,6 +127,11 @@ public  class BasePoseActivity2 extends BaseMvpActivity<ActivityFuwochengBinding
     //动作难度阈值
     protected float mThreshold=15f;
     private String mExamName;
+
+    //上个界面传来的json串数据
+    protected String mDataJson;
+    //将要缓存的数据
+    protected StudentExamRecord mStudentExamRecord;
 
 
     // 设置考试科目
@@ -211,7 +220,7 @@ public  class BasePoseActivity2 extends BaseMvpActivity<ActivityFuwochengBinding
         mViewBind.tvSubjectName.setText(selectedModel);
 
 
-        startExam();
+       // startExam();
     }
 
     protected void startExam() {
@@ -598,6 +607,8 @@ public  class BasePoseActivity2 extends BaseMvpActivity<ActivityFuwochengBinding
 
                         /**取消此任务**/
                         RxHelper.getInstance(BasePoseActivity2.this).unsubscribe(mSubscriptionCount);
+
+                        onExamFinished();
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -611,6 +622,11 @@ public  class BasePoseActivity2 extends BaseMvpActivity<ActivityFuwochengBinding
 
         mSubscriptions.add(mSubscriptionCount);
 
+    }
+
+
+    private void onExamFinished(){
+        //
     }
 
     @Override

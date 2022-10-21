@@ -1,5 +1,7 @@
 package com.ilinklink.tg.mvp.stuexamindex;
 
+import android.view.View;
+
 import com.ilinklink.greendao.ExamInfo;
 import com.qdong.communal.library.module.BaseRefreshableListFragment.adapter.BaseViewHolder2;
 import com.qdong.communal.library.module.BaseRefreshableListFragment.adapter.CustomSingleQuickAdapter;
@@ -27,6 +29,13 @@ public class ExamSubjectAdapter extends CustomSingleQuickAdapter<ExamInfo, BaseV
         //BitmapUtil.loadPhoto(AppLoader.getInstance(),item.getCourseCover(),viewBind.ivCover);
 
         viewBind.tvName.setText(item.getName());
+
+        if(item.getDesc()==null){
+            viewBind.ivFinished.setVisibility(View.INVISIBLE);
+        }
+        else {
+            viewBind.ivFinished.setVisibility(View.VISIBLE);
+        }
 
     }
 

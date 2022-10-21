@@ -11,6 +11,7 @@ import com.ilinklink.greendao.LoginModel;
 import com.ilinklink.greendao.LoginModelDao;
 import com.ilinklink.greendao.StudentExam;
 import com.ilinklink.greendao.StudentExamDao;
+import com.ilinklink.greendao.StudentExamRecord;
 import com.ilinklink.greendao.StudentExamRecordDao;
 import com.ilinklink.greendao.StudentInfo;
 import com.ilinklink.greendao.StudentInfoDao;
@@ -19,6 +20,7 @@ import com.ilinklink.greendao.TrainingModelDao;
 import com.ilinklink.greendao.WifiModel;
 import com.ilinklink.greendao.WifiModelDao;
 import com.ilinklink.tg.communal.AppLoader;
+import com.ilinklink.tg.dto.QueryStudentExamRecordDto;
 
 import java.util.List;
 
@@ -422,6 +424,35 @@ public class DBHelper {
         QueryBuilder<ExamRecord> mqBuilder = mExamRecordDao.queryBuilder();
         List<ExamRecord> list = mqBuilder.where(ExamRecordDao.Properties.ExamUUID.isNotNull())
                 .orderDesc(ExamRecordDao.Properties.Id)
+                .list();
+        return list;
+    }
+
+    /**
+     * 查询某个考生针对某场考试的记录
+     * @return
+     */
+    public List<StudentExamRecord> getStudentRecord(QueryStudentExamRecordDto dto) {
+        QueryBuilder<StudentExamRecord> mqBuilder = mStudentExamRecordDao.queryBuilder();
+        List<StudentExamRecord> list = mqBuilder
+                .where(StudentExamRecordDao.Properties.ExamRecordId.eq(dto.getExamRecordId())
+                ,StudentExamRecordDao.Properties.StudentUUID.eq(dto.getStudentUUID())
+                )
+                .orderDesc(StudentExamRecordDao.Properties.Id)
+                .list();
+        return list;
+    }
+
+    /**
+     * 查询针对某场考试的记录
+     * @return
+     */
+    public List<StudentExamRecord> getExamRecord(String examRecordId) {
+        QueryBuilder<StudentExamRecord> mqBuilder = mStudentExamRecordDao.queryBuilder();
+        List<StudentExamRecord> list = mqBuilder
+                .where(StudentExamRecordDao.Properties.ExamRecordId.eq(examRecordId)
+                )
+                .orderDesc(StudentExamRecordDao.Properties.Id)
                 .list();
         return list;
     }
