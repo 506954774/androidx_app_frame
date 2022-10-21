@@ -4,15 +4,18 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 
 import com.blankj.utilcode.util.ToastUtils;
 import com.ilinklink.greendao.ExamInfo;
+import com.ilinklink.greendao.ExamRecord;
 import com.ilinklink.tg.base.BaseMvpActivity;
 import com.ilinklink.tg.green_dao.DBHelper;
 import com.ilinklink.tg.mvp.BasePresenter;
 import com.ilinklink.tg.mvp.exam.BasePoseActivity2;
 import com.ilinklink.tg.mvp.exam.ExamActivity2;
+import com.ilinklink.tg.utils.CollectionUtils;
 import com.qdong.communal.library.module.BaseRefreshableListFragment.adapter.BaseQuickAdapter2;
 import com.qdong.communal.library.util.DensityUtil;
 import com.spc.pose.demo.BR;
@@ -35,6 +38,7 @@ import androidx.recyclerview.widget.RecyclerView;
  */
 public class StudentExamIndexActivity extends BaseMvpActivity<ActivityStudentExamIndexBinding> implements View.OnClickListener {
 
+    public static final String TAG="StudentExamIndexActivity";
 
     private ExamSubjectAdapter mExamAdapter;
 
@@ -82,6 +86,22 @@ public class StudentExamIndexActivity extends BaseMvpActivity<ActivityStudentExa
     }
 
     private void initData() {
+
+        /**
+         * 此次考试的数据
+         */
+        List<ExamRecord> examRecordList = DBHelper.getInstance(this).getExamRecordList();
+        Log.i(TAG,"examRecordList:"+examRecordList);
+
+        if(CollectionUtils.isNullOrEmpty(examRecordList)){
+            ExamRecord examRecord=new ExamRecord();
+            examRecord.setExamRecordId("1");
+            examRecord.setExamUUID("1");
+            examRecord.setName("十月份大比武");
+            examRecord.setExamTime("2022-10-21 17:00");
+            DBHelper.getInstance(this).saveExamRecord(examRecord);
+        }
+
 
         RecyclerView.LayoutManager layoutManager = new GridLayoutManager(this,2);
         mViewBind.recyclerExams.setLayoutManager(layoutManager);

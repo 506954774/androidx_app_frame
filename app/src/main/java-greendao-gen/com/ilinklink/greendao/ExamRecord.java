@@ -121,4 +121,17 @@ public class ExamRecord {
         this.examTime = examTime;
     }
 
+    @Override
+    public String toString() {
+        return "ExamRecord{" +
+                "id=" + id +
+                ", examRecordId='" + examRecordId + '\'' +
+                ", examUUID='" + examUUID + '\'' +
+                ", name='" + name + '\'' +
+                ", desc='" + desc + '\'' +
+                ", reservedColumn='" + reservedColumn + '\'' +
+                ", reservedColumn2='" + reservedColumn2 + '\'' +
+                ", examTime='" + examTime + '\'' +
+                '}';
+    }
 }
