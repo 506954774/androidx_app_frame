@@ -29,14 +29,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
-                android:layout_marginLeft="15dp"
+                android:layout_marginLeft="150dp"
                 android:layout_marginTop="20dp"
                 android:onClick="@{click.onClick}"
                 android:paddingLeft="20dp"
                 android:paddingRight="10dp"
                 android:paddingTop="5dp"
                 android:paddingBottom="5dp"
-                android:text="考核数据"
+                android:text="@string/history_exam_list_title"
                 android:background="@drawable/bg_blue_radius_react"
                 android:textColor="@color/green_659B43" />
 
@@ -47,7 +47,7 @@
 
             <com.ilinklink.tg.widget.customClick.CustomClickImageView
                 android:layout_alignParentRight="true"
-                android:layout_marginRight="15dp"
+                android:layout_marginLeft="20dp"
                 android:layout_marginTop="20dp"
                 android:layout_width="45dp"
                 android:layout_height="40dp"
