@@ -3,6 +3,11 @@
     <!--新版考核-->
     <string name="enter_exam">进入考核</string>
     <string name="exit_exam">退出考核</string>
+    <string name="student_info_verify">身份验证</string>
+    <string name="go_back">退出</string>
+    <string name="please_verify_the_student_infomation">请核对人员信息准确无误</string>
+    <string name="verify_infomation">确认身份</string>
+    <string name="redo_face_recongnize">重新识别</string>
 
 
 </resources>

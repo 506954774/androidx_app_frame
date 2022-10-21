@@ -14,6 +14,7 @@ import com.ilinklink.tg.mvp.BasePresenter;
 import com.ilinklink.tg.mvp.exam.BasePoseActivity2;
 import com.ilinklink.tg.mvp.exam.ExamActivity2;
 
+import com.ilinklink.tg.mvp.facerecognize.FaceResultActivity;
 import com.ilinklink.tg.mvp.stuexamindex.StudentExamIndexActivity;
 
 import com.ilinklink.tg.mvp.history.ExamListHistoryActivity;
@@ -189,7 +190,7 @@ public class SelectSubjectActivity extends BaseMvpActivity<ActivitySelectSubject
                 break;
             case R.id.tv_enter_exam:
                 //ToastUtils.showShort("tv_enter_exam");
-                startActivity(new Intent(this, StudentExamIndexActivity.class));
+                startActivity(new Intent(this, FaceResultActivity.class));
 
 
                 break;

@@ -568,7 +568,7 @@ public  class BasePoseActivity2 extends BaseMvpActivity<ActivityFuwochengBinding
     private Subscription mSubscriptionCount;
 
     //考试倒计时,60秒
-    protected long mTimer = 60;
+    protected long mTimer = 120;
 
 
     /**

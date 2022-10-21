@@ -331,6 +331,16 @@ public class InitFaceFeatrueAct3 extends BaseMvpActivity<ActivityInitFaceFeatrue
 
                     //Constants.FACE_IMAGES_PATH
                     String [] imagesPaths={"40.jpg","41.jpg","42.jpg","45.jpg"};
+                    String [] names={"李景亮","赵峰","杨晓云","刘东华"};
+                    String [] sns={"HAM2205011","HAM2205025","HAM2205038","HAM2205058"};
+                    String [] heads={
+                            "https://www.baidu.com/link?url=Kg8cLPDuX5DN7pTQZPMan0AMVsgD_Mh8OHxFTXI2xLXcYM9Dx2gHymK-q4r9yfnh3fPtoC9wgU5aPB2ae6BBivSnr80h5KsOhbiAiq4qPv_z5C2nqjoYXIGQOvIFxMk4EyKTxcoGFCa31bLZe9ZX9e3f7QH24zOfNY5FFJ-RHgSQ3TfgUqgs8ZuB_DBbJ7KPILfN9OXHZmsVsKzQ9riGeSvphgYZ8pdu31zPT0bOaYDIvosnIk2052jqV4qLPpNhVwtOk3sjBPsJ1xLUa1kwzwITITkZXsGux9KnIHMqyrBa_GxRQFEJhtjRaaY7D2HkQfKm8TQ5-j3MyMimfQTPvu75AqOv3tiLGx0n5lUI9remmf0ZumcgndGn3PLVWLc8WI3BIWMSkhVe7V38U1AyZl_tJ_r3s_gCjRzRv7tFPqSp2ezI_cuxS_Eq_LBGBnvnPltivuJRmnwXF0zcmYoLif_ei8GsDX0jTmJvHmjt6Z0DI3M-HqiVCaTnFBmucbqgA9F7AJRq0lqPVHCi1OLVsso6ivA2rau2fhl1DT7jox1-pq_UITPPTfbI0KYMQkvsN-Wwc7f7o5YDcXHQRVn_O79C20hYI5_lS1ft59ckoB5K_GfEilCBSQipG9ecTTVnHDBBC_srGR-l2i0tAgxtBSLHP2enZ79tO8H1uhx6ibDLPeYq8yYCAU1Nk7zlNZEd6JZo5eZyDD2f98cJ9aHPhkDvoOuZjUcjZZQPR___nDWBM0bcS3rZtqqkPGtIa_Ccsj0VwIdPNwVzCKZXxMBFia&wd=&eqid=b273940500037240000000056352a9b2",
+
+                            "https://www.baidu.com/link?url=BI9aolXHH3wwtJOP-5xxxOsIFo08U8_7bAjD4X3AW--IrMu3WSRBICWVlctRDbK7KnvfxU8zMSC9UKPIcXyW_v9UXDgERQKX3p23Hyswt9cADFyMoUDFLiP2frTJkV9BAVElLwUk5Miv-IklkQv8zNr3oiwQdtNgZ_63QdYY4Y7fQZ9VB-eNJbrBM4M_8W4mdpXxZiWuBUnk8J90tuG0r3GQhAx9yubSYp24XeAIgKv_M_ygerEh-hMF-wkypuufPaHL8-_PGYquRJrvHgkKnDOCM4b4OC-wfApps7pOuaWPvqf9HEr3RoYR0RHxNe-bOv6R5Eq2hRxfj1nBKEBsQq_QT2cqftK5fSM-w-ZVGh64IHiT8zpCg8u183VQOnxSpvDwA-kAqcj3s-4tZBCCf9QtCQXek3yX7D0HVU_hydgOCWq39Cm2XXHutz8N8ePGOSfTdWCgG_HQ7cK9wK2X2W_4xM3gY0pPDi2W1fLieFxCJXzJ2_NANdxiVqto1CO-hRqApjz5T5D6OsAobE40Fv8KwUz-cKQYXvUYkH6u_MWo5yYDxnLdfx7Ypo0cyhpf4qNMjs6xsNPhRU2FgO9E94aneoUJLuIYqzUdYyEKauQKfy0gKo5HVoW9k308S5E0vwuxJFW88sMbV6up78CtsuqduFowzS7ZxQuSRkYONElbomsXOUs1QyAbPUDfDX3VM_Roi-SYEgySOFKuovJsk6miAhr6hjuSjrELvxY3q0bC0nIkiSm1INLN-F8cMvDIsPhuLlWlQYshlCTn7jvdWq&wd=&eqid=b273940500037240000000056352a9b2",
+
+                            "https://gimg2.baidu.com/image_search/src=http%3A%2F%2F5b0988e595225.cdn.sohucs.com%2Fq_70%2Cc_zoom%2Cw_640%2Fimages%2F20170929%2F09ed3516c62b4790a6ab30055cb1f570.jpeg&refer=http%3A%2F%2F5b0988e595225.cdn.sohucs.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=auto?sec=1668953810&t=d4f9d35fd50913abc36d6ab913ffbac6",
+
+                            "https://gimg2.baidu.com/image_search/src=http%3A%2F%2F5b0988e595225.cdn.sohucs.com%2Fimages%2F20200417%2Fe9e2f2504e46461cbf8352810bef64ef.jpeg&refer=http%3A%2F%2F5b0988e595225.cdn.sohucs.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=auto?sec=1668953810&t=a3f0fa5bb0e7662a98854b952509892b"};
 
                     List<String> faceTokenList = new ArrayList<>();
 
@@ -359,7 +369,16 @@ public class InitFaceFeatrueAct3 extends BaseMvpActivity<ActivityInitFaceFeatrue
                         StudentInfo old = DBHelper.getInstance(InitFaceFeatrueAct3.this).getStudentInfo(imagesPaths[i]);
                         if(old!=null){
                             if(old.getDesc()!=null){
-                                String[] split = old.getDesc().split(",");
+
+                                if(!CollectionUtils.isNullOrEmpty(faceTokenList)){
+                                    if(faceTokenList.contains(old.getFaceToken())){
+                                        bindBefore=true;
+                                        successCount++;
+                                        Log.i(TAG,"此照片已经被绑定过,path："+imagesPaths[i]);
+                                    }
+                                }
+
+                              /*  String[] split = old.getDesc().split(",");
                                 //需要判断，因为下载完成之后，是没有token的。
                                 if(split.length==2){
                                     String token=old.getDesc().split(",")[1];
@@ -370,7 +389,7 @@ public class InitFaceFeatrueAct3 extends BaseMvpActivity<ActivityInitFaceFeatrue
                                             Log.i(TAG,"此照片已经被绑定过,path："+imagesPaths[i]);
                                         }
                                     }
-                                }
+                                }*/
                             }
                         }
 
@@ -418,9 +437,11 @@ public class InitFaceFeatrueAct3 extends BaseMvpActivity<ActivityInitFaceFeatrue
 
                                             StudentInfo student=new StudentInfo();
                                             student.setStudentUUID(imagesPaths[i]);
-                                            student.setName(imagesPaths[i]);
-                                            student.setImageUrl("");
-                                            student.setDesc(imagesPaths[i]+","+new String(faceToken));
+                                            student.setImageSdCardPath(imagePath);
+                                            student.setName(names[i]);
+                                            student.setFaceToken(new String(faceToken));
+                                            student.setImageUrl(heads[i]);
+                                            student.setDesc(sns[i]);
                                             student.setUpdateTime(System.currentTimeMillis());
                                             student.setImageDownloadTime(System.currentTimeMillis());
 
