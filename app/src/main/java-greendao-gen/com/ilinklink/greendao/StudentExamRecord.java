@@ -31,7 +31,7 @@ public class StudentExamRecord {
      */
     private String examTime;
     /**
-     * 得分，json串，每个科目的个数。{a:12,b:34,c:14,d:fdf}
+     * 得分，json串，每个科目的个数  {@link com.ilinklink.tg.entity.SubjectExamResult}
      */
     private String subResultJson;
     /**
