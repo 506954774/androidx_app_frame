@@ -315,6 +315,7 @@
                     android:gravity="center"
                     android:onClick="@{click.onClick}"
                     android:padding="6dp"
+                    android:visibility="invisible"
                     android:text="@string/exam_stu_face_hint"
                     android:textColor="@color/green_659B43"
                     android:textSize="20sp" />
@@ -327,13 +328,12 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentBottom="true"
                     android:layout_marginRight="15dp"
-                    android:layout_toRightOf="@+id/tv_stu_face"
                     android:background="@drawable/green_btn_selector"
                     android:gravity="center"
                     android:onClick="@{click.onClick}"
                     android:padding="6dp"
                     android:text="@string/exam_start"
-                    android:textColor="@color/green_659B43"
+                    android:textColor="@color/white"
                     android:textSize="20sp" />
 
 
@@ -350,7 +350,8 @@
                     android:onClick="@{click.onClick}"
                     android:padding="6dp"
                     android:text="@string/exam_commit_exam_result"
-                    android:textColor="@color/green_659B43"
+                    android:visibility="invisible"
+                    android:textColor="@color/white"
                     android:textSize="20sp" />
 
                 <com.ilinklink.tg.widget.customClick.CustomClickTextView

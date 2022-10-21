@@ -30,11 +30,25 @@
                 android:layout_height="40dp"
                 android:id="@+id/iv_back"
                 android:onClick="@{click.onClick}"
+                android:visibility="gone"
 
                 android:src="@mipmap/icon_select_sub_back"
                 >
 
             </com.ilinklink.tg.widget.customClick.CustomClickImageView>
+
+            <TextView
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="20dp"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:id="@+id/iv_stu_name"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:text="考生：张学文"
+                >
+            </TextView>
+
 
             <TextView
 

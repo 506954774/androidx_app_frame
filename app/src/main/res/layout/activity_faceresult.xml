@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:chuck="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="click"
+            type="android.view.View.OnClickListener" />
+
+    </data>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@mipmap/bg_green_theme">
+
+        <RelativeLayout
+            android:id="@+id/rl_title"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="35dp"
+            android:gravity="center_vertical">
+
+            <TextView
+
+                style="@style/ztsb_title"
+                android:text="@string/student_info_verify" />
+
+            <com.ilinklink.tg.widget.customClick.CustomClickImageView
+                android:id="@+id/iv_back"
+                android:layout_width="45dp"
+                android:layout_height="40dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="20dp"
+                android:onClick="@{click.onClick}"
+                android:src="@mipmap/icon_select_sub_back"
+
+                android:visibility="invisible">
+
+            </com.ilinklink.tg.widget.customClick.CustomClickImageView>
+
+            <com.ilinklink.tg.widget.customClick.CustomClickImageView
+                android:id="@+id/iv_setting"
+                android:layout_width="45dp"
+                android:layout_height="40dp"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="15dp"
+                android:layout_marginTop="20dp"
+                android:onClick="@{click.onClick}"
+                android:src="@mipmap/icon_select_sub_setting"
+
+                android:visibility="invisible">
+
+            </com.ilinklink.tg.widget.customClick.CustomClickImageView>
+
+            <com.ilinklink.tg.widget.customClick.CustomClickTextView
+                android:id="@+id/tv_return"
+                style="@style/titleRightBtn"
+                android:onClick="@{click.onClick}"
+                android:text="@string/go_back">
+
+            </com.ilinklink.tg.widget.customClick.CustomClickTextView>
+
+        </RelativeLayout>
+
+
+        <!--android:background="@color/transparent"-->
+        <RelativeLayout
+            style="@style/main_container"
+            android:background="#aaffffff"
+            android:padding="20dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:text="@string/please_verify_the_student_infomation"
+                        android:textColor="@color/green_659B43">
+
+
+                    </TextView>
+
+                </RelativeLayout>
+
+
+                <RelativeLayout
+
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp">
+
+                    <ImageView
+                        android:id="@+id/iv_head"
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:layout_centerInParent="true"
+                        android:src="@mipmap/album_placehold_image">
+
+
+                    </ImageView>
+
+                </RelativeLayout>
+
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp">
+
+                    <TextView
+                        android:id="@+id/tv_stu_name"
+                        android:layout_width="150dp"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:text="姓名：李景亮"
+                        android:textColor="@color/black"></TextView>
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp">
+
+                    <TextView
+                        android:id="@+id/tv_stu_gender"
+                        android:layout_width="150dp"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:text="性别：男"
+                        android:textColor="@color/black"></TextView>
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp">
+
+                    <TextView
+                        android:id="@+id/tv_stu_age"
+                        android:layout_width="150dp"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:text="年龄：26"
+                        android:textColor="@color/black"></TextView>
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp">
+
+                    <TextView
+                        android:id="@+id/tv_stu_dept"
+                        android:layout_width="150dp"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:text="机构：二排三班"
+                        android:textColor="@color/black"></TextView>
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp">
+
+                    <TextView
+                        android:id="@+id/tv_stu_sn"
+                        android:layout_width="150dp"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:text="编号：HAM2205011"
+                        android:textColor="@color/black"></TextView>
+                </RelativeLayout>
+
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <RelativeLayout
+                        android:layout_centerInParent="true"
+                        android:layout_width="200dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="15dp"
+                        >
+                        <com.ilinklink.tg.widget.customClick.CustomClickTextView
+                            android:layout_marginLeft="15dp"
+                            android:id="@+id/tv_redo_face_recongnize"
+                            style="@style/titleBtn"
+                            android:onClick="@{click.onClick}"
+                            android:text="@string/redo_face_recongnize">
+
+                        </com.ilinklink.tg.widget.customClick.CustomClickTextView>
+
+                        <com.ilinklink.tg.widget.customClick.CustomClickTextView
+                            android:id="@+id/tv_verify_infomation"
+                            style="@style/titleRightBtn"
+                            android:onClick="@{click.onClick}"
+                            android:text="@string/verify_infomation">
+
+                        </com.ilinklink.tg.widget.customClick.CustomClickTextView>
+                    </RelativeLayout>
+
+                </RelativeLayout>
+
+
+
+            </LinearLayout>
+
+
+        </RelativeLayout>
+
+
+    </RelativeLayout>
+
+</layout>

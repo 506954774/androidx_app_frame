@@ -1,5 +1,6 @@
-package com.ilinklink.tg.mvp.stuexamindex;
+package com.ilinklink.tg.mvp.facerecognize;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
@@ -16,30 +17,37 @@ import com.ilinklink.tg.green_dao.DBHelper;
 import com.ilinklink.tg.mvp.BasePresenter;
 import com.ilinklink.tg.mvp.exam.BasePoseActivity2;
 import com.ilinklink.tg.mvp.exam.ExamActivity2;
+import com.ilinklink.tg.mvp.stuexamindex.ExamSubjectAdapter;
+import com.ilinklink.tg.mvp.stuexamindex.SpaceItemDecoration;
+import com.ilinklink.tg.mvp.stuexamindex.StudentExamIndexActivity;
 import com.ilinklink.tg.utils.CollectionUtils;
 import com.qdong.communal.library.module.BaseRefreshableListFragment.adapter.BaseQuickAdapter2;
+import com.qdong.communal.library.util.BitmapUtil;
+import com.qdong.communal.library.util.Constants;
 import com.qdong.communal.library.util.DensityUtil;
 import com.spc.pose.demo.BR;
 import com.spc.pose.demo.R;
+import com.spc.pose.demo.databinding.ActivityFaceresultBinding;
 import com.spc.pose.demo.databinding.ActivityStudentExamIndexBinding;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import androidx.annotation.RequiresApi;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 /**
- * SelectSubjectActivity
- * 考生考试首页，科目选择
+  人脸识别成功之后，人员信息展示界面
  * Created By:Chuck
  * Des:
  * on 2018/12/6 15:43
  */
-public class StudentExamIndexActivity extends BaseMvpActivity<ActivityStudentExamIndexBinding> implements View.OnClickListener {
+public class FaceResultActivity extends BaseMvpActivity<ActivityFaceresultBinding> implements View.OnClickListener {
 
-    public static final String TAG="StudentExamIndexActivity";
+    public static final String TAG="FaceResultActivity";
 
     private ExamSubjectAdapter mExamAdapter;
 
@@ -80,97 +88,42 @@ public class StudentExamIndexActivity extends BaseMvpActivity<ActivityStudentExa
         super.onCreate(savedInstanceState);
 
         //设置布局,里面有埋点按钮,详细看布局文件
-        setContentView(R.layout.activity_student_exam_index);
+        setContentView(R.layout.activity_faceresult);
+
+        initData();
 
         initView();
-        initData();
 
 
     }
 
     private void initData() {
 
-        /**
-         * 此次考试的数据
-         */
-        List<ExamRecord> examRecordList = DBHelper.getInstance(this).getExamRecordList();
-        Log.i(TAG,"examRecordList:"+examRecordList);
-
-        if(CollectionUtils.isNullOrEmpty(examRecordList)){
-            ExamRecord examRecord=new ExamRecord();
-            examRecord.setExamRecordId("1");
-            examRecord.setExamUUID("1");
-            examRecord.setName("十月份大比武");
-            examRecord.setExamTime("2022-10-21 17:00");
-            DBHelper.getInstance(this).saveExamRecord(examRecord);
+        List<StudentInfo> allStudents = DBHelper.getInstance(this).getAllStudents();
+        if(!CollectionUtils.isNullOrEmpty(allStudents)){
+            mStudentInfo=allStudents.get(new Random().nextInt(allStudents.size()));
         }
 
-
-        RecyclerView.LayoutManager layoutManager = new GridLayoutManager(this,2);
-        mViewBind.recyclerExams.setLayoutManager(layoutManager);
-        SpaceItemDecoration itemDecoration=new SpaceItemDecoration(DensityUtil.dp2px(this,30),2);
-        mViewBind.recyclerExams.addItemDecoration(itemDecoration);
-
-        List<ExamInfo> examInfoList = DBHelper.getInstance(this).getExamInfoList();
-
-        /**
-         * 写死科目
-         *
-         */
-        String [] names={"单杠引体向上","双杠臂屈伸","俯卧撑","仰卧起坐"};
-        for(String name :names){
-            ExamInfo s1=new ExamInfo();
-            s1.setName(name);
-            examInfoList.add(s1);
-        }
-
-
-
-        mExamAdapter = new ExamSubjectAdapter(examInfoList, R.layout.item_exam_sub_item, BR.ExamSubIndex);
-
-        mExamAdapter.setOnItemClickListener(new BaseQuickAdapter2.OnItemClickListener() {
-            @Override
-            public void onItemClick(BaseQuickAdapter2 adapter, View view, int position) {
-                //ToastUtils.showShort(examInfoList.get(position).toString());
-
-                ExamInfo mExam = examInfoList.get(position);
-                if(mExam!=null){
-
-                    Intent intent=new Intent(StudentExamIndexActivity.this, ExamActivity2.class);
-
-                    if("单杠引体向上".equals(mExam.getName())){
-                        intent.putExtra(BasePoseActivity2.EXAM_NAME,mExam.getName());
-                        startActivity(intent);
-                    }
-                    else if("双杠臂屈伸".equals(mExam.getName())){
-                        intent.putExtra(BasePoseActivity2.EXAM_NAME,mExam.getName());
-                        startActivity(intent);
-                    }
-                    else if("俯卧撑".equals(mExam.getName())){
-                        intent.putExtra(BasePoseActivity2.EXAM_NAME,mExam.getName());
-                        startActivity(intent);
-                    }
-                    else if("仰卧起坐".equals(mExam.getName())){
-                        intent.putExtra(BasePoseActivity2.EXAM_NAME,mExam.getName());
-                        startActivity(intent);
-                    }
-                    else  {
-                        ToastUtils.showShort(getString(R.string.exam_not_supported));
-                    }
-                }
-
-
-            }
-        });
-
-        mViewBind.recyclerExams.setAdapter(mExamAdapter);
     }
 
     //重置界面
     private void initView() {
         mViewBind.setClick(this);
 
-        mViewBind.tvEnterExam.setText(getString(R.string.exit_exam));
+      /*  BitmapUtil.loadPic(this,"https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fgss0.baidu.com%2F7Po3dSag_xI4khGko9WTAnF6hhy%2Fzhidao%2Fpic%2Fitem%2Fd8f9d72a6059252d5322e19e359b033b5bb5b977.jpg&refer=http%3A%2F%2Fgss0.baidu.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=auto?sec=1668950495&t=227b884563ef2261c782846225dced9b", R.mipmap.album_placehold_image, R.mipmap.album_placehold_image, mViewBind.ivHead, 50);
+*/
+
+        if(mStudentInfo!=null){
+            mViewBind.tvStuName.setText("姓名："+mStudentInfo.getName());
+            mViewBind.tvStuSn.setText("编号："+mStudentInfo.getDesc());
+
+            // Constants.FACE_IMAGES_PATH+File.separator+imagesPaths[i]
+
+            BitmapUtil.loadPic(this,  mStudentInfo.getImageSdCardPath(), R.mipmap.album_placehold_image, R.mipmap.album_placehold_image, mViewBind.ivHead, 50);
+
+            FaceRecognizeResult.getInstance().setStudentId(mStudentInfo.getStudentUUID());
+        }
+
     }
 
 
@@ -181,7 +134,7 @@ public class StudentExamIndexActivity extends BaseMvpActivity<ActivityStudentExa
         Intent intent = null;
         switch (v.getId()) {
 
-            case R.id.iv_back:
+            case R.id.tv_return:
                 finish();
                 break;
 
@@ -206,9 +159,12 @@ public class StudentExamIndexActivity extends BaseMvpActivity<ActivityStudentExa
 
 
                 break;
-            case R.id.tv_enter_exam:
+            case R.id.tv_verify_infomation:
                 ToastUtils.showShort("tv_enter_exam");
                 //startActivity(new Intent(this, ShuanggangActivity.class));
+
+                startActivity(new Intent(this, StudentExamIndexActivity.class));
+                finish();
 
 
                 break;
