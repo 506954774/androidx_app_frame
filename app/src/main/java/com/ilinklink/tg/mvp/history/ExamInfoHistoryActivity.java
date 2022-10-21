@@ -10,6 +10,7 @@ import android.widget.TextView;
 import com.ilinklink.greendao.ExamRecord;
 import com.ilinklink.greendao.StudentExamRecord;
 import com.ilinklink.tg.base.BaseMvpActivity;
+import com.ilinklink.tg.dialog.DialogUploadSuccess;
 import com.ilinklink.tg.green_dao.DBHelper;
 import com.ilinklink.tg.mvp.BasePresenter;
 import com.ilinklink.tg.mvp.selectsubject.SpaceItemDecoration;
@@ -67,58 +68,13 @@ public class ExamInfoHistoryActivity extends BaseMvpActivity<ActivityExamInfoHis
     }
 
     private void initData() {
-        List<StudentExamRecord> examInfoList = new LinkedList<>();
-//        Log.e("TAG","长度是"+examInfoList.size());
-//        for (ExamRecord examInfo : examInfoList) {
-//            Log.e("TAG",examInfo+"");
-//        }
-        StudentExamRecord studentExamRecord = new StudentExamRecord();
-        StudentExamRecord studentExamRecor2 = new StudentExamRecord();
-
-        studentExamRecord.setStudentName("名字1");
-        studentExamRecor2.setStudentName("名字2");
-        studentExamRecord.setExamTime("2022-2-2-22 23:22:22");
-        studentExamRecor2.setExamTime("2022-4-2-22 23:22:22");
-        studentExamRecord.setReservedColumn("dgasjdga1@!#!@#12");
-        studentExamRecor2.setReservedColumn("2342423423@!#!@#12");
-
-        examInfoList.add(studentExamRecord);
-        examInfoList.add(studentExamRecord);
-        examInfoList.add(studentExamRecord);
-        examInfoList.add(studentExamRecord);
-        examInfoList.add(studentExamRecord);
-        examInfoList.add(studentExamRecord);
-        examInfoList.add(studentExamRecord);
-        examInfoList.add(studentExamRecord);
-        examInfoList.add(studentExamRecord);
-        examInfoList.add(studentExamRecor2);
-        examInfoList.add(studentExamRecor2);
-        examInfoList.add(studentExamRecor2);
-        examInfoList.add(studentExamRecor2);
-        examInfoList.add(studentExamRecord);
-        examInfoList.add(studentExamRecor2);
-        examInfoList.add(studentExamRecor2);
-        examInfoList.add(studentExamRecor2);
-        examInfoList.add(studentExamRecor2);
-        examInfoList.add(studentExamRecor2);
-        examInfoList.add(studentExamRecor2);
-        examInfoList.add(studentExamRecor2);
-        examInfoList.add(studentExamRecor2);
-        examInfoList.add(studentExamRecor2);
-        examInfoList.add(studentExamRecor2);
-        examInfoList.add(studentExamRecor2);
-        examInfoList.add(studentExamRecor2);
-        examInfoList.add(studentExamRecor2);
-
+        List<StudentExamRecord> examInfoList = DBHelper.getInstance(this).getExamRecord(examID);
+        Log.e("TAG","长度是"+examInfoList.size());
+        for (StudentExamRecord examInfo : examInfoList) {
+            Log.e("TAG",examInfo+"");
+        }
 
         mAdapter = new ExamInfoHistoryAdapter(examInfoList, R.layout.item_exam_info_history, BR.studentExamRecord);
-        mAdapter.setOnItemClickListener(new BaseQuickAdapter2.OnItemClickListener() {
-
-            @Override
-            public void onItemClick(BaseQuickAdapter2 adapter, View view, int position) {
-                showToast("  " + position);
-            }
-        });
         mViewBind.recyclerExamsList.setAdapter(mAdapter);
     }
 
@@ -137,6 +93,11 @@ public class ExamInfoHistoryActivity extends BaseMvpActivity<ActivityExamInfoHis
     public void onClick(View view) {
         if (view.getId() == R.id.btn_back) {
             finish();
+        }
+        if (view.getId() == R.id.btn_upload) {
+            // 上传数据
+            DialogUploadSuccess dialogUploadSuccess = new DialogUploadSuccess(this);
+            dialogUploadSuccess.show();
         }
     }
 

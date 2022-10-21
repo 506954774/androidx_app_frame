@@ -72,4 +72,18 @@
         <item name="android:paddingRight">15dp</item>
         <item name="android:background">@drawable/blue_btn_selector</item>
     </style>
+
+    <style name="dia_btn_sure">
+        <item name="android:layout_centerHorizontal">true</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:gravity">center</item>
+        <item name="android:paddingLeft">50dp</item>
+        <item name="android:paddingRight">50dp</item>
+        <item name="android:paddingTop">10dp</item>
+        <item name="android:paddingBottom">10dp</item>
+        <item name="android:background">@drawable/bg_blue_radius_react</item>
+    </style>
 </resources>

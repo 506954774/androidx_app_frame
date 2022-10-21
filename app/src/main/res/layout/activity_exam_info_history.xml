@@ -98,7 +98,7 @@
                     android:id="@+id/exam_time"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="100dp"
+                    android:layout_marginLeft="50dp"
                     android:text="    考试时间 "
                     android:textColor="@color/white"
                     android:textSize="20sp" />
@@ -113,7 +113,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="60dp"
-                    android:text="    俯卧撑"
+                    android:text=" 俯卧撑"
                     android:textColor="@color/white"
                     android:textSize="20sp" />
 
@@ -170,7 +170,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/table_head"
-                android:layout_marginBottom="20dp" />
+                android:layout_marginBottom="20dp"
+                android:layout_weight="1" />
 
 
             <com.ilinklink.tg.widget.customClick.CustomClickTextView

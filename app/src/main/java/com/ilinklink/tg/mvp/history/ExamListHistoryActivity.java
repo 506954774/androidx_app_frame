@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.ilinklink.greendao.ExamRecord;
 import com.ilinklink.tg.base.BaseMvpActivity;
+import com.ilinklink.tg.dialog.DialogUploadSuccess;
 import com.ilinklink.tg.green_dao.DBHelper;
 import com.ilinklink.tg.mvp.BasePresenter;
 import com.ilinklink.tg.mvp.selectsubject.SpaceItemDecoration;
@@ -63,17 +64,13 @@ public class ExamListHistoryActivity extends BaseMvpActivity<ActivityExamListHis
         for (ExamRecord examInfo : examInfoList) {
             Log.e("TAG", examInfo + "");
         }
-        examInfoList.add(examInfoList.get(0));
-        examInfoList.add(examInfoList.get(0));
-        examInfoList.add(examInfoList.get(0));
-        examInfoList.add(examInfoList.get(0));
         mAdapter = new ExamListHistoryAdapter(examInfoList, R.layout.item_exam_list_history, BR.ExamInfo);
         mAdapter.setOnItemClickListener(new BaseQuickAdapter2.OnItemClickListener() {
             @Override
             public void onItemClick(BaseQuickAdapter2 adapter, View view, int position) {
                 Intent intent = new Intent(ExamListHistoryActivity.this, ExamInfoHistoryActivity.class);
                 intent.putExtra("title", examInfoList.get(position).getName());
-                intent.putExtra(ExamInfoHistoryActivity.KEY_EXAM_ID, examInfoList.get(position).getExamUUID());
+                intent.putExtra(ExamInfoHistoryActivity.KEY_EXAM_ID, examInfoList.get(position).getExamRecordId());
                 ExamListHistoryActivity.this.startActivity(intent);
             }
         });
@@ -93,6 +90,11 @@ public class ExamListHistoryActivity extends BaseMvpActivity<ActivityExamListHis
     public void onClick(View view) {
         if (view.getId() == R.id.btn_back) {
             finish();
+        }
+        if (view.getId() == R.id.btn_upload) {
+            // todo  上传数据
+            DialogUploadSuccess dialogUploadSuccess = new DialogUploadSuccess(this);
+            dialogUploadSuccess.show();
         }
     }
 
