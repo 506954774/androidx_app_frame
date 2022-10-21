@@ -614,7 +614,9 @@ public  class BasePoseActivity2 extends BaseMvpActivity<ActivityFuwochengBinding
                         mIsCountDown=true;
                         mViewBind.tvTime.setText(String.valueOf(mTimer - aLong) + "秒");
                         mViewBind.progressbarHint.setProgress((int) (100 * aLong / mTimer));
+                        mViewBind.tvStartExam.setVisibility(View.INVISIBLE);
                     } else {
+                        mViewBind.tvStartExam.setVisibility(View.VISIBLE);
 
                         mIsExamming=false;
                         mIsCountDown=false;
