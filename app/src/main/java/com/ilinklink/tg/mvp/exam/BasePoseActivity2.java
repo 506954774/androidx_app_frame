@@ -548,15 +548,17 @@ public  class BasePoseActivity2 extends BaseMvpActivity<ActivityFuwochengBinding
             mStudentExamRecord= Json.fromJson(mDataJson,StudentExamRecord.class);
         }
 
+        if(mStudentExamRecord!=null){
+            mViewBind.tvStudentName.setText(mStudentExamRecord.getStudentName());
+        }
+
     }
 
     //重置界面
     private void initView() {
         mViewBind.setClick(this);
 
-        if(mStudentExamRecord!=null){
-            mViewBind.tvStudentName.setText(mStudentExamRecord.getStudentName());
-        }
+
     }
 
 
@@ -612,7 +614,9 @@ public  class BasePoseActivity2 extends BaseMvpActivity<ActivityFuwochengBinding
                         mIsCountDown=true;
                         mViewBind.tvTime.setText(String.valueOf(mTimer - aLong) + "秒");
                         mViewBind.progressbarHint.setProgress((int) (100 * aLong / mTimer));
+                        mViewBind.tvStartExam.setVisibility(View.INVISIBLE);
                     } else {
+                        mViewBind.tvStartExam.setVisibility(View.VISIBLE);
 
                         mIsExamming=false;
                         mIsCountDown=false;
