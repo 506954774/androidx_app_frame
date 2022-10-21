@@ -1,4 +1,4 @@
-package com.ilinklink.tg.mvp.selectsubject;
+package com.ilinklink.tg.mvp.stuexamindex;
 
 import android.content.Intent;
 import android.graphics.Color;
@@ -13,12 +13,11 @@ import com.ilinklink.tg.green_dao.DBHelper;
 import com.ilinklink.tg.mvp.BasePresenter;
 import com.ilinklink.tg.mvp.exam.BasePoseActivity2;
 import com.ilinklink.tg.mvp.exam.ExamActivity2;
-import com.ilinklink.tg.mvp.stuexamindex.StudentExamIndexActivity;
 import com.qdong.communal.library.module.BaseRefreshableListFragment.adapter.BaseQuickAdapter2;
 import com.qdong.communal.library.util.DensityUtil;
 import com.spc.pose.demo.BR;
 import com.spc.pose.demo.R;
-import com.spc.pose.demo.databinding.ActivitySelectSubjectBinding;
+import com.spc.pose.demo.databinding.ActivityStudentExamIndexBinding;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,15 +28,15 @@ import androidx.recyclerview.widget.RecyclerView;
 
 /**
  * SelectSubjectActivity
- * 选择科目界面
+ * 考生考试首页，科目选择
  * Created By:Chuck
  * Des:
  * on 2018/12/6 15:43
  */
-public class SelectSubjectActivity extends BaseMvpActivity<ActivitySelectSubjectBinding> implements View.OnClickListener {
+public class StudentExamIndexActivity extends BaseMvpActivity<ActivityStudentExamIndexBinding> implements View.OnClickListener {
 
 
-    private ExamAdapter mExamAdapter;
+    private ExamSubjectAdapter mExamAdapter;
 
     //给父类存起来,父类destory时遍历释放资源
     @Override
@@ -74,7 +73,7 @@ public class SelectSubjectActivity extends BaseMvpActivity<ActivitySelectSubject
         super.onCreate(savedInstanceState);
 
         //设置布局,里面有埋点按钮,详细看布局文件
-        setContentView(R.layout.activity_select_subject);
+        setContentView(R.layout.activity_student_exam_index);
 
         initView();
         initData();
@@ -104,7 +103,7 @@ public class SelectSubjectActivity extends BaseMvpActivity<ActivitySelectSubject
 
 
 
-        mExamAdapter = new ExamAdapter(examInfoList, R.layout.item_ztsb_course, BR.ExamInfo);
+        mExamAdapter = new ExamSubjectAdapter(examInfoList, R.layout.item_exam_sub_item, BR.ExamSubIndex);
 
         mExamAdapter.setOnItemClickListener(new BaseQuickAdapter2.OnItemClickListener() {
             @Override
@@ -114,7 +113,7 @@ public class SelectSubjectActivity extends BaseMvpActivity<ActivitySelectSubject
                 ExamInfo mExam = examInfoList.get(position);
                 if(mExam!=null){
 
-                    Intent intent=new Intent(SelectSubjectActivity.this, ExamActivity2.class);
+                    Intent intent=new Intent(StudentExamIndexActivity.this, ExamActivity2.class);
 
                     if("单杠引体向上".equals(mExam.getName())){
                         intent.putExtra(BasePoseActivity2.EXAM_NAME,mExam.getName());
@@ -147,6 +146,8 @@ public class SelectSubjectActivity extends BaseMvpActivity<ActivitySelectSubject
     //重置界面
     private void initView() {
         mViewBind.setClick(this);
+
+        mViewBind.tvEnterExam.setText(getString(R.string.exit_exam));
     }
 
 
@@ -183,8 +184,8 @@ public class SelectSubjectActivity extends BaseMvpActivity<ActivitySelectSubject
 
                 break;
             case R.id.tv_enter_exam:
-                //ToastUtils.showShort("tv_enter_exam");
-                startActivity(new Intent(this, StudentExamIndexActivity.class));
+                ToastUtils.showShort("tv_enter_exam");
+                //startActivity(new Intent(this, ShuanggangActivity.class));
 
 
                 break;

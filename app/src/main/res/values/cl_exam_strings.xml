@@ -1,0 +1,8 @@
+<resources>
+
+    <!--新版考核-->
+    <string name="enter_exam">进入考核</string>
+    <string name="exit_exam">退出考核</string>
+
+
+</resources>

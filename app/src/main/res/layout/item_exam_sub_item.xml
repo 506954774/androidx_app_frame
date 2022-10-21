@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="click"
+            type="android.view.View.OnClickListener" />
+
+        <variable
+            name="ExamSubIndex"
+            type="com.ilinklink.greendao.ExamInfo" />
+    </data>
+
+    <LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.ilinklink.tg.widget.customClick.CustomClickTextView
+                android:id="@+id/tv_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:background="@drawable/green_btn_selector"
+                android:gravity="center"
+                android:padding="6dp"
+                android:text="@string/select_subject_fuwocheng"
+                android:textColor="@color/white"
+                android:textSize="20sp" />
+
+            <ImageView
+                android:layout_alignParentRight="true"
+                android:id="@+id/iv_finished"
+                android:src="@mipmap/bg_exam_finished"
+                android:layout_width="30dp"
+                android:layout_height="30dp">
+
+            </ImageView>
+
+
+        </RelativeLayout>
+
+
+
+     </LinearLayout>
+</layout>
