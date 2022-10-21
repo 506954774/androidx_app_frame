@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:chuck="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="click"
+            type="android.view.View.OnClickListener" />
+
+    </data>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@mipmap/bg_green_theme">
+
+        <RelativeLayout
+            android:id="@+id/rl_title"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="35dp"
+            android:gravity="center_vertical">
+
+
+            <com.ilinklink.tg.widget.customClick.CustomClickTextView
+                android:id="@+id/btn_back"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:paddingTop="3dp"
+                android:paddingBottom="3dp"
+                android:text="@string/back"
+                android:onClick="@{click.onClick}"
+                style="@style/titleRightBtn"
+                />
+
+            <TextView
+                style="@style/ztsb_title"
+                android:text="@string/history_exam_list_title" />
+
+
+        </RelativeLayout>
+
+
+        <RelativeLayout style="@style/main_container">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="20dp"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:orientation="horizontal"
+                    android:weightSum="2">
+
+
+                    <com.ilinklink.tg.widget.customClick.CustomClickTextView
+                        android:id="@+id/tv_fuwocheng"
+
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:layout_marginRight="5dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/green_btn_selector"
+                        android:gravity="center"
+                        android:onClick="@{click.onClick}"
+                        android:padding="6dp"
+                        android:text="@string/select_subject_fuwocheng"
+                        android:textColor="@color/green_659B43"
+                        android:textSize="20sp" />
+
+
+                    <com.ilinklink.tg.widget.customClick.CustomClickTextView
+                        android:id="@+id/tv_yintixiangshang"
+
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:layout_marginLeft="5dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/green_btn_selector"
+                        android:gravity="center"
+                        android:onClick="@{click.onClick}"
+                        android:padding="6dp"
+                        android:text="@string/select_subject_yintixiangshang"
+                        android:textColor="@color/green_659B43"
+                        android:textSize="20sp" />
+
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:orientation="horizontal"
+                    android:weightSum="2">
+
+
+                    <com.ilinklink.tg.widget.customClick.CustomClickTextView
+                        android:id="@+id/tv_shuanggangbiqushen"
+
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:layout_marginRight="5dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/green_btn_selector"
+                        android:gravity="center"
+                        android:onClick="@{click.onClick}"
+                        android:padding="6dp"
+                        android:text="@string/select_subject_shuanggangbiqushen"
+                        android:textColor="@color/green_659B43"
+                        android:textSize="20sp" />
+
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycler_exams_list"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginBottom="20dp" />
+
+
+        </RelativeLayout>
+
+
+    </RelativeLayout>
+
+</layout>
