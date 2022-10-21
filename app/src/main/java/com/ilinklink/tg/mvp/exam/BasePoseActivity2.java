@@ -548,15 +548,17 @@ public  class BasePoseActivity2 extends BaseMvpActivity<ActivityFuwochengBinding
             mStudentExamRecord= Json.fromJson(mDataJson,StudentExamRecord.class);
         }
 
+        if(mStudentExamRecord!=null){
+            mViewBind.tvStudentName.setText(mStudentExamRecord.getStudentName());
+        }
+
     }
 
     //重置界面
     private void initView() {
         mViewBind.setClick(this);
 
-        if(mStudentExamRecord!=null){
-            mViewBind.tvStudentName.setText(mStudentExamRecord.getStudentName());
-        }
+
     }
 
 
