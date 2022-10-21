@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <color name="green_336633">#336633</color>
-    <color name="green_659B43">#659B43</color>
+    <color name="green_336633">#8097CBED</color>
+    <color name="blue_item">#805BC1F5</color>
+    <color name="green_659B43">#5BC1F5</color>
+
 
     <color name="green_339911">#339911</color>
     <color name="green_07A805">#07A805</color>

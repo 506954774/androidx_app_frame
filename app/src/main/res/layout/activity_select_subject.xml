@@ -62,25 +62,24 @@
         <RelativeLayout style="@style/main_container">
 
             <LinearLayout
-                android:visibility="gone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="20dp"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:visibility="gone">
 
 
                 <LinearLayout
-                    android:layout_marginTop="15dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
                     android:orientation="horizontal"
                     android:weightSum="2">
 
 
                     <com.ilinklink.tg.widget.customClick.CustomClickTextView
-                        android:onClick="@{click.onClick}"
-
                         android:id="@+id/tv_fuwocheng"
+
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_centerInParent="true"
@@ -88,6 +87,7 @@
                         android:layout_weight="1"
                         android:background="@drawable/green_btn_selector"
                         android:gravity="center"
+                        android:onClick="@{click.onClick}"
                         android:padding="6dp"
                         android:text="@string/select_subject_fuwocheng"
                         android:textColor="@color/green_659B43"
@@ -95,9 +95,8 @@
 
 
                     <com.ilinklink.tg.widget.customClick.CustomClickTextView
-                        android:onClick="@{click.onClick}"
-
                         android:id="@+id/tv_yintixiangshang"
+
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_centerInParent="true"
@@ -105,6 +104,7 @@
                         android:layout_weight="1"
                         android:background="@drawable/green_btn_selector"
                         android:gravity="center"
+                        android:onClick="@{click.onClick}"
                         android:padding="6dp"
                         android:text="@string/select_subject_yintixiangshang"
                         android:textColor="@color/green_659B43"
@@ -114,19 +114,17 @@
                 </LinearLayout>
 
 
-
                 <LinearLayout
-                    android:layout_marginTop="15dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
                     android:orientation="horizontal"
                     android:weightSum="2">
 
 
                     <com.ilinklink.tg.widget.customClick.CustomClickTextView
-                        android:onClick="@{click.onClick}"
-
                         android:id="@+id/tv_shuanggangbiqushen"
+
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_centerInParent="true"
@@ -134,13 +132,11 @@
                         android:layout_weight="1"
                         android:background="@drawable/green_btn_selector"
                         android:gravity="center"
+                        android:onClick="@{click.onClick}"
                         android:padding="6dp"
                         android:text="@string/select_subject_shuanggangbiqushen"
                         android:textColor="@color/green_659B43"
                         android:textSize="20sp" />
-
-
-
 
 
                 </LinearLayout>
@@ -150,11 +146,12 @@
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recycler_exams"
-                android:layout_margin="20dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="100dp"
-                />
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginBottom="20dp" />
 
 
         </RelativeLayout>
