@@ -416,8 +416,6 @@ public class InitFaceFeatrueAct3 extends BaseMvpActivity<ActivityInitFaceFeatrue
 
                                         if(b){
 
-                                            successCount++;
-
                                             StudentInfo student=new StudentInfo();
                                             student.setStudentUUID(imagesPaths[i]);
                                             student.setName(imagesPaths[i]);
