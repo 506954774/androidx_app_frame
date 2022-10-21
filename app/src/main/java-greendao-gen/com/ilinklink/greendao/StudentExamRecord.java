@@ -147,4 +147,19 @@ public class StudentExamRecord {
         this.reservedColumn2 = reservedColumn2;
     }
 
+    @Override
+    public String toString() {
+        return "StudentExamRecord{" +
+                "id=" + id +
+                ", studentExamRecordId='" + studentExamRecordId + '\'' +
+                ", examRecordId='" + examRecordId + '\'' +
+                ", studentUUID='" + studentUUID + '\'' +
+                ", studentName='" + studentName + '\'' +
+                ", examTime='" + examTime + '\'' +
+                ", subResultJson='" + subResultJson + '\'' +
+                ", desc='" + desc + '\'' +
+                ", reservedColumn='" + reservedColumn + '\'' +
+                ", reservedColumn2='" + reservedColumn2 + '\'' +
+                '}';
+    }
 }

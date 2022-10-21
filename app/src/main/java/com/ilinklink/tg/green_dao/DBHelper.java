@@ -5,10 +5,13 @@ import android.content.Context;
 import com.ilinklink.greendao.DaoSession;
 import com.ilinklink.greendao.ExamInfo;
 import com.ilinklink.greendao.ExamInfoDao;
+import com.ilinklink.greendao.ExamRecord;
+import com.ilinklink.greendao.ExamRecordDao;
 import com.ilinklink.greendao.LoginModel;
 import com.ilinklink.greendao.LoginModelDao;
 import com.ilinklink.greendao.StudentExam;
 import com.ilinklink.greendao.StudentExamDao;
+import com.ilinklink.greendao.StudentExamRecordDao;
 import com.ilinklink.greendao.StudentInfo;
 import com.ilinklink.greendao.StudentInfoDao;
 import com.ilinklink.greendao.TrainingModel;
@@ -43,6 +46,9 @@ public class DBHelper {
     private ExamInfoDao mExamInfoDao;
     private StudentExamDao mStudentExamDao;
 
+    private ExamRecordDao mExamRecordDao;
+    private StudentExamRecordDao mStudentExamRecordDao;
+
 
     private DBHelper() {
     }
@@ -66,6 +72,9 @@ public class DBHelper {
             instance.mStudentInfoDao = instance.mDaoSession.getStudentInfoDao();
             instance.mExamInfoDao = instance.mDaoSession.getExamInfoDao();
             instance.mStudentExamDao = instance.mDaoSession.getStudentExamDao();
+
+            instance.mExamRecordDao = instance.mDaoSession.getExamRecordDao();
+            instance.mStudentExamRecordDao = instance.mDaoSession.getStudentExamRecordDao();
 
         }
         return instance;
@@ -392,5 +401,28 @@ public class DBHelper {
             return list.get(0);
         }
         return null;
+    }
+
+
+    /**
+     *  插入一条考试数据
+     * @param bean
+     * @return
+     */
+    public long saveExamRecord(ExamRecord bean) {
+        return mExamRecordDao.insertOrReplace(bean);
+    }
+
+
+    /**
+     * 查询考试列表
+     * @return
+     */
+    public List<ExamRecord> getExamRecordList() {
+        QueryBuilder<ExamRecord> mqBuilder = mExamRecordDao.queryBuilder();
+        List<ExamRecord> list = mqBuilder.where(ExamRecordDao.Properties.ExamUUID.isNotNull())
+                .orderDesc(ExamRecordDao.Properties.Id)
+                .list();
+        return list;
     }
 }
