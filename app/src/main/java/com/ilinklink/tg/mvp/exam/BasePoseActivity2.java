@@ -43,6 +43,8 @@ import com.ilinklink.greendao.StudentExam;
 import com.ilinklink.greendao.StudentExamRecord;
 import com.ilinklink.greendao.StudentInfo;
 import com.ilinklink.tg.base.BaseMvpActivity;
+import com.ilinklink.tg.dto.QueryStudentExamRecordDto;
+import com.ilinklink.tg.entity.SubjectExamResult;
 import com.ilinklink.tg.green_dao.DBHelper;
 import com.ilinklink.tg.mvp.BasePresenter;
 import com.ilinklink.tg.mvp.exam.setting.ExamSettingActivity;
@@ -50,6 +52,7 @@ import com.ilinklink.tg.mvp.selectsubject.SelectSubjectActivity;
 import com.ilinklink.tg.utils.ActionRulesUtils;
 import com.ilinklink.tg.utils.CollectionUtils;
 import com.ilinklink.tg.utils.ExamSettingUtils;
+import com.ilinklink.tg.utils.Json;
 import com.ilinklink.tg.utils.LogUtil;
 import com.ilinklink.tg.utils.SdCardLogUtil;
 import com.qdong.communal.library.module.network.RxHelper;
@@ -97,7 +100,7 @@ public  class BasePoseActivity2 extends BaseMvpActivity<ActivityFuwochengBinding
     private static final String POSE_DETECTION_2 = "俯卧撑";
     private static final String POSE_DETECTION_3 = "单杠引体向上";
     private static final String POSE_DETECTION_4 = "双杠臂屈伸";
-    private static final String TAG = "LivePreviewActivity";
+    private static final String TAG = "BasePoseActivity2";
     private static final int PERMISSION_REQUESTS = 1;
     protected static final int GO_TO_SETTING = 110;
 
@@ -150,6 +153,7 @@ public  class BasePoseActivity2 extends BaseMvpActivity<ActivityFuwochengBinding
         } else {
             selectedModel = POSE_DETECTION_2;
         }
+
 
 
     }
@@ -539,11 +543,20 @@ public  class BasePoseActivity2 extends BaseMvpActivity<ActivityFuwochengBinding
 
 
 
+        mDataJson=getIntent().getStringExtra(EXAM_DATA);
+        if(mDataJson!=null){
+            mStudentExamRecord= Json.fromJson(mDataJson,StudentExamRecord.class);
+        }
+
     }
 
     //重置界面
     private void initView() {
         mViewBind.setClick(this);
+
+        if(mStudentExamRecord!=null){
+            mViewBind.tvStudentName.setText(mStudentExamRecord.getStudentName());
+        }
     }
 
 
@@ -554,6 +567,7 @@ public  class BasePoseActivity2 extends BaseMvpActivity<ActivityFuwochengBinding
 
             case R.id.iv_back:
                 finish();
+                setResult(RESULT_OK);
                 break;
             case R.id.iv_setting:
                 //ToastUtils.showShort("该功能尚未开启");
@@ -626,7 +640,67 @@ public  class BasePoseActivity2 extends BaseMvpActivity<ActivityFuwochengBinding
 
 
     private void onExamFinished(){
-        //
+        Log.i(TAG,"onExamFinished,===============" );
+
+
+        QueryStudentExamRecordDto dto=new QueryStudentExamRecordDto();
+        dto.setExamRecordId(mStudentExamRecord.getExamRecordId());
+        dto.setStudentUUID(mStudentExamRecord.getStudentUUID());
+        List<StudentExamRecord> studentRecord = DBHelper.getInstance(this).getStudentRecord(dto);
+
+        if(!CollectionUtils.isNullOrEmpty(studentRecord)){
+            mStudentExamRecord = studentRecord.get(studentRecord.size()-1);
+        }
+
+
+        SubjectExamResult result= Json.fromJson(mStudentExamRecord.getSubResultJson(),SubjectExamResult.class);
+        if(result==null){
+            result=new SubjectExamResult();
+        }
+
+        Integer count=Integer.parseInt(mViewBind.tvExamSucessedCount.getText().toString());
+        int pass=0;
+        if(count!=null){
+            if(count.compareTo(new Integer(10))>0){
+                pass=1;
+            }
+        }
+        else {
+            count=0;
+        }
+
+        String score=count+","+pass;
+
+        if (selectedModel.equals(POSE_DETECTION_1)) {
+
+            Log.i(TAG,"onExamFinished,===============设置规则,仰卧起坐" );
+
+            result.setSithUpsScore(score);
+
+        } else if (selectedModel.equals(POSE_DETECTION_2)) {
+            Log.i(TAG,"onExamFinished,===============设置规则,俯卧撑" );
+
+            result.setPushUpsScore(score);
+
+        } else if (selectedModel.equals(POSE_DETECTION_3)) {
+            Log.i(TAG,"onExamFinished,===============设置规则,单杠引体向上" );
+
+            result.setPullUpsScore(score);
+
+
+        } else if (selectedModel.equals(POSE_DETECTION_4)) {
+            Log.i(TAG,"onExamFinished,===============设置规则,双杠臂屈伸" );
+
+            result.setParallelBarsScore(score);
+
+        }
+
+        mStudentExamRecord.setSubResultJson(Json.toJson(result));
+
+        Log.i(TAG,"onExamFinished,===============准备存入此次考试成绩："+ mStudentExamRecord);
+
+        DBHelper.getInstance(this).saveStudentExamRecord(mStudentExamRecord);
+
     }
 
     @Override

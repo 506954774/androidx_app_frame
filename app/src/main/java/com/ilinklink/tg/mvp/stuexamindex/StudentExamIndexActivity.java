@@ -32,6 +32,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 import androidx.annotation.RequiresApi;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -53,6 +54,7 @@ public class StudentExamIndexActivity extends BaseMvpActivity<ActivityStudentExa
     private StudentInfo mStudentInfo;
 
     private ExamRecord mExamRecord;
+    private int GO_TO_EXAM=110;
 
     //给父类存起来,父类destory时遍历释放资源
     @Override
@@ -163,7 +165,7 @@ public class StudentExamIndexActivity extends BaseMvpActivity<ActivityStudentExa
 
                 if(!CollectionUtils.isNullOrEmpty(studentRecord)){
 
-                    StudentExamRecord studentExamRecord = studentRecord.get(0);
+                    StudentExamRecord studentExamRecord = studentRecord.get(studentRecord.size()-1);
 
                     if(studentExamRecord!=null){
                         SubjectExamResult result= Json.fromJson(studentExamRecord.getSubResultJson(),SubjectExamResult.class);
@@ -257,10 +259,14 @@ public class StudentExamIndexActivity extends BaseMvpActivity<ActivityStudentExa
 
                     StudentExamRecord studentExamRecord=new StudentExamRecord();
 
+                    studentExamRecord.setStudentExamRecordId(UUID.randomUUID().toString());
                     studentExamRecord.setExamRecordId(mExamRecord.getExamRecordId());
+
                     SimpleDateFormat simpleDateFormat=new SimpleDateFormat("yyyy-MM-dd HH:mm");
                     studentExamRecord.setExamTime(simpleDateFormat.format(new Date()));
+
                     studentExamRecord.setStudentName(mStudentInfo.getName());
+                    studentExamRecord.setStudentUUID(mStudentInfo.getStudentUUID());
                     // TODO: 2022/10/21 此处应该加字段，最好不用用desc作为学生编号
                     studentExamRecord.setReservedColumn(mStudentInfo.getDesc());
 
@@ -269,19 +275,19 @@ public class StudentExamIndexActivity extends BaseMvpActivity<ActivityStudentExa
 
                     if("单杠引体向上".equals(mExam.getName())){
                         intent.putExtra(BasePoseActivity2.EXAM_NAME,mExam.getName());
-                        startActivity(intent);
+                        startActivityForResult(intent,GO_TO_EXAM);
                     }
                     else if("双杠臂屈伸".equals(mExam.getName())){
                         intent.putExtra(BasePoseActivity2.EXAM_NAME,mExam.getName());
-                        startActivity(intent);
+                        startActivityForResult(intent,GO_TO_EXAM);
                     }
                     else if("俯卧撑".equals(mExam.getName())){
                         intent.putExtra(BasePoseActivity2.EXAM_NAME,mExam.getName());
-                        startActivity(intent);
+                        startActivityForResult(intent,GO_TO_EXAM);
                     }
                     else if("仰卧起坐".equals(mExam.getName())){
                         intent.putExtra(BasePoseActivity2.EXAM_NAME,mExam.getName());
-                        startActivity(intent);
+                        startActivityForResult(intent,GO_TO_EXAM);
                     }
                     else  {
                         ToastUtils.showShort(getString(R.string.exam_not_supported));
@@ -341,7 +347,7 @@ public class StudentExamIndexActivity extends BaseMvpActivity<ActivityStudentExa
 
                 break;
             case R.id.tv_enter_exam:
-                ToastUtils.showShort("tv_enter_exam");
+                //ToastUtils.showShort("tv_enter_exam");
                 //startActivity(new Intent(this, ShuanggangActivity.class));
 
 
@@ -357,6 +363,7 @@ public class StudentExamIndexActivity extends BaseMvpActivity<ActivityStudentExa
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
+        resetAdapter();
     }
 
 }

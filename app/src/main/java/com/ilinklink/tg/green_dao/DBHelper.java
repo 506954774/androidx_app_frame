@@ -456,4 +456,13 @@ public class DBHelper {
                 .list();
         return list;
     }
+
+
+    /**
+     * 插入某个考生的某个考试记录
+     * @return
+     */
+    public void saveStudentExamRecord(StudentExamRecord dto) {
+        mStudentExamRecordDao.insertOrReplace(dto);
+    }
 }

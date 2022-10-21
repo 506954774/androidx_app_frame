@@ -160,7 +160,7 @@ public class FaceResultActivity extends BaseMvpActivity<ActivityFaceresultBindin
 
                 break;
             case R.id.tv_verify_infomation:
-                ToastUtils.showShort("tv_enter_exam");
+               // ToastUtils.showShort("tv_enter_exam");
                 //startActivity(new Intent(this, ShuanggangActivity.class));
 
                 startActivity(new Intent(this, StudentExamIndexActivity.class));
