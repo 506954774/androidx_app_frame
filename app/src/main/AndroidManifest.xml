@@ -195,6 +195,8 @@
         <!--实际的actiity ***************************************************************-->
         <!--实际的actiity end-->
 
+        <activity android:name="com.ilinklink.tg.mvp.history.ExamListHistoryActivity"
+            android:screenOrientation="landscape"/>
 
     </application>
     <queries>

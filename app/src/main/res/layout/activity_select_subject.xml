@@ -23,23 +23,27 @@
             android:layout_width="match_parent"
             android:layout_height="50dp"
           >
-            <com.ilinklink.tg.widget.customClick.CustomClickImageView
+
+            <TextView
+                android:id="@+id/btn_history"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
                 android:layout_marginLeft="15dp"
                 android:layout_marginTop="20dp"
-                android:layout_width="45dp"
-                android:layout_height="40dp"
-                android:id="@+id/iv_back"
                 android:onClick="@{click.onClick}"
-
-                android:src="@mipmap/icon_select_sub_back"
-                >
-
-            </com.ilinklink.tg.widget.customClick.CustomClickImageView>
+                android:paddingLeft="20dp"
+                android:paddingRight="10dp"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp"
+                android:text="考核数据"
+                android:background="@drawable/bg_blue_radius_react"
+                android:textColor="@color/green_659B43" />
 
             <TextView
 
-                android:text="@string/select_subject_title"
-                style="@style/ztsb_title" />
+                style="@style/ztsb_title"
+                android:text="@string/select_subject_title" />
 
             <com.ilinklink.tg.widget.customClick.CustomClickImageView
                 android:layout_alignParentRight="true"
