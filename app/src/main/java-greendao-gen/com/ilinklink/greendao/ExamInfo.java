@@ -6,12 +6,61 @@ package com.ilinklink.greendao;
  */
 public class ExamInfo {
 
+    /**
+     * 系统生成的id
+     */
     private Long id;
+    /**
+     * 考试id
+     */
     private String examUUID;
+    /**
+     * 考试名称
+     */
     private String name;
+    /**
+     * 考试开始时间，毫秒数
+     */
+    private Long startTimeMs;
+    /**
+     * 考试结束时间，毫秒数
+     */
+    private Long endTimeMs;
+    /**
+     * 此次考试的各科目详细json串
+     */
+    private String subDetailsJson;
+    /**
+     * 此次考试针对的部门id
+     */
+    private String deptId;
+    /**
+     * 此次考试针对的部门名称
+     */
+    private String deptName;
+    /**
+     * 描述
+     */
     private String desc;
+    /**
+     * 备注
+     */
     private String remark;
+    /**
+     * 预留字段1
+     */
+    private String reservedColumn;
+    /**
+     * 预留字段2
+     */
+    private String reservedColumn2;
+    /**
+     * （弃用）
+     */
     private Double difficultyThreshold;
+    /**
+     * （弃用）
+     */
     private Long limitTime;
 
     public ExamInfo() {
@@ -21,12 +70,19 @@ public class ExamInfo {
         this.id = id;
     }
 
-    public ExamInfo(Long id, String examUUID, String name, String desc, String remark, Double difficultyThreshold, Long limitTime) {
+    public ExamInfo(Long id, String examUUID, String name, Long startTimeMs, Long endTimeMs, String subDetailsJson, String deptId, String deptName, String desc, String remark, String reservedColumn, String reservedColumn2, Double difficultyThreshold, Long limitTime) {
         this.id = id;
         this.examUUID = examUUID;
         this.name = name;
+        this.startTimeMs = startTimeMs;
+        this.endTimeMs = endTimeMs;
+        this.subDetailsJson = subDetailsJson;
+        this.deptId = deptId;
+        this.deptName = deptName;
         this.desc = desc;
         this.remark = remark;
+        this.reservedColumn = reservedColumn;
+        this.reservedColumn2 = reservedColumn2;
         this.difficultyThreshold = difficultyThreshold;
         this.limitTime = limitTime;
     }
@@ -55,6 +111,46 @@ public class ExamInfo {
         this.name = name;
     }
 
+    public Long getStartTimeMs() {
+        return startTimeMs;
+    }
+
+    public void setStartTimeMs(Long startTimeMs) {
+        this.startTimeMs = startTimeMs;
+    }
+
+    public Long getEndTimeMs() {
+        return endTimeMs;
+    }
+
+    public void setEndTimeMs(Long endTimeMs) {
+        this.endTimeMs = endTimeMs;
+    }
+
+    public String getSubDetailsJson() {
+        return subDetailsJson;
+    }
+
+    public void setSubDetailsJson(String subDetailsJson) {
+        this.subDetailsJson = subDetailsJson;
+    }
+
+    public String getDeptId() {
+        return deptId;
+    }
+
+    public void setDeptId(String deptId) {
+        this.deptId = deptId;
+    }
+
+    public String getDeptName() {
+        return deptName;
+    }
+
+    public void setDeptName(String deptName) {
+        this.deptName = deptName;
+    }
+
     public String getDesc() {
         return desc;
     }
@@ -69,6 +165,22 @@ public class ExamInfo {
 
     public void setRemark(String remark) {
         this.remark = remark;
+    }
+
+    public String getReservedColumn() {
+        return reservedColumn;
+    }
+
+    public void setReservedColumn(String reservedColumn) {
+        this.reservedColumn = reservedColumn;
+    }
+
+    public String getReservedColumn2() {
+        return reservedColumn2;
+    }
+
+    public void setReservedColumn2(String reservedColumn2) {
+        this.reservedColumn2 = reservedColumn2;
     }
 
     public Double getDifficultyThreshold() {

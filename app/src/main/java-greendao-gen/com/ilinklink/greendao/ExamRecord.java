@@ -6,13 +6,37 @@ package com.ilinklink.greendao;
  */
 public class ExamRecord {
 
+    /**
+     * 系统生成的id
+     */
     private Long id;
+    /**
+     * 记录id
+     */
     private String examRecordId;
+    /**
+     * 考试UUID
+     */
     private String examUUID;
+    /**
+     * 名称
+     */
     private String name;
+    /**
+     * 描述
+     */
     private String desc;
+    /**
+     * 预留字段
+     */
     private String reservedColumn;
+    /**
+     * 预留字段2
+     */
     private String reservedColumn2;
+    /**
+     * 考试时间  yyyy-MM-dd HH:mm:ss
+     */
     private String examTime;
 
     public ExamRecord() {

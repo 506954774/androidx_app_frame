@@ -26,10 +26,17 @@ public class ExamInfoDao extends AbstractDao<ExamInfo, Long> {
         public final static Property Id = new Property(0, Long.class, "id", true, "_id");
         public final static Property ExamUUID = new Property(1, String.class, "examUUID", false, "EXAM_UUID");
         public final static Property Name = new Property(2, String.class, "name", false, "NAME");
-        public final static Property Desc = new Property(3, String.class, "desc", false, "DESC");
-        public final static Property Remark = new Property(4, String.class, "remark", false, "REMARK");
-        public final static Property DifficultyThreshold = new Property(5, Double.class, "difficultyThreshold", false, "DIFFICULTY_THRESHOLD");
-        public final static Property LimitTime = new Property(6, Long.class, "limitTime", false, "LIMIT_TIME");
+        public final static Property StartTimeMs = new Property(3, Long.class, "startTimeMs", false, "START_TIME_MS");
+        public final static Property EndTimeMs = new Property(4, Long.class, "endTimeMs", false, "END_TIME_MS");
+        public final static Property SubDetailsJson = new Property(5, String.class, "subDetailsJson", false, "SUB_DETAILS_JSON");
+        public final static Property DeptId = new Property(6, String.class, "deptId", false, "DEPT_ID");
+        public final static Property DeptName = new Property(7, String.class, "deptName", false, "DEPT_NAME");
+        public final static Property Desc = new Property(8, String.class, "desc", false, "DESC");
+        public final static Property Remark = new Property(9, String.class, "remark", false, "REMARK");
+        public final static Property ReservedColumn = new Property(10, String.class, "reservedColumn", false, "RESERVED_COLUMN");
+        public final static Property ReservedColumn2 = new Property(11, String.class, "reservedColumn2", false, "RESERVED_COLUMN2");
+        public final static Property DifficultyThreshold = new Property(12, Double.class, "difficultyThreshold", false, "DIFFICULTY_THRESHOLD");
+        public final static Property LimitTime = new Property(13, Long.class, "limitTime", false, "LIMIT_TIME");
     };
 
 
@@ -48,10 +55,17 @@ public class ExamInfoDao extends AbstractDao<ExamInfo, Long> {
                 "'_id' INTEGER PRIMARY KEY AUTOINCREMENT ," + // 0: id
                 "'EXAM_UUID' TEXT UNIQUE ," + // 1: examUUID
                 "'NAME' TEXT," + // 2: name
-                "'DESC' TEXT," + // 3: desc
-                "'REMARK' TEXT," + // 4: remark
-                "'DIFFICULTY_THRESHOLD' REAL," + // 5: difficultyThreshold
-                "'LIMIT_TIME' INTEGER);"); // 6: limitTime
+                "'START_TIME_MS' INTEGER," + // 3: startTimeMs
+                "'END_TIME_MS' INTEGER," + // 4: endTimeMs
+                "'SUB_DETAILS_JSON' TEXT," + // 5: subDetailsJson
+                "'DEPT_ID' TEXT," + // 6: deptId
+                "'DEPT_NAME' TEXT," + // 7: deptName
+                "'DESC' TEXT," + // 8: desc
+                "'REMARK' TEXT," + // 9: remark
+                "'RESERVED_COLUMN' TEXT," + // 10: reservedColumn
+                "'RESERVED_COLUMN2' TEXT," + // 11: reservedColumn2
+                "'DIFFICULTY_THRESHOLD' REAL," + // 12: difficultyThreshold
+                "'LIMIT_TIME' INTEGER);"); // 13: limitTime
     }
 
     /** Drops the underlying database table. */
@@ -80,24 +94,59 @@ public class ExamInfoDao extends AbstractDao<ExamInfo, Long> {
             stmt.bindString(3, name);
         }
  
+        Long startTimeMs = entity.getStartTimeMs();
+        if (startTimeMs != null) {
+            stmt.bindLong(4, startTimeMs);
+        }
+ 
+        Long endTimeMs = entity.getEndTimeMs();
+        if (endTimeMs != null) {
+            stmt.bindLong(5, endTimeMs);
+        }
+ 
+        String subDetailsJson = entity.getSubDetailsJson();
+        if (subDetailsJson != null) {
+            stmt.bindString(6, subDetailsJson);
+        }
+ 
+        String deptId = entity.getDeptId();
+        if (deptId != null) {
+            stmt.bindString(7, deptId);
+        }
+ 
+        String deptName = entity.getDeptName();
+        if (deptName != null) {
+            stmt.bindString(8, deptName);
+        }
+ 
         String desc = entity.getDesc();
         if (desc != null) {
-            stmt.bindString(4, desc);
+            stmt.bindString(9, desc);
         }
  
         String remark = entity.getRemark();
         if (remark != null) {
-            stmt.bindString(5, remark);
+            stmt.bindString(10, remark);
+        }
+ 
+        String reservedColumn = entity.getReservedColumn();
+        if (reservedColumn != null) {
+            stmt.bindString(11, reservedColumn);
+        }
+ 
+        String reservedColumn2 = entity.getReservedColumn2();
+        if (reservedColumn2 != null) {
+            stmt.bindString(12, reservedColumn2);
         }
  
         Double difficultyThreshold = entity.getDifficultyThreshold();
         if (difficultyThreshold != null) {
-            stmt.bindDouble(6, difficultyThreshold);
+            stmt.bindDouble(13, difficultyThreshold);
         }
  
         Long limitTime = entity.getLimitTime();
         if (limitTime != null) {
-            stmt.bindLong(7, limitTime);
+            stmt.bindLong(14, limitTime);
         }
     }
 
@@ -114,10 +163,17 @@ public class ExamInfoDao extends AbstractDao<ExamInfo, Long> {
             cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0), // id
             cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1), // examUUID
             cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2), // name
-            cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3), // desc
-            cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4), // remark
-            cursor.isNull(offset + 5) ? null : cursor.getDouble(offset + 5), // difficultyThreshold
-            cursor.isNull(offset + 6) ? null : cursor.getLong(offset + 6) // limitTime
+            cursor.isNull(offset + 3) ? null : cursor.getLong(offset + 3), // startTimeMs
+            cursor.isNull(offset + 4) ? null : cursor.getLong(offset + 4), // endTimeMs
+            cursor.isNull(offset + 5) ? null : cursor.getString(offset + 5), // subDetailsJson
+            cursor.isNull(offset + 6) ? null : cursor.getString(offset + 6), // deptId
+            cursor.isNull(offset + 7) ? null : cursor.getString(offset + 7), // deptName
+            cursor.isNull(offset + 8) ? null : cursor.getString(offset + 8), // desc
+            cursor.isNull(offset + 9) ? null : cursor.getString(offset + 9), // remark
+            cursor.isNull(offset + 10) ? null : cursor.getString(offset + 10), // reservedColumn
+            cursor.isNull(offset + 11) ? null : cursor.getString(offset + 11), // reservedColumn2
+            cursor.isNull(offset + 12) ? null : cursor.getDouble(offset + 12), // difficultyThreshold
+            cursor.isNull(offset + 13) ? null : cursor.getLong(offset + 13) // limitTime
         );
         return entity;
     }
@@ -128,10 +184,17 @@ public class ExamInfoDao extends AbstractDao<ExamInfo, Long> {
         entity.setId(cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0));
         entity.setExamUUID(cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1));
         entity.setName(cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2));
-        entity.setDesc(cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3));
-        entity.setRemark(cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4));
-        entity.setDifficultyThreshold(cursor.isNull(offset + 5) ? null : cursor.getDouble(offset + 5));
-        entity.setLimitTime(cursor.isNull(offset + 6) ? null : cursor.getLong(offset + 6));
+        entity.setStartTimeMs(cursor.isNull(offset + 3) ? null : cursor.getLong(offset + 3));
+        entity.setEndTimeMs(cursor.isNull(offset + 4) ? null : cursor.getLong(offset + 4));
+        entity.setSubDetailsJson(cursor.isNull(offset + 5) ? null : cursor.getString(offset + 5));
+        entity.setDeptId(cursor.isNull(offset + 6) ? null : cursor.getString(offset + 6));
+        entity.setDeptName(cursor.isNull(offset + 7) ? null : cursor.getString(offset + 7));
+        entity.setDesc(cursor.isNull(offset + 8) ? null : cursor.getString(offset + 8));
+        entity.setRemark(cursor.isNull(offset + 9) ? null : cursor.getString(offset + 9));
+        entity.setReservedColumn(cursor.isNull(offset + 10) ? null : cursor.getString(offset + 10));
+        entity.setReservedColumn2(cursor.isNull(offset + 11) ? null : cursor.getString(offset + 11));
+        entity.setDifficultyThreshold(cursor.isNull(offset + 12) ? null : cursor.getDouble(offset + 12));
+        entity.setLimitTime(cursor.isNull(offset + 13) ? null : cursor.getLong(offset + 13));
      }
     
     /** @inheritdoc */

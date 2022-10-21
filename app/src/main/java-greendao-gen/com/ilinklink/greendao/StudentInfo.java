@@ -6,12 +6,57 @@ package com.ilinklink.greendao;
  */
 public class StudentInfo {
 
+    /**
+     * 系统生成的id
+     */
     private Long id;
+    /**
+     * 学生id
+     */
     private String studentUUID;
+    /**
+     * 学生姓名
+     */
     private String name;
+    /**
+     * 学生性别
+     */
+    private String gender;
+    /**
+     * 学生头像地址
+     */
     private String imageUrl;
+    /**
+     * 学生生日 yyyy-MM-dd
+     */
+    private String birthday;
+    /**
+     * 学生部门id
+     */
+    private String deptId;
+    /**
+     * 学生部门名称
+     */
+    private String deptName;
+    /**
+     * 学生图片的本地sd卡存放路径
+     */
+    private String imageSdCardPath;
+    /**
+     * 学生图片的人脸token
+     */
+    private String faceToken;
+    /**
+     * 描述信息
+     */
     private String desc;
+    /**
+     * 更新时间
+     */
     private Long updateTime;
+    /**
+     * 图片下载时间
+     */
     private Long imageDownloadTime;
 
     public StudentInfo() {
@@ -21,11 +66,17 @@ public class StudentInfo {
         this.id = id;
     }
 
-    public StudentInfo(Long id, String studentUUID, String name, String imageUrl, String desc, Long updateTime, Long imageDownloadTime) {
+    public StudentInfo(Long id, String studentUUID, String name, String gender, String imageUrl, String birthday, String deptId, String deptName, String imageSdCardPath, String faceToken, String desc, Long updateTime, Long imageDownloadTime) {
         this.id = id;
         this.studentUUID = studentUUID;
         this.name = name;
+        this.gender = gender;
         this.imageUrl = imageUrl;
+        this.birthday = birthday;
+        this.deptId = deptId;
+        this.deptName = deptName;
+        this.imageSdCardPath = imageSdCardPath;
+        this.faceToken = faceToken;
         this.desc = desc;
         this.updateTime = updateTime;
         this.imageDownloadTime = imageDownloadTime;
@@ -55,12 +106,60 @@ public class StudentInfo {
         this.name = name;
     }
 
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
+
     public String getImageUrl() {
         return imageUrl;
     }
 
     public void setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
+    }
+
+    public String getBirthday() {
+        return birthday;
+    }
+
+    public void setBirthday(String birthday) {
+        this.birthday = birthday;
+    }
+
+    public String getDeptId() {
+        return deptId;
+    }
+
+    public void setDeptId(String deptId) {
+        this.deptId = deptId;
+    }
+
+    public String getDeptName() {
+        return deptName;
+    }
+
+    public void setDeptName(String deptName) {
+        this.deptName = deptName;
+    }
+
+    public String getImageSdCardPath() {
+        return imageSdCardPath;
+    }
+
+    public void setImageSdCardPath(String imageSdCardPath) {
+        this.imageSdCardPath = imageSdCardPath;
+    }
+
+    public String getFaceToken() {
+        return faceToken;
+    }
+
+    public void setFaceToken(String faceToken) {
+        this.faceToken = faceToken;
     }
 
     public String getDesc() {

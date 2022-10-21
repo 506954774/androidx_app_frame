@@ -26,10 +26,16 @@ public class StudentInfoDao extends AbstractDao<StudentInfo, Long> {
         public final static Property Id = new Property(0, Long.class, "id", true, "_id");
         public final static Property StudentUUID = new Property(1, String.class, "studentUUID", false, "STUDENT_UUID");
         public final static Property Name = new Property(2, String.class, "name", false, "NAME");
-        public final static Property ImageUrl = new Property(3, String.class, "imageUrl", false, "IMAGE_URL");
-        public final static Property Desc = new Property(4, String.class, "desc", false, "DESC");
-        public final static Property UpdateTime = new Property(5, Long.class, "updateTime", false, "UPDATE_TIME");
-        public final static Property ImageDownloadTime = new Property(6, Long.class, "imageDownloadTime", false, "IMAGE_DOWNLOAD_TIME");
+        public final static Property Gender = new Property(3, String.class, "gender", false, "GENDER");
+        public final static Property ImageUrl = new Property(4, String.class, "imageUrl", false, "IMAGE_URL");
+        public final static Property Birthday = new Property(5, String.class, "birthday", false, "BIRTHDAY");
+        public final static Property DeptId = new Property(6, String.class, "deptId", false, "DEPT_ID");
+        public final static Property DeptName = new Property(7, String.class, "deptName", false, "DEPT_NAME");
+        public final static Property ImageSdCardPath = new Property(8, String.class, "imageSdCardPath", false, "IMAGE_SD_CARD_PATH");
+        public final static Property FaceToken = new Property(9, String.class, "faceToken", false, "FACE_TOKEN");
+        public final static Property Desc = new Property(10, String.class, "desc", false, "DESC");
+        public final static Property UpdateTime = new Property(11, Long.class, "updateTime", false, "UPDATE_TIME");
+        public final static Property ImageDownloadTime = new Property(12, Long.class, "imageDownloadTime", false, "IMAGE_DOWNLOAD_TIME");
     };
 
 
@@ -48,10 +54,16 @@ public class StudentInfoDao extends AbstractDao<StudentInfo, Long> {
                 "'_id' INTEGER PRIMARY KEY AUTOINCREMENT ," + // 0: id
                 "'STUDENT_UUID' TEXT UNIQUE ," + // 1: studentUUID
                 "'NAME' TEXT," + // 2: name
-                "'IMAGE_URL' TEXT," + // 3: imageUrl
-                "'DESC' TEXT," + // 4: desc
-                "'UPDATE_TIME' INTEGER," + // 5: updateTime
-                "'IMAGE_DOWNLOAD_TIME' INTEGER);"); // 6: imageDownloadTime
+                "'GENDER' TEXT," + // 3: gender
+                "'IMAGE_URL' TEXT," + // 4: imageUrl
+                "'BIRTHDAY' TEXT," + // 5: birthday
+                "'DEPT_ID' TEXT," + // 6: deptId
+                "'DEPT_NAME' TEXT," + // 7: deptName
+                "'IMAGE_SD_CARD_PATH' TEXT," + // 8: imageSdCardPath
+                "'FACE_TOKEN' TEXT," + // 9: faceToken
+                "'DESC' TEXT," + // 10: desc
+                "'UPDATE_TIME' INTEGER," + // 11: updateTime
+                "'IMAGE_DOWNLOAD_TIME' INTEGER);"); // 12: imageDownloadTime
     }
 
     /** Drops the underlying database table. */
@@ -80,24 +92,54 @@ public class StudentInfoDao extends AbstractDao<StudentInfo, Long> {
             stmt.bindString(3, name);
         }
  
+        String gender = entity.getGender();
+        if (gender != null) {
+            stmt.bindString(4, gender);
+        }
+ 
         String imageUrl = entity.getImageUrl();
         if (imageUrl != null) {
-            stmt.bindString(4, imageUrl);
+            stmt.bindString(5, imageUrl);
+        }
+ 
+        String birthday = entity.getBirthday();
+        if (birthday != null) {
+            stmt.bindString(6, birthday);
+        }
+ 
+        String deptId = entity.getDeptId();
+        if (deptId != null) {
+            stmt.bindString(7, deptId);
+        }
+ 
+        String deptName = entity.getDeptName();
+        if (deptName != null) {
+            stmt.bindString(8, deptName);
+        }
+ 
+        String imageSdCardPath = entity.getImageSdCardPath();
+        if (imageSdCardPath != null) {
+            stmt.bindString(9, imageSdCardPath);
+        }
+ 
+        String faceToken = entity.getFaceToken();
+        if (faceToken != null) {
+            stmt.bindString(10, faceToken);
         }
  
         String desc = entity.getDesc();
         if (desc != null) {
-            stmt.bindString(5, desc);
+            stmt.bindString(11, desc);
         }
  
         Long updateTime = entity.getUpdateTime();
         if (updateTime != null) {
-            stmt.bindLong(6, updateTime);
+            stmt.bindLong(12, updateTime);
         }
  
         Long imageDownloadTime = entity.getImageDownloadTime();
         if (imageDownloadTime != null) {
-            stmt.bindLong(7, imageDownloadTime);
+            stmt.bindLong(13, imageDownloadTime);
         }
     }
 
@@ -114,10 +156,16 @@ public class StudentInfoDao extends AbstractDao<StudentInfo, Long> {
             cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0), // id
             cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1), // studentUUID
             cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2), // name
-            cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3), // imageUrl
-            cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4), // desc
-            cursor.isNull(offset + 5) ? null : cursor.getLong(offset + 5), // updateTime
-            cursor.isNull(offset + 6) ? null : cursor.getLong(offset + 6) // imageDownloadTime
+            cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3), // gender
+            cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4), // imageUrl
+            cursor.isNull(offset + 5) ? null : cursor.getString(offset + 5), // birthday
+            cursor.isNull(offset + 6) ? null : cursor.getString(offset + 6), // deptId
+            cursor.isNull(offset + 7) ? null : cursor.getString(offset + 7), // deptName
+            cursor.isNull(offset + 8) ? null : cursor.getString(offset + 8), // imageSdCardPath
+            cursor.isNull(offset + 9) ? null : cursor.getString(offset + 9), // faceToken
+            cursor.isNull(offset + 10) ? null : cursor.getString(offset + 10), // desc
+            cursor.isNull(offset + 11) ? null : cursor.getLong(offset + 11), // updateTime
+            cursor.isNull(offset + 12) ? null : cursor.getLong(offset + 12) // imageDownloadTime
         );
         return entity;
     }
@@ -128,10 +176,16 @@ public class StudentInfoDao extends AbstractDao<StudentInfo, Long> {
         entity.setId(cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0));
         entity.setStudentUUID(cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1));
         entity.setName(cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2));
-        entity.setImageUrl(cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3));
-        entity.setDesc(cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4));
-        entity.setUpdateTime(cursor.isNull(offset + 5) ? null : cursor.getLong(offset + 5));
-        entity.setImageDownloadTime(cursor.isNull(offset + 6) ? null : cursor.getLong(offset + 6));
+        entity.setGender(cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3));
+        entity.setImageUrl(cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4));
+        entity.setBirthday(cursor.isNull(offset + 5) ? null : cursor.getString(offset + 5));
+        entity.setDeptId(cursor.isNull(offset + 6) ? null : cursor.getString(offset + 6));
+        entity.setDeptName(cursor.isNull(offset + 7) ? null : cursor.getString(offset + 7));
+        entity.setImageSdCardPath(cursor.isNull(offset + 8) ? null : cursor.getString(offset + 8));
+        entity.setFaceToken(cursor.isNull(offset + 9) ? null : cursor.getString(offset + 9));
+        entity.setDesc(cursor.isNull(offset + 10) ? null : cursor.getString(offset + 10));
+        entity.setUpdateTime(cursor.isNull(offset + 11) ? null : cursor.getLong(offset + 11));
+        entity.setImageDownloadTime(cursor.isNull(offset + 12) ? null : cursor.getLong(offset + 12));
      }
     
     /** @inheritdoc */

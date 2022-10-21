@@ -6,15 +6,45 @@ package com.ilinklink.greendao;
  */
 public class StudentExamRecord {
 
+    /**
+     * 系统生成的id
+     */
     private Long id;
+    /**
+     * 学生考试记录
+     */
     private String studentExamRecordId;
+    /**
+     * 关联的考试记录id
+     */
     private String examRecordId;
+    /**
+     * 学生id
+     */
     private String studentUUID;
+    /**
+     * 学生名称
+     */
     private String studentName;
+    /**
+     * 考试时间
+     */
     private String examTime;
+    /**
+     * 得分，json串，每个科目的个数。{a:12,b:34,c:14,d:fdf}
+     */
     private String subResultJson;
+    /**
+     * 描述
+     */
     private String desc;
+    /**
+     * 预留字段
+     */
     private String reservedColumn;
+    /**
+     * 预留字段2
+     */
     private String reservedColumn2;
 
     public StudentExamRecord() {
