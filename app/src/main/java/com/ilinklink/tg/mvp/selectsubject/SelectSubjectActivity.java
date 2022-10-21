@@ -13,6 +13,7 @@ import com.ilinklink.tg.green_dao.DBHelper;
 import com.ilinklink.tg.mvp.BasePresenter;
 import com.ilinklink.tg.mvp.exam.BasePoseActivity2;
 import com.ilinklink.tg.mvp.exam.ExamActivity2;
+import com.ilinklink.tg.mvp.history.ExamListHistoryActivity;
 import com.qdong.communal.library.module.BaseRefreshableListFragment.adapter.BaseQuickAdapter2;
 import com.qdong.communal.library.util.DensityUtil;
 import com.spc.pose.demo.BR;
@@ -156,8 +157,9 @@ public class SelectSubjectActivity extends BaseMvpActivity<ActivitySelectSubject
         Intent intent = null;
         switch (v.getId()) {
 
-            case R.id.iv_back:
-                finish();
+            case R.id.btn_history:
+                // 跳转考试历史记录
+                startActivity(new Intent(this, ExamListHistoryActivity.class));
                 break;
 
                 //俯卧撑

@@ -52,5 +52,7 @@
 
 
     <string name="setting_title">考试设置</string>
+    <string name="history_exam_list_title">考核数据</string>
+
 
 </resources>
