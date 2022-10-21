@@ -252,8 +252,14 @@ public class LauchActivity extends BaseMvpActivity<ActivityLaunchBinding> implem
 
         //startActivity(new Intent(this,SelectSubjectActivity.class));
         //startActivity(new Intent(this, InitFaceFeatrueAct2.class));
-        startActivity(new Intent(this, InitFaceFeatrueAct3.class));
-        finish();
+
+        mViewBind.tvHint.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                startActivity(new Intent(LauchActivity.this, InitFaceFeatrueAct3.class));
+                finish();
+            }
+        },1000);
 
     }
 

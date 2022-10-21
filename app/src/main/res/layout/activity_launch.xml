@@ -29,6 +29,7 @@
         <TextView
             android:layout_below="@+id/tv_hint"
             android:layout_marginTop="20dp"
+            android:visibility="invisible"
             android:text="@string/launch_tel"
             android:textColor="@color/black"
             android:textSize="20sp"

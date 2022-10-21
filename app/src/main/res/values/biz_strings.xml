@@ -3,7 +3,7 @@
 
 
     <!--业务字符串-->
-    <string name="launch_hint">军事体育训练综合考试评估系统</string>
+    <string name="launch_hint">睿融通训练考核系统</string>
     <string name="launch_tel">联系电话: 400 800 8585</string>
 
     <string name="init_title">动作考核分系统</string>
