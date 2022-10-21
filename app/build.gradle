@@ -366,7 +366,7 @@ dependencies {
     implementation 'com.gcssloop.widget:rclayout:1.8.1'
 
     //二维码
-    implementation 'com.github.open-android:Zxing:v1.0.3'
+//    implementation 'com.github.open-android:Zxing:+'
 
     //尺子
     implementation 'com.github.superSp:RulerView:v1.2'

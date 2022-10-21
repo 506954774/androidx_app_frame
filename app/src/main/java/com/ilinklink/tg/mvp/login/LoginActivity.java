@@ -8,12 +8,11 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 
-import com.google.zxing.WriterException;
 
 import com.ilinklink.tg.base.BaseMvpActivity;
 import com.ilinklink.tg.green_dao.DBHelper;
 import com.ilinklink.tg.mvp.BasePresenter;
-import com.ilinklink.tg.utils.BitmapUtils;
+//import com.ilinklink.tg.utils.BitmapUtils;
 import com.ilinklink.tg.utils.Constants;
 import com.ilinklink.tg.utils.PhoneUtils;
 import com.ilinklink.tg.utils.ToastHelper;
@@ -103,12 +102,12 @@ public class LoginActivity extends BaseMvpActivity<ActivityLoginBinding> impleme
 
        uuID = UUID.randomUUID().toString().replaceAll("-", "");
         Bitmap bitmap = null;
-        try {
-            bitmap = BitmapUtils.create2DCodeByLogo(uuID,136,136);//根据内容生成二维码
-            mViewBind.ivQrcode.setImageBitmap(bitmap);
-        } catch (WriterException e) {
-            e.printStackTrace();
-        }
+//        try {
+//            bitmap = BitmapUtils.create2DCodeByLogo(uuID,136,136);//根据内容生成二维码
+//            mViewBind.ivQrcode.setImageBitmap(bitmap);
+//        } catch (WriterException e) {
+//            e.printStackTrace();
+//        }
 
 
     }
@@ -165,12 +164,12 @@ public class LoginActivity extends BaseMvpActivity<ActivityLoginBinding> impleme
                 //扫码登录
                 mViewBind.llPsw.setVisibility(View.GONE);
                 mViewBind.llSwap.setVisibility(View.VISIBLE);
-                try {
-                    Bitmap bitmap = BitmapUtils.create2DCodeByLogo(uuID,440,440);
-                    mViewBind.ivSwapQrcode.setImageBitmap(bitmap);
-                } catch (WriterException e) {
-                    e.printStackTrace();
-                }
+//                try {
+//                    Bitmap bitmap = BitmapUtils.create2DCodeByLogo(uuID,440,440);
+//                    mViewBind.ivSwapQrcode.setImageBitmap(bitmap);
+//                } catch (WriterException e) {
+//                    e.printStackTrace();
+//                }
 
 
                 break;
