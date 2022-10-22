@@ -349,7 +349,7 @@ public class StudentExamIndexActivity extends BaseMvpActivity<ActivityStudentExa
             case R.id.tv_enter_exam:
                 //ToastUtils.showShort("tv_enter_exam");
                 //startActivity(new Intent(this, ShuanggangActivity.class));
-
+                finish();
 
                 break;
 

@@ -647,6 +647,9 @@ public  class BasePoseActivity2 extends BaseMvpActivity<ActivityFuwochengBinding
     private void onExamFinished(){
         Log.i(TAG,"onExamFinished,===============" );
 
+        if(mStudentExamRecord==null){
+            return;
+        }
 
         QueryStudentExamRecordDto dto=new QueryStudentExamRecordDto();
         dto.setExamRecordId(mStudentExamRecord.getExamRecordId());
