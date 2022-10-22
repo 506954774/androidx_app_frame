@@ -558,6 +558,7 @@ public  class BasePoseActivity2 extends BaseMvpActivity<ActivityFuwochengBinding
     private void initView() {
         mViewBind.setClick(this);
 
+        mViewBind.ivSetting.setVisibility(View.INVISIBLE);
 
     }
 
