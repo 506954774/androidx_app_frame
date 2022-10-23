@@ -79,6 +79,9 @@ public  class ExamActivity2 extends BasePoseActivity2{
         //如果没有时间限制,则不开启倒计时
 
 
+             super.startExam();
+
+
             mViewBind.tvExamStatus.setText(getString(R.string.exam_status_examming));
 
 

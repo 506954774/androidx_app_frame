@@ -45,7 +45,7 @@
     <string name="exam_result_succed">成绩提交成功</string>
     <string name="exam_result_failed">成绩提交失败:</string>
     <string name="exam_result_counting">当前考试尚未结束,请倒计时结束后再提交</string>
-    <string name="exam_status_no_student">当前状态:准备中,请先点击考生人脸识别按钮</string>
+    <string name="exam_status_no_student">当前状态:准备中,请点击‘开始考试’按钮</string>
     <string name="exam_status_ready">当前状态:考生认证成功,请点击开始考试</string>
     <string name="exam_status_examming">当前状态:考试中</string>
 

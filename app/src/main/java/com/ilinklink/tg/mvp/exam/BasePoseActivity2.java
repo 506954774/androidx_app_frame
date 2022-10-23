@@ -33,6 +33,7 @@ import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
+import android.widget.SeekBar;
 import android.widget.Spinner;
 import android.widget.ToggleButton;
 
@@ -56,6 +57,7 @@ import com.ilinklink.tg.utils.Json;
 import com.ilinklink.tg.utils.LogUtil;
 import com.ilinklink.tg.utils.SdCardLogUtil;
 import com.qdong.communal.library.module.network.RxHelper;
+import com.qdong.communal.library.widget.SeekBar.CustomSeekBar;
 import com.spc.pose.demo.R;
 import com.spc.pose.demo.databinding.ActivityFuwochengBinding;
 import com.spc.pose.demo.preference.activity.SettingsActivity;
@@ -218,8 +220,8 @@ public  class BasePoseActivity2 extends BaseMvpActivity<ActivityFuwochengBinding
 
 
 
-        initView();
         initData();
+        initView();
         //countDown();
         mViewBind.tvSubjectName.setText(selectedModel);
 
@@ -229,6 +231,12 @@ public  class BasePoseActivity2 extends BaseMvpActivity<ActivityFuwochengBinding
 
     protected void startExam() {
 
+        mViewBind.sbDifficultyCoefficient.setClickable(false);
+        mViewBind.sbDifficultyCoefficient.setEnabled(false);
+        mViewBind.sbDifficultyCoefficient.setSelected(false);
+        mViewBind.sbDifficultyCoefficient.setFocusable(false);
+
+        createCameraSource(selectedModel);
     }
 
     @Override
@@ -560,6 +568,30 @@ public  class BasePoseActivity2 extends BaseMvpActivity<ActivityFuwochengBinding
 
         mViewBind.ivSetting.setVisibility(View.INVISIBLE);
 
+        mViewBind.sbDifficultyCoefficient.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                mViewBind.tvDifficultyCoefficientValue.setText(String.valueOf(progress));
+
+                //难度系数seekbar的取值范围是 【0，100】，100是最高难度，与mThreshold的映射关系
+                mThreshold=50 - 0.5f*progress;
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+
+            }
+        });
+
+        if(mStudentExamRecord==null){
+            mViewBind.tvStartExam.setText(getString(R.string.start_practise));
+            mViewBind.tvExamStatus.setVisibility(View.INVISIBLE);
+        }
     }
 
 
@@ -646,6 +678,13 @@ public  class BasePoseActivity2 extends BaseMvpActivity<ActivityFuwochengBinding
 
     private void onExamFinished(){
         Log.i(TAG,"onExamFinished,===============" );
+
+
+
+        mViewBind.sbDifficultyCoefficient.setClickable(true);
+        mViewBind.sbDifficultyCoefficient.setEnabled(true);
+        mViewBind.sbDifficultyCoefficient.setSelected(true);
+        mViewBind.sbDifficultyCoefficient.setFocusable(true);
 
         if(mStudentExamRecord==null){
             return;

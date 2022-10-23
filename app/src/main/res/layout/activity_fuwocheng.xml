@@ -17,30 +17,29 @@
         android:background="@mipmap/bg_green_theme">
 
         <RelativeLayout
-            android:layout_marginTop="35dp"
             android:id="@+id/rl_title"
-            android:gravity="center_vertical"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-          >
-            <com.ilinklink.tg.widget.customClick.CustomClickImageView
-                android:visibility="invisible"
-                android:layout_marginLeft="15dp"
-                android:layout_marginTop="20dp"
-                android:onClick="@{click.onClick}"
-
-                android:layout_width="45dp"
-                android:layout_height="40dp"
-                android:id="@+id/iv_back"
-                android:src="@mipmap/icon_select_sub_back"
-                >
-
-            </com.ilinklink.tg.widget.customClick.CustomClickImageView>
+            android:layout_marginTop="35dp"
+            android:gravity="center_vertical">
 
             <TextView
 
-                android:text="@string/exam_title"
-                style="@style/ztsb_title"/>
+                style="@style/ztsb_title"
+                android:text="@string/exam_title" />
+
+            <com.ilinklink.tg.widget.customClick.CustomClickImageView
+                android:id="@+id/iv_back"
+                android:layout_width="45dp"
+                android:layout_height="40dp"
+                android:layout_marginLeft="15dp"
+
+                android:layout_marginTop="20dp"
+                android:onClick="@{click.onClick}"
+                android:src="@mipmap/icon_select_sub_back"
+                android:visibility="invisible">
+
+            </com.ilinklink.tg.widget.customClick.CustomClickImageView>
 
             <com.ilinklink.tg.widget.customClick.CustomClickImageView
                 android:id="@+id/iv_setting"
@@ -119,7 +118,7 @@
 
                 <RelativeLayout
 
-                    android:layout_width="200dp"
+                    android:layout_width="250dp"
                     android:layout_height="30dp"
                     android:layout_alignBottom="@+id/tv_exam_timer"
                     android:layout_alignTop="@+id/tv_exam_timer"
@@ -150,9 +149,62 @@
 
                 </RelativeLayout>
 
+                <RelativeLayout
+
+                    android:layout_width="250dp"
+                    android:layout_height="30dp"
+                    android:layout_alignBottom="@+id/tv_difficulty_coefficient"
+                    android:layout_alignTop="@+id/tv_difficulty_coefficient"
+                    android:layout_marginLeft="20dp"
+                    android:layout_toRightOf="@+id/tv_difficulty_coefficient"
+                    android:gravity="center_vertical">
+
+
+                    <SeekBar
+                        android:id="@+id/sb_difficulty_coefficient"
+                        style="?android:attr/progressBarStyleHorizontal"
+                        android:layout_width="200dp"
+                        android:layout_height="30dp"
+                        android:layout_centerVertical="true"
+                        android:layout_toRightOf="@+id/tv_easy"
+                        android:max="100"
+                        android:progress="50"
+                        android:progressDrawable="@drawable/jc_hint_bottom_progress_bule" />
+
+                    <TextView
+                        android:id="@+id/tv_easy"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+
+                        android:text="易"
+                        android:textColor="@color/white"
+                        android:textSize="20sp"></TextView>
+
+                    <TextView
+                        android:id="@+id/tv_difficult"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_toRightOf="@+id/sb_difficulty_coefficient"
+                        android:text="难"
+                        android:textColor="@color/white"
+                        android:textSize="20sp"></TextView>
+
+                    <TextView
+                        android:id="@+id/tv_difficulty_coefficient_value"
+                        android:layout_width="match_parent"
+                        android:layout_height="30dp"
+                        android:gravity="center"
+
+                        android:text="50"
+                        android:textColor="@color/white"
+                        android:textSize="15sp"></TextView>
+
+                </RelativeLayout>
+
+
                 <TextView
                     android:id="@+id/tv_exam_sucessed_count"
-                    android:layout_width="wrap_content"
+                    android:layout_width="60dp"
                     android:layout_height="wrap_content"
                     android:layout_alignBottom="@+id/tv_exam_sucessed_count_hint"
                     android:layout_marginLeft="20dp"
@@ -161,20 +213,20 @@
                     android:textColor="@color/green_07A805"
                     android:textSize="20sp"></TextView>
 
-
                 <TextView
                     android:id="@+id/tv_exam_failed_count_hint"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/tv_exam_sucessed_count_hint"
-                    android:layout_marginTop="12dp"
+                    android:layout_alignBottom="@+id/tv_exam_sucessed_count"
+                    android:layout_toRightOf="@+id/tv_exam_sucessed_count"
                     android:text="@string/exam_failed_count"
                     android:textColor="@color/green_659B43"
                     android:textSize="20sp"></TextView>
 
+
                 <TextView
                     android:id="@+id/tv_exam_failed_count"
-                    android:layout_width="wrap_content"
+                    android:layout_width="100dp"
                     android:layout_height="wrap_content"
                     android:layout_alignBottom="@+id/tv_exam_failed_count_hint"
                     android:layout_marginLeft="20dp"
@@ -183,7 +235,6 @@
                     android:text="0"
                     android:textColor="@color/red"
                     android:textSize="20sp"></TextView>
-
 
                 <TextView
                     android:id="@+id/tv_exam_score_hint"
@@ -209,20 +260,35 @@
                     android:textSize="20sp"
                     android:visibility="gone"></TextView>
 
+
                 <TextView
                     android:id="@+id/tv_exam_timer"
                     android:layout_width="wrap_content"
                     android:layout_height="30dp"
-                    android:layout_below="@+id/tv_exam_score_hint"
+                    android:layout_below="@+id/tv_difficulty_coefficient"
                     android:layout_marginTop="12dp"
 
                     android:text="@string/exam_time_left"
                     android:textColor="@color/green_659B43"
                     android:textSize="20sp"></TextView>
 
+                <TextView
+                    android:id="@+id/tv_difficulty_coefficient"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+
+                    android:layout_marginTop="12dp"
+
+                    android:text="@string/difficulty_coefficient"
+                    android:textColor="@color/green_659B43"
+                    android:textSize="20sp"></TextView>
+
 
                 <TextView
                     android:id="@+id/tv_exam_sucessed_count_hint"
+                    android:layout_below="@+id/tv_exam_timer"
+                    android:layout_marginTop="12dp"
+
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/exam_sucessed_count"
@@ -233,7 +299,7 @@
                     android:id="@+id/tv_exam_failed_desc_hint"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/tv_exam_timer"
+                    android:layout_below="@+id/tv_exam_sucessed_count_hint"
                     android:layout_marginTop="12dp"
                     android:text="@string/exam_error_info"
                     android:textColor="@color/green_659B43"
@@ -242,7 +308,7 @@
                 <TextView
                     android:id="@+id/tv_exam_failed_desc"
                     android:layout_width="200dp"
-                    android:layout_height="100dp"
+                    android:layout_height="60dp"
                     android:layout_alignTop="@+id/tv_exam_failed_desc_hint"
                     android:layout_marginLeft="20dp"
 
@@ -315,10 +381,10 @@
                     android:gravity="center"
                     android:onClick="@{click.onClick}"
                     android:padding="6dp"
-                    android:visibility="invisible"
                     android:text="@string/exam_stu_face_hint"
                     android:textColor="@color/green_659B43"
-                    android:textSize="20sp" />
+                    android:textSize="20sp"
+                    android:visibility="invisible" />
 
 
                 <com.ilinklink.tg.widget.customClick.CustomClickTextView
@@ -350,9 +416,9 @@
                     android:onClick="@{click.onClick}"
                     android:padding="6dp"
                     android:text="@string/exam_commit_exam_result"
-                    android:visibility="invisible"
                     android:textColor="@color/white"
-                    android:textSize="20sp" />
+                    android:textSize="20sp"
+                    android:visibility="invisible" />
 
                 <com.ilinklink.tg.widget.customClick.CustomClickTextView
                     android:id="@+id/tv_show_error_list"
