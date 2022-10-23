@@ -53,6 +53,10 @@ android {
 
     lintOptions {
         abortOnError false
+
+        aaptOptions.cruncherEnabled = false
+        aaptOptions.useNewCruncher = false
+
     }
 
     compileOptions {
