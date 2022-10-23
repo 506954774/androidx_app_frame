@@ -138,6 +138,9 @@ public  class BasePoseActivity2 extends BaseMvpActivity<ActivityFuwochengBinding
     //将要缓存的数据
     protected StudentExamRecord mStudentExamRecord;
 
+    //人为点击了结束按钮
+    protected boolean mArtificialStoped;
+
 
     // 设置考试科目
     private void resetSubject() {
@@ -230,6 +233,9 @@ public  class BasePoseActivity2 extends BaseMvpActivity<ActivityFuwochengBinding
     }
 
     protected void startExam() {
+
+        setStatus(true);
+
 
         mViewBind.sbDifficultyCoefficient.setClickable(false);
         mViewBind.sbDifficultyCoefficient.setEnabled(false);
@@ -591,9 +597,38 @@ public  class BasePoseActivity2 extends BaseMvpActivity<ActivityFuwochengBinding
         if(mStudentExamRecord==null){
             mViewBind.tvStartExam.setText(getString(R.string.start_practise));
             mViewBind.tvExamStatus.setVisibility(View.INVISIBLE);
+            mViewBind.tvStatus.setText(getString(R.string.practise_status));
+
         }
+        else {
+            mViewBind.tvStatus.setText(getString(R.string.exam_status));
+
+            mViewBind.tvStuName.setText("考生："+mStudentExamRecord.getStudentName());
+
+        }
+
+        setStatus(false);
     }
 
+    /**
+     *
+     * 重置状态文案
+     * @param mStarted
+     */
+    private void setStatus(boolean mStarted){
+        if(!mStarted){
+            mViewBind.tvStatusValue.setText(getString(R.string.not_started));
+        }
+        else {
+            if(mStudentExamRecord==null){
+                mViewBind.tvStatusValue.setText(getString(R.string.practising));
+            }
+            else {
+                mViewBind.tvStatusValue.setText(getString(R.string.examing));
+            }
+        }
+
+    }
 
     @Override
     public void onClick(View v) {
@@ -680,6 +715,7 @@ public  class BasePoseActivity2 extends BaseMvpActivity<ActivityFuwochengBinding
         Log.i(TAG,"onExamFinished,===============" );
 
 
+        setStatus(false);
 
         mViewBind.sbDifficultyCoefficient.setClickable(true);
         mViewBind.sbDifficultyCoefficient.setEnabled(true);

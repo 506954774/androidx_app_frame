@@ -28,18 +28,14 @@
                 style="@style/ztsb_title"
                 android:text="@string/exam_title" />
 
-            <com.ilinklink.tg.widget.customClick.CustomClickImageView
-                android:id="@+id/iv_back"
-                android:layout_width="45dp"
+            <TextView
+                android:id="@+id/tv_stu_name"
+                android:layout_width="wrap_content"
                 android:layout_height="40dp"
                 android:layout_marginLeft="15dp"
-
                 android:layout_marginTop="20dp"
-                android:onClick="@{click.onClick}"
-                android:src="@mipmap/icon_select_sub_back"
-                android:visibility="invisible">
-
-            </com.ilinklink.tg.widget.customClick.CustomClickImageView>
+                android:gravity="center"
+                android:textColor="@color/black"></TextView>
 
             <com.ilinklink.tg.widget.customClick.CustomClickImageView
                 android:id="@+id/iv_setting"
@@ -53,6 +49,19 @@
                 android:src="@mipmap/icon_select_sub_setting"
 
                 android:visibility="visible">
+
+            </com.ilinklink.tg.widget.customClick.CustomClickImageView>
+
+            <com.ilinklink.tg.widget.customClick.CustomClickImageView
+                android:id="@+id/iv_back"
+                android:layout_width="45dp"
+                android:layout_height="40dp"
+                android:layout_marginLeft="15dp"
+
+                android:layout_marginTop="20dp"
+                android:onClick="@{click.onClick}"
+                android:src="@mipmap/icon_select_sub_back"
+                android:visibility="invisible">
 
             </com.ilinklink.tg.widget.customClick.CustomClickImageView>
 
@@ -93,6 +102,7 @@
                     android:layout_marginLeft="20dp"
                     android:text="@string/exam_name"
 
+                    android:visibility="gone"
                     android:textColor="@color/green_659B43"
                     android:textSize="20sp"></TextView>
 
@@ -101,6 +111,29 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="20dp"
+                    android:visibility="gone"
+
+                    android:textColor="@color/white"
+                    android:textSize="24sp"></TextView>
+
+
+                <TextView
+                    android:id="@+id/tv_status"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:text="@string/exam_status2"
+
+                    android:textColor="@color/green_659B43"
+                    android:textSize="20sp"></TextView>
+
+                <TextView
+                    android:id="@+id/tv_status_value"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+
+                    android:text="@string/not_started"
                     android:textColor="@color/white"
                     android:textSize="24sp"></TextView>
 
@@ -365,6 +398,7 @@
                     android:layout_height="wrap_content"
                     android:layout_above="@+id/tv_stu_face"
                     android:layout_marginBottom="15dp"
+                    android:visibility="gone"
                     android:text="@string/exam_status_no_student"
                     android:textColor="@color/red"
                     android:textSize="20sp"></TextView>

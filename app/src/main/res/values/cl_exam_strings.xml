@@ -10,6 +10,11 @@
     <string name="redo_face_recongnize">重新识别</string>
     <string name="difficulty_coefficient">难易程度:</string>
     <string name="start_practise">开始训练</string>
+    <string name="practise_status">训练状态:</string>
+    <string name="exam_status2">考核状态:</string>
+    <string name="not_started">未开始</string>
+    <string name="practising">训练中</string>
+    <string name="examing">考核中</string>
 
 
 </resources>
