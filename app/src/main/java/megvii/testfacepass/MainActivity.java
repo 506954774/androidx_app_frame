@@ -56,6 +56,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.HttpHeaderParser;
 import com.android.volley.toolbox.ImageLoader;
+import com.ilinklink.tg.mvp.selectsubject.SelectSubjectActivity;
 import com.spc.pose.demo.R;
 
 import org.apache.http.HttpEntity;
@@ -1043,6 +1044,10 @@ public class MainActivity extends Activity implements CameraManager.CameraListen
         mRecoToast.setView(toastView);
 
         mRecoToast.show();
+
+
+        startActivity(new Intent(this, SelectSubjectActivity.class));
+        finish();
     }
 
     private static final int REQUEST_CODE_CHOOSE_PICK = 1;

@@ -169,6 +169,7 @@
         <!--实际的actiity ***************************************************************-->
 
         <activity android:name="megvii.testfacepass.MainActivity"
+            android:screenOrientation="landscape"
             >
         </activity>
 

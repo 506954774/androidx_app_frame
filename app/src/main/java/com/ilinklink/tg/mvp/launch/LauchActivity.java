@@ -42,6 +42,7 @@ import java.util.List;
 import androidx.annotation.RequiresApi;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+import megvii.testfacepass.MainActivity;
 
 /**
  * LauchActivity
@@ -256,7 +257,13 @@ public class LauchActivity extends BaseMvpActivity<ActivityLaunchBinding> implem
         mViewBind.tvHint.postDelayed(new Runnable() {
             @Override
             public void run() {
-                startActivity(new Intent(LauchActivity.this, InitFaceFeatrueAct3.class));
+                //startActivity(new Intent(LauchActivity.this, InitFaceFeatrueAct3.class));
+
+                //startActivity(new Intent(LauchActivity.this, SelectSubjectActivity.class));
+
+                //人脸识别界面
+                startActivity(new Intent( LauchActivity.this, MainActivity.class));
+
                 finish();
             }
         },1000);

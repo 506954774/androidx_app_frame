@@ -10,38 +10,75 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.Handler;
 import android.os.Looper;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.View;
 
 import com.blankj.utilcode.util.Utils;
+import com.google.common.base.Throwables;
 import com.ilinklink.greendao.DaoMaster;
 import com.ilinklink.greendao.DaoSession;
+import com.ilinklink.greendao.ExamInfo;
 import com.ilinklink.greendao.LoginModel;
 
+import com.ilinklink.greendao.StudentExam;
+import com.ilinklink.greendao.StudentInfo;
+import com.ilinklink.tg.entity.ZtsbExamListData;
 import com.ilinklink.tg.enums.ActivityLifecycleStatus;
 import com.ilinklink.tg.green_dao.CustomDbUpdateHelper;
 import com.ilinklink.tg.green_dao.DBHelper;
+import com.ilinklink.tg.mvp.exam.BasePoseActivity2;
+import com.ilinklink.tg.mvp.initfacefeatrue.InitFaceFeatrueAct3;
+import com.ilinklink.tg.mvp.selectsubject.SelectSubjectActivity;
+import com.ilinklink.tg.utils.CollectionUtils;
 import com.ilinklink.tg.utils.Constants;
+import com.ilinklink.tg.utils.Json;
 import com.ilinklink.tg.utils.LogUtil;
 import com.ilinklink.tg.utils.PackageUtil;
+import com.ilinklink.tg.utils.SdCardLogUtil;
+import com.qdong.communal.library.module.network.LinkLinkApi;
+import com.qdong.communal.library.module.network.LinkLinkNetInfo;
+import com.qdong.communal.library.module.network.RetrofitAPIManager;
+import com.qdong.communal.library.module.network.RxHelper;
 import com.qdong.communal.library.util.SharedPreferencesUtil;
 
 import com.spc.pose.demo.BuildConfig;
 import com.tencent.smtt.sdk.QbSdk;
 
+import java.io.File;
 import java.io.InputStreamReader;
 import java.io.LineNumberReader;
 import java.net.NetworkInterface;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.concurrent.TimeUnit;
+
+import mcv.facepass.FacePassException;
+import mcv.facepass.FacePassHandler;
+import mcv.facepass.types.FacePassAddFaceResult;
+import mcv.facepass.types.FacePassConfig;
+import mcv.facepass.types.FacePassModel;
+import mcv.facepass.types.FacePassPose;
+import rx.Observable;
+import rx.Observer;
+import rx.Subscription;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.functions.Action1;
+import rx.functions.Func1;
+import rx.schedulers.Schedulers;
 
 /**
  * AppLoader
@@ -496,6 +533,14 @@ public class AppLoader extends Application{
             // 捕获未知异常
             CrashHandler.getInstance().init();
 
+
+            // 初始化人脸sdk
+            //initFacePassSDK();
+            //initFaceHandler();
+
+            //定时拉取数据
+            //syncData();
+
         } catch (Exception e) {
             LogUtil.e("JPush", "准备调用父类的onCreate,初始化各种SDK");
         }
@@ -710,5 +755,447 @@ public class AppLoader extends Application{
     public static void cleanComment() {
         mCommentMap.clear();
         mCommentMap = new HashMap<>();
+    }
+
+
+
+
+    private Subscription mSubscriptionSyncData;
+
+
+
+    /**
+     * @method name:同步服务器数据，先调用接口，拉取考试信息，如果服务器可访问，则继续拉取学生照片数据。
+     *              拉取学生照片后，对比本地数据，增量写入到数据库并调用特征值api
+     * @des:
+     * @param :
+     * @return type:
+     * @date 创建时间:2022/10/26
+     * @author Chuck
+     **/
+
+    protected void syncData() {
+
+        String TAG="syncData";
+
+        LinkLinkApi mApi = RetrofitAPIManager.provideClientApi(this);
+
+        Action1<? super Long> observer = new Action1<Long>() {
+            @Override
+            public void call(Long aLong) {
+                try {
+
+                    //调用接口
+                    mApi.getExamInfo()
+                            .subscribeOn(Schedulers.io())
+                            //写入SQLite数据库
+                            .map(new Func1<LinkLinkNetInfo, LinkLinkNetInfo>() {
+                                @Override
+                                public LinkLinkNetInfo call(LinkLinkNetInfo linkLinkNetInfo) {
+
+                                    LogUtil.i(TAG,"================getExamInfo,call,线程id:{0}",Thread.currentThread().getId());
+
+                                    LinkLinkNetInfo result=new LinkLinkNetInfo();
+                                    result.setCode(0);
+
+                                    ZtsbExamListData ztsbExamListData = Json.fromJson(linkLinkNetInfo.getData(), ZtsbExamListData.class);
+
+                                    LogUtil.i(TAG,"ztsbExamListData==null?:"+ztsbExamListData==null);
+
+
+                                    if(ztsbExamListData==null|| CollectionUtils.isNullOrEmpty(ztsbExamListData.getContentExamEmps())){
+                                        result.setCode(1);
+                                        result.setMessage("暂无考试信息");
+
+                                        return result;
+                                    }
+
+
+
+
+                                    return result;
+                                }
+                            })
+
+                            .observeOn(Schedulers.io())
+                            .subscribe(new Observer<LinkLinkNetInfo>() {
+                                @Override
+                                public void onCompleted() {
+                                    LogUtil.e(TAG,"================getExamInfoAndSave,onCompleted()");
+                                }
+
+                                @Override
+                                public void onError(Throwable e) {
+                                    LogUtil.e(TAG,"================getExamInfoAndSave,onError:"+ e.getMessage());
+                                }
+
+                                @Override
+                                public void onNext(LinkLinkNetInfo result) {
+                                    LogUtil.i(TAG,"================getExamInfoAndSave,Observer,onNext,线程id:{0}",Thread.currentThread().getId());
+
+                                    LogUtil.i(TAG,"================getExamInfoAndSave,Observer,onNext,result:{0}",result);
+
+
+
+                                }
+                            });
+
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        };
+        mSubscriptionSyncData = Observable.interval(1, 5, TimeUnit.SECONDS)
+                .subscribeOn(Schedulers.io())
+                .observeOn(Schedulers.io())//指定观察者的执行线程,最终来到主线程执行
+                .subscribe(observer);//订阅
+
+    }
+
+
+
+    /* SDK 实例对象 */
+    FacePassHandler mFacePassHandler;
+    private static final String DEBUG_TAG = "FacePassDemo";
+    // 需要客户根据自己需求配置
+    private static final String authIP = "https://api-cn.faceplusplus.com";
+    //private static final String apiKey = "fHrrO2VYQ8WQTujUuqsGixdBasnetD8J";
+    private static final String apiKey = "7B18IrqUfpAdvmeP7MyhNOTEx4c8u0QT";
+    //private static final String apiSecret = "9rwNIpyUclXsYRn3WRrzhKDVIl8MEb9O";
+    private static final String apiSecret = "dO6TUdfpeRWnywYrrI6wcmaPDbdris9F";
+    /* 根据需求配置单目 / 双目场景，默认单目 */
+    private static FacePassCameraType CamType =  FacePassCameraType.FACEPASS_SINGLECAM;
+
+    /* 人脸识别Group */
+    private static final String group_name = "facepass";
+
+    private boolean isLocalGroupExist = false;
+
+
+    private enum FacePassSDKMode {
+        MODE_ONLINE,
+        MODE_OFFLINE
+    }
+
+    private enum FacePassCameraType{
+        FACEPASS_SINGLECAM,
+        FACEPASS_DUALCAM
+    };
+
+
+    private void initFacePassSDK() {
+        Context mContext = getApplicationContext();
+        FacePassHandler.initSDK(mContext);
+        FacePassHandler.authPrepare(mContext);
+        FacePassHandler.getAuth(authIP, apiKey, apiSecret, true);
+        Log.d("FacePassDemo", FacePassHandler.getVersion());
+
+    }
+
+    private void initFaceHandler() {
+        String TAG="syncData";
+
+        new Thread() {
+            @Override
+            public void run() {
+                while (true ) {
+                    while (FacePassHandler.isAvailable()) {
+                        Log.d(DEBUG_TAG, "start to build FacePassHandler");
+                        FacePassConfig config;
+                        try {
+                            /* 填入所需要的模型配置 */
+                            config = new FacePassConfig();
+                            config.poseBlurModel = FacePassModel.initModel(getApplicationContext().getAssets(), "attr.pose_blur.arm.190630.bin");
+
+                            config.livenessModel = FacePassModel.initModel(getApplicationContext().getAssets(), "liveness.CPU.rgb.G.bin");
+                            if (CamType ==  FacePassCameraType.FACEPASS_DUALCAM) {
+                                config.rgbIrLivenessModel = FacePassModel.initModel(getApplicationContext().getAssets(), "liveness.CPU.rgbir.G.bin");
+                            }
+
+                            config.searchModel = FacePassModel.initModel(getApplicationContext().getAssets(), "feat2.arm.K.v1.0_1core.bin");
+
+                            config.detectModel = FacePassModel.initModel(getApplicationContext().getAssets(), "detector.arm.G.bin");
+                            config.detectRectModel = FacePassModel.initModel(getApplicationContext().getAssets(), "detector_rect.arm.G.bin");
+                            config.landmarkModel = FacePassModel.initModel(getApplicationContext().getAssets(), "pf.lmk.arm.E.bin");
+
+                            config.rcAttributeModel = FacePassModel.initModel(getApplicationContext().getAssets(), "attr.RC.arm.G.bin");
+                            config.occlusionFilterModel = FacePassModel.initModel(getApplicationContext().getAssets(), "attr.occlusion.arm.20201209.bin");
+                            //config.smileModel = FacePassModel.initModel(getApplicationContext().getAssets(), "attr.RC.arm.200815.bin");
+                            //config.ageGenderModel = FacePassModel.initModel(getApplicationContext().getAssets(), "attr.age_gender.arm.190630.bin");
+
+                            /* 送识别阈值参数 */
+                            config.rcAttributeAndOcclusionMode = 1;
+                            config.searchThreshold = 65f;
+                            config.livenessThreshold = 55f;
+                            if (CamType == FacePassCameraType.FACEPASS_DUALCAM) {
+                                config.livenessEnabled = false;
+                                config.rgbIrLivenessEnabled = true;
+                            } else {
+                                config.livenessEnabled = true;
+                                config.rgbIrLivenessEnabled = false;
+                            }
+
+
+                            config.poseThreshold = new FacePassPose(35f, 35f, 35f);
+                            config.blurThreshold = 0.8f;
+                            config.lowBrightnessThreshold = 30f;
+                            config.highBrightnessThreshold = 210f;
+                            config.brightnessSTDThreshold = 80f;
+                            config.faceMinThreshold = 100;
+                            config.retryCount = 10;
+                            config.smileEnabled = false;
+                            config.maxFaceEnabled = true;
+
+                            config.fileRootPath = getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS).getAbsolutePath();
+
+                            /* 创建SDK实例 */
+                            mFacePassHandler = new FacePassHandler(config);
+
+                            /* 入库阈值参数 */
+                            FacePassConfig addFaceConfig = mFacePassHandler.getAddFaceConfig();
+                            addFaceConfig.poseThreshold.pitch = 35f;
+                            addFaceConfig.poseThreshold.roll = 35f;
+                            addFaceConfig.poseThreshold.yaw = 35f;
+                            addFaceConfig.blurThreshold = 0.7f;
+                            addFaceConfig.lowBrightnessThreshold = 70f;
+                            addFaceConfig.highBrightnessThreshold = 220f;
+                            addFaceConfig.brightnessSTDThreshold = 60f;
+                            addFaceConfig.faceMinThreshold = 100;
+                            addFaceConfig.rcAttributeAndOcclusionMode = 2;
+                            mFacePassHandler.setAddFaceConfig(addFaceConfig);
+
+                            checkGroup();
+
+                            initFaceFeatrue();
+                        } catch (FacePassException e) {
+                            e.printStackTrace();
+                            Log.d(DEBUG_TAG, "FacePassHandler is null");
+                            return;
+                        }
+                        return;
+                    }
+                    try {
+                        /* 如果SDK初始化未完成则需等待 */
+                        sleep(500);
+
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        }.start();
+    }
+
+
+    private void checkGroup() {
+        if (mFacePassHandler == null) {
+            return;
+        }
+        try {
+            String[] localGroups = mFacePassHandler.getLocalGroups();
+            isLocalGroupExist = false;
+            if (localGroups == null || localGroups.length == 0) {
+
+                return;
+            }
+            for (String group : localGroups) {
+                if (group_name.equals(group)) {
+                    isLocalGroupExist = true;
+                }
+            }
+            if (!isLocalGroupExist) {
+
+
+            }
+        } catch (FacePassException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void initFaceFeatrue(){
+        String TAG="syncData";
+
+        new Thread(){
+            @Override
+            public void run() {
+                //创建group
+
+
+                boolean isSuccess = false;
+                String groupName="facepass";
+                try {
+                    isSuccess = mFacePassHandler.createLocalGroup(groupName);
+                } catch (FacePassException e) {
+                    e.printStackTrace();
+                }
+
+                if(isLocalGroupExist){
+                    isSuccess=true;
+                }
+
+                Log.i(TAG,"createLocalGroup,isSuccess："+isSuccess);
+                Log.i(TAG,"createLocalGroup, groupName："+groupName);
+
+                //选取照片
+
+                if(isSuccess){
+
+                    //Constants.FACE_IMAGES_PATH
+                    String [] imagesPaths={"40.jpg","41.jpg","42.jpg","45.jpg"};
+                    String [] names={"李景亮","赵峰","杨晓云","刘东华"};
+                    String [] sns={"HAM2205011","HAM2205025","HAM2205038","HAM2205058"};
+                    String [] heads={
+                            "https://www.baidu.com/link?url=Kg8cLPDuX5DN7pTQZPMan0AMVsgD_Mh8OHxFTXI2xLXcYM9Dx2gHymK-q4r9yfnh3fPtoC9wgU5aPB2ae6BBivSnr80h5KsOhbiAiq4qPv_z5C2nqjoYXIGQOvIFxMk4EyKTxcoGFCa31bLZe9ZX9e3f7QH24zOfNY5FFJ-RHgSQ3TfgUqgs8ZuB_DBbJ7KPILfN9OXHZmsVsKzQ9riGeSvphgYZ8pdu31zPT0bOaYDIvosnIk2052jqV4qLPpNhVwtOk3sjBPsJ1xLUa1kwzwITITkZXsGux9KnIHMqyrBa_GxRQFEJhtjRaaY7D2HkQfKm8TQ5-j3MyMimfQTPvu75AqOv3tiLGx0n5lUI9remmf0ZumcgndGn3PLVWLc8WI3BIWMSkhVe7V38U1AyZl_tJ_r3s_gCjRzRv7tFPqSp2ezI_cuxS_Eq_LBGBnvnPltivuJRmnwXF0zcmYoLif_ei8GsDX0jTmJvHmjt6Z0DI3M-HqiVCaTnFBmucbqgA9F7AJRq0lqPVHCi1OLVsso6ivA2rau2fhl1DT7jox1-pq_UITPPTfbI0KYMQkvsN-Wwc7f7o5YDcXHQRVn_O79C20hYI5_lS1ft59ckoB5K_GfEilCBSQipG9ecTTVnHDBBC_srGR-l2i0tAgxtBSLHP2enZ79tO8H1uhx6ibDLPeYq8yYCAU1Nk7zlNZEd6JZo5eZyDD2f98cJ9aHPhkDvoOuZjUcjZZQPR___nDWBM0bcS3rZtqqkPGtIa_Ccsj0VwIdPNwVzCKZXxMBFia&wd=&eqid=b273940500037240000000056352a9b2",
+
+                            "https://www.baidu.com/link?url=BI9aolXHH3wwtJOP-5xxxOsIFo08U8_7bAjD4X3AW--IrMu3WSRBICWVlctRDbK7KnvfxU8zMSC9UKPIcXyW_v9UXDgERQKX3p23Hyswt9cADFyMoUDFLiP2frTJkV9BAVElLwUk5Miv-IklkQv8zNr3oiwQdtNgZ_63QdYY4Y7fQZ9VB-eNJbrBM4M_8W4mdpXxZiWuBUnk8J90tuG0r3GQhAx9yubSYp24XeAIgKv_M_ygerEh-hMF-wkypuufPaHL8-_PGYquRJrvHgkKnDOCM4b4OC-wfApps7pOuaWPvqf9HEr3RoYR0RHxNe-bOv6R5Eq2hRxfj1nBKEBsQq_QT2cqftK5fSM-w-ZVGh64IHiT8zpCg8u183VQOnxSpvDwA-kAqcj3s-4tZBCCf9QtCQXek3yX7D0HVU_hydgOCWq39Cm2XXHutz8N8ePGOSfTdWCgG_HQ7cK9wK2X2W_4xM3gY0pPDi2W1fLieFxCJXzJ2_NANdxiVqto1CO-hRqApjz5T5D6OsAobE40Fv8KwUz-cKQYXvUYkH6u_MWo5yYDxnLdfx7Ypo0cyhpf4qNMjs6xsNPhRU2FgO9E94aneoUJLuIYqzUdYyEKauQKfy0gKo5HVoW9k308S5E0vwuxJFW88sMbV6up78CtsuqduFowzS7ZxQuSRkYONElbomsXOUs1QyAbPUDfDX3VM_Roi-SYEgySOFKuovJsk6miAhr6hjuSjrELvxY3q0bC0nIkiSm1INLN-F8cMvDIsPhuLlWlQYshlCTn7jvdWq&wd=&eqid=b273940500037240000000056352a9b2",
+
+                            "https://gimg2.baidu.com/image_search/src=http%3A%2F%2F5b0988e595225.cdn.sohucs.com%2Fq_70%2Cc_zoom%2Cw_640%2Fimages%2F20170929%2F09ed3516c62b4790a6ab30055cb1f570.jpeg&refer=http%3A%2F%2F5b0988e595225.cdn.sohucs.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=auto?sec=1668953810&t=d4f9d35fd50913abc36d6ab913ffbac6",
+
+                            "https://gimg2.baidu.com/image_search/src=http%3A%2F%2F5b0988e595225.cdn.sohucs.com%2Fimages%2F20200417%2Fe9e2f2504e46461cbf8352810bef64ef.jpeg&refer=http%3A%2F%2F5b0988e595225.cdn.sohucs.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=auto?sec=1668953810&t=a3f0fa5bb0e7662a98854b952509892b"};
+
+                    List<String> faceTokenList = new ArrayList<>();
+
+                    try {
+                        byte[][] faceTokens = mFacePassHandler.getLocalGroupInfo(groupName);
+                        if (faceTokens != null && faceTokens.length > 0) {
+                            for (int j = 0; j < faceTokens.length; j++) {
+                                if (faceTokens[j].length > 0) {
+                                    faceTokenList.add(new String(faceTokens[j]));
+                                }
+                            }
+                        }
+
+                        Log.i(TAG,"此groupName既有的token列表，faceTokenList:"+faceTokenList );
+
+                    } catch (FacePassException e) {
+                        e.printStackTrace();
+                    }
+
+                    int successCount=0;
+                    int failureCount=0;
+                    // TODO: 2022/10/16 此处应该做判断，本地磁盘的图片文件要有token关联。 根据文件绝对路径拿到token，然后判断此token是否已经被绑定过
+                    for (int i = 0; i < imagesPaths.length; i++) {
+
+                        boolean bindBefore=false;
+                        StudentInfo old = DBHelper.getInstance(getApplicationContext()).getStudentInfo(imagesPaths[i]);
+                        if(old!=null){
+                            if(old.getDesc()!=null){
+
+                                if(!CollectionUtils.isNullOrEmpty(faceTokenList)){
+                                    if(faceTokenList.contains(old.getFaceToken())){
+                                        bindBefore=true;
+                                        successCount++;
+                                        Log.i(TAG,"此照片已经被绑定过,path："+imagesPaths[i]);
+                                    }
+                                }
+
+                              /*  String[] split = old.getDesc().split(",");
+                                //需要判断，因为下载完成之后，是没有token的。
+                                if(split.length==2){
+                                    String token=old.getDesc().split(",")[1];
+                                    if(!CollectionUtils.isNullOrEmpty(faceTokenList)){
+                                        if(faceTokenList.contains(token)){
+                                            bindBefore=true;
+                                            successCount++;
+                                            Log.i(TAG,"此照片已经被绑定过,path："+imagesPaths[i]);
+                                        }
+                                    }
+                                }*/
+                            }
+                        }
+
+                        if(bindBefore){
+                            Log.i(TAG,"此照片已经被绑定过,循环将 continue" );
+
+                            //界面绘制进度
+
+
+
+                            continue;
+                        }
+
+                        String imagePath= com.qdong.communal.library.util.Constants.FACE_IMAGES_PATH+ File.separator+imagesPaths[i];
+
+                        Log.i(TAG,"imagePath:"+imagePath );
+
+                        Bitmap bitmap = BitmapFactory.decodeFile(imagePath);
+
+                        try {
+                            FacePassAddFaceResult result = mFacePassHandler.addFace(bitmap);
+                            Log.d("qujiaqi", "result:" + result
+                                    + ",bl:" + result.blur
+                                    + ",pp:" + result.pose.pitch
+                                    + ",pr:" + result.pose.roll
+                                    + ",py" + result.pose.yaw);
+                            if (result != null) {
+                                if (result.result == 0) {
+                                    //toast("add face successfully！");
+                                    Log.i(TAG,"add face successfully！,faceToken："+new String(result.faceToken));
+
+
+                                    byte[] faceToken =result.faceToken;
+                                    if (faceToken == null || faceToken.length == 0 || TextUtils.isEmpty(groupName)) {
+                                        Log.i(TAG,"bindGroup,params error！" );
+                                        failureCount++;
+
+                                    }
+                                    try {
+                                        boolean b = mFacePassHandler.bindGroup(groupName, faceToken);
+                                        String bindGroupResult = b ? "success " : "failed";
+                                        Log.i(TAG,"bindGroupResult:  " + bindGroupResult);
+
+                                        if(b){
+
+                                            StudentInfo student=new StudentInfo();
+                                            student.setStudentUUID(imagesPaths[i]);
+                                            student.setImageSdCardPath(imagePath);
+                                            student.setName(names[i]);
+                                            student.setFaceToken(new String(faceToken));
+                                            student.setImageUrl(heads[i]);
+                                            student.setDesc(sns[i]);
+                                            student.setUpdateTime(System.currentTimeMillis());
+                                            student.setImageDownloadTime(System.currentTimeMillis());
+
+                                            DBHelper.getInstance(getApplicationContext()).saveStudentInfo(student);
+
+                                            successCount++;
+                                            //界面绘制进度
+
+                                        }
+
+                                    } catch (Exception e) {
+                                        e.printStackTrace();
+                                        Log.e(TAG,"bindGroupResult,Exception:  " + e.getMessage());
+                                        failureCount++;
+                                    }
+
+
+                                } else if (result.result == 1) {
+                                    // toast("no face ！");
+                                    Log.i(TAG,"add face failed,no face ！" );
+                                    failureCount++;
+
+
+                                } else {
+                                    Log.i(TAG,"add face failed,quality problem！" );
+                                    failureCount++;
+
+                                    //toast("quality problem！");
+
+                                }
+                            }
+                        } catch (FacePassException e) {
+                            e.printStackTrace();
+                            Log.i(TAG,"bindGroupResult,FacePassException:"+e.getMessage() );
+
+                        }
+                    }
+
+
+                }
+
+            }
+        }.start();
     }
 }
