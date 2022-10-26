@@ -18,6 +18,7 @@ import com.ilinklink.tg.base.BaseMvpActivity;
 import com.ilinklink.tg.communal.AppLoader;
 import com.ilinklink.tg.entity.SysConfig;
 import com.ilinklink.tg.mvp.BasePresenter;
+import com.ilinklink.tg.mvp.facerecognize.WsFaceRecognizeActivity;
 import com.ilinklink.tg.mvp.initfacefeatrue.InitFaceFeatrueAct2;
 import com.ilinklink.tg.mvp.initfacefeatrue.InitFaceFeatrueAct3;
 import com.ilinklink.tg.mvp.selectsubject.SelectSubjectActivity;
@@ -262,7 +263,8 @@ public class LauchActivity extends BaseMvpActivity<ActivityLaunchBinding> implem
                 //startActivity(new Intent(LauchActivity.this, SelectSubjectActivity.class));
 
                 //人脸识别界面
-                startActivity(new Intent( LauchActivity.this, MainActivity.class));
+                //startActivity(new Intent( LauchActivity.this, MainActivity.class));
+                startActivity(new Intent( LauchActivity.this, WsFaceRecognizeActivity.class));
 
                 finish();
             }
