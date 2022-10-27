@@ -15,6 +15,11 @@
     <string name="not_started">未开始</string>
     <string name="practising">训练中</string>
     <string name="examing">考核中</string>
+    <string name="exam_start2">开始</string>
+    <string name="exam_finish2">结束</string>
+    <string name="exam_redo">重考</string>
+    <string name="exam_compelated">完成</string>
+
 
 
 </resources>

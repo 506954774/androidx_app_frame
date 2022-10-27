@@ -6,4 +6,8 @@
 
     <dimen name="dimen_margin_12dp">12dp</dimen>
 
+
+    <dimen name="circal_btn_background_width">80dp</dimen>
+
+
 </resources>

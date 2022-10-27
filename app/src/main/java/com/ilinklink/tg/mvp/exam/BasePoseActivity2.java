@@ -595,7 +595,7 @@ public  class BasePoseActivity2 extends BaseMvpActivity<ActivityFuwochengBinding
         });
 
         if(mStudentExamRecord==null){
-            mViewBind.tvStartExam.setText(getString(R.string.start_practise));
+            mViewBind.tvStartExam.setText(getString(R.string.exam_start2));
             mViewBind.tvExamStatus.setVisibility(View.INVISIBLE);
             mViewBind.tvStatus.setText(getString(R.string.practise_status));
 
@@ -618,13 +618,30 @@ public  class BasePoseActivity2 extends BaseMvpActivity<ActivityFuwochengBinding
     private void setStatus(boolean mStarted){
         if(!mStarted){
             mViewBind.tvStatusValue.setText(getString(R.string.not_started));
+
+            mViewBind.tvRedoExam.setVisibility(View.GONE);
+            mViewBind.tvStartExam.setVisibility(View.VISIBLE);
+            mViewBind.tvStopExam.setVisibility(View.GONE);
+            mViewBind.tvExamCompelated.setVisibility(View.GONE);
         }
         else {
+            //训练
             if(mStudentExamRecord==null){
                 mViewBind.tvStatusValue.setText(getString(R.string.practising));
+
+                mViewBind.tvRedoExam.setVisibility(View.GONE);
+                mViewBind.tvStartExam.setVisibility(View.GONE);
+                mViewBind.tvStopExam.setVisibility(View.VISIBLE);
+                mViewBind.tvExamCompelated.setVisibility(View.GONE);
             }
+            //考核
             else {
                 mViewBind.tvStatusValue.setText(getString(R.string.examing));
+
+                mViewBind.tvRedoExam.setVisibility(View.GONE);
+                mViewBind.tvStartExam.setVisibility(View.GONE);
+                mViewBind.tvStopExam.setVisibility(View.VISIBLE);
+                mViewBind.tvExamCompelated.setVisibility(View.GONE);
             }
         }
 
