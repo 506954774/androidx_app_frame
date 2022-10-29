@@ -101,7 +101,8 @@ public class FaceResultActivity extends BaseMvpActivity<ActivityFaceresultBindin
 
         List<StudentInfo> allStudents = DBHelper.getInstance(this).getAllStudents();
         if(!CollectionUtils.isNullOrEmpty(allStudents)){
-            mStudentInfo=allStudents.get(new Random().nextInt(allStudents.size()));
+            //mStudentInfo=allStudents.get(new Random().nextInt(allStudents.size()));
+            mStudentInfo=DBHelper.getInstance(this).getStudentInfo(FaceRecognizeResult.getInstance().getStudentId());
         }
 
     }
@@ -164,6 +165,15 @@ public class FaceResultActivity extends BaseMvpActivity<ActivityFaceresultBindin
                 //startActivity(new Intent(this, ShuanggangActivity.class));
 
                 startActivity(new Intent(this, StudentExamIndexActivity.class));
+                finish();
+
+
+                break;
+            case R.id.tv_redo_face_recongnize:
+               // ToastUtils.showShort("tv_enter_exam");
+                //startActivity(new Intent(this, ShuanggangActivity.class));
+
+                startActivity(new Intent(this, WsFaceRecognizeActivity.class));
                 finish();
 
 

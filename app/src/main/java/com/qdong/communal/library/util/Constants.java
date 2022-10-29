@@ -135,7 +135,8 @@ public class Constants {
     //http://192.168.0.134:3020/swagger-ui.html 接口文档
     //public static final String DEBUG_HOST="http://228381bk77.iok.la";
     //public static final String DEBUG_HOST="http://192.168.0.134:3020";
-    public static  String DEBUG_HOST="http://101.42.228.156:43213";
+    //public static  String DEBUG_HOST="http://101.42.228.156:43213";
+    public static  String DEBUG_HOST="https://174y9539y5.zicp.fun/mgr-backend";
 
     public static final String DEBUG_PORT="/";
 //    public static final String DEBUG_HOST_CESHI = "https://api-yp2-sanitation.dlsmartercity.com";
@@ -145,7 +146,9 @@ public class Constants {
 
     //public static final String PRODUCTION_HOST="http://228381bk77.iok.la";
     //public static final String PRODUCTION_HOST="http://192.168.0.134:3020";
-    public static  String PRODUCTION_HOST="http://101.42.228.156:43213";
+    //public static  String PRODUCTION_HOST="http://101.42.228.156:43213";
+    public static  String PRODUCTION_HOST="https://174y9539y5.zicp.fun/mgr-backend";
+
 
     public static final String PRODUCTION_PORT="/";
 
@@ -162,6 +165,7 @@ public class Constants {
     public static final String EVENT_SERVICE="";//活动模块
     public static final String APP_SERVICE="";//app模块
     public static final String COURSE_SERVICE="";//课程模块
+    public static final String ILINK_APP_SERVICE="app/";//新兵考试系统
 
     public static final String SMS_SERVICE = "sms-service";
     public static final String USER_AUTHC_SERVICE = "user-authc-service";
@@ -199,7 +203,8 @@ public class Constants {
     //public static final String SERVER_PREFIX = "app-server";
     public static final String TFS_READ_URL = "http://123.56.202.154:7500/v1/tfs/";//文件读取地址,默认的
 
-    public static  String FILE_URL = "http://101.42.228.156:43213";//文件读取地址,默认的
+    //public static  String FILE_URL = "http://101.42.228.156:43213";//文件读取地址,默认的
+    public static  String FILE_URL = "https://174y9539y5.zicp.fun/mgr-backend";//文件读取地址,默认的
 
     //public static final String SERVER_URL = "http://192.168.1.230:10005/";//baseUrl,默认的
     //Host: 192.168.1.230:10005

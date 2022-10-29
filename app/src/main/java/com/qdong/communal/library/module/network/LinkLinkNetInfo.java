@@ -15,7 +15,8 @@ import java.io.Serializable;
 public class LinkLinkNetInfo implements Serializable {
 
     private static final long serialVersionUID = 19840902L;
-    private static final String SUCESS_CODE = "000000";
+    public static final String SUCESS_CODE = "000000";
+    public static final String FAIL_CODE = "000001";
     /**
      * success : false
      * errorCode : 010035
@@ -27,7 +28,7 @@ public class LinkLinkNetInfo implements Serializable {
     private String errorCode;
 
     //0表示成功
-    private int code;
+    private String code;
     private String message;
     private JsonElement data;
 
@@ -49,7 +50,8 @@ public class LinkLinkNetInfo implements Serializable {
             return true;
         }
         return SUCESS_CODE.equals(errorCode);*/
-        return code==0;
+        //return code==0;
+        return SUCESS_CODE.equals(errorCode);
     }
 
 
@@ -84,11 +86,11 @@ public class LinkLinkNetInfo implements Serializable {
         this.success = success;
     }
 
-    public int getCode() {
+    public String getCode() {
         return code;
     }
 
-    public void setCode(int code) {
+    public void setCode(String code) {
         this.code = code;
     }
 

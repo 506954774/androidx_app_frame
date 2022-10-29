@@ -65,7 +65,7 @@ public class ExamPresenterImpl extends BasePresenter<ExamContract.ExamView> impl
                             public LinkLinkNetInfo call(LinkLinkNetInfo linkLinkNetInfo) {
 
                                 LinkLinkNetInfo result=new LinkLinkNetInfo();
-                                result.setCode(0);
+                                result.setCode(LinkLinkNetInfo.SUCESS_CODE);
 
                                 ZtsbExamListData ztsbExamListData = Json.fromJson(linkLinkNetInfo.getData(), ZtsbExamListData.class);
 
@@ -73,7 +73,7 @@ public class ExamPresenterImpl extends BasePresenter<ExamContract.ExamView> impl
 
 
                                 if(ztsbExamListData==null|| CollectionUtils.isNullOrEmpty(ztsbExamListData.getContentExamEmps())){
-                                    result.setCode(1);
+                                    result.setCode(LinkLinkNetInfo.FAIL_CODE);
                                     result.setMessage("暂无考试信息");
 
                                     return result;
@@ -127,7 +127,7 @@ public class ExamPresenterImpl extends BasePresenter<ExamContract.ExamView> impl
 
                                     SdCardLogUtil.logInSdCard(TAG,"考试信息入库,================插入数据库,异常:"+e.getMessage());
                                     LogUtil.e(TAG,"================插入数据库,异常:"+e.getMessage());
-                                    result.setCode(1);
+                                    result.setCode(LinkLinkNetInfo.FAIL_CODE);
                                     result.setMessage("插入数据库,异常:"+e.getMessage());
                                 }
 
@@ -153,7 +153,7 @@ public class ExamPresenterImpl extends BasePresenter<ExamContract.ExamView> impl
 
                                 LogUtil.i(TAG,"================getExamInfoAndSave,Observer,onNext,result:{0}",result);
 
-                                mView.getExamInfoAndSaveOnCompleted(result.getCode()==0,result.getMessage());
+                                mView.getExamInfoAndSaveOnCompleted(result.isSuccess(),result.getMessage());
 
                             }
                         })
@@ -178,7 +178,7 @@ public class ExamPresenterImpl extends BasePresenter<ExamContract.ExamView> impl
                             public LinkLinkNetInfo call(LinkLinkNetInfo linkLinkNetInfo) {
 
                                 LinkLinkNetInfo result=new LinkLinkNetInfo();
-                                result.setCode(0);
+                                result.setCode(LinkLinkNetInfo.SUCESS_CODE);
 
                                 ZtsbExamListData ztsbExamListData = Json.fromJson(linkLinkNetInfo.getData(), ZtsbExamListData.class);
 
@@ -186,7 +186,7 @@ public class ExamPresenterImpl extends BasePresenter<ExamContract.ExamView> impl
 
 
                                 if(ztsbExamListData==null|| CollectionUtils.isNullOrEmpty(ztsbExamListData.getEmps())){
-                                    result.setCode(1);
+                                    result.setCode(LinkLinkNetInfo.FAIL_CODE);
                                     result.setMessage("暂时没有考生");
                                 }
 
@@ -197,7 +197,7 @@ public class ExamPresenterImpl extends BasePresenter<ExamContract.ExamView> impl
                                     List<StudentInfo> allStudents = DBHelper.getInstance(mView.getActivityContext()).getAllStudents();
 
                                     if(CollectionUtils.isNullOrEmpty(allStudents)){
-                                        result.setCode(0);
+                                        result.setCode(LinkLinkNetInfo.SUCESS_CODE);
                                         result.setDesc(ztsbExamListData.getEmps().size());
                                     }
                                     else {
@@ -239,7 +239,7 @@ public class ExamPresenterImpl extends BasePresenter<ExamContract.ExamView> impl
 
                                     SdCardLogUtil.logInSdCard(TAG,"compareFaceFeatrue,================对比考生照片,异常:"+e.getMessage());
                                     LogUtil.e(TAG,"compareFaceFeatrue,================对比考生照片,异常:"+e.getMessage());
-                                    result.setCode(1);
+                                    result.setCode(LinkLinkNetInfo.FAIL_CODE);
                                     result.setMessage("对比考生照片,异常:"+e.getMessage());
                                 }
 
@@ -268,7 +268,7 @@ public class ExamPresenterImpl extends BasePresenter<ExamContract.ExamView> impl
                                 SdCardLogUtil.logInSdCard(TAG,"compareFaceFeatrue,================此次需要更新的照片数量:"+String.valueOf(result.getDesc()));
 
 
-                                if(result.getCode()==0){
+                                if(result.isSuccess()){
                                     mView.compareFaceFeatrueOnCompleted(true,"此次需要更新照片的数量:"+result.getDesc().toString());
                                 }
                                 else {
@@ -301,7 +301,7 @@ public class ExamPresenterImpl extends BasePresenter<ExamContract.ExamView> impl
                                 //此次新下载的图片数量
                                 result.setDesc("0");
                                 //错误码
-                                result.setCode(0);
+                                result.setCode(LinkLinkNetInfo.SUCESS_CODE);
 
                                 ZtsbExamListData ztsbExamListData = Json.fromJson(linkLinkNetInfo.getData(), ZtsbExamListData.class);
 
@@ -309,7 +309,7 @@ public class ExamPresenterImpl extends BasePresenter<ExamContract.ExamView> impl
 
 
                                 if(ztsbExamListData==null|| CollectionUtils.isNullOrEmpty(ztsbExamListData.getEmps())){
-                                    result.setCode(1);
+                                    result.setCode(LinkLinkNetInfo.FAIL_CODE);
                                     result.setMessage("暂时没有考生");
                                 }
 
@@ -380,7 +380,7 @@ public class ExamPresenterImpl extends BasePresenter<ExamContract.ExamView> impl
 
                                     SdCardLogUtil.logInSdCard(TAG,"downLoadFaceImages,================downLoadFaceImages,异常:"+e.getMessage());
                                     LogUtil.e(TAG,"downLoadFaceImages,================downLoadFaceImages,异常:"+e.getMessage());
-                                    result.setCode(1);
+                                    result.setCode(LinkLinkNetInfo.FAIL_CODE);
                                     result.setMessage("downLoadFaceImages,异常:"+e.getMessage());
                                 }
 
@@ -407,7 +407,7 @@ public class ExamPresenterImpl extends BasePresenter<ExamContract.ExamView> impl
                                 LogUtil.i(TAG,"================downLoadFaceImages,Observer,onNext,result:{0}",result);
 
 
-                                if(result.getCode()==0){
+                                if(result.isSuccess()){
                                     SdCardLogUtil.logInSdCard(TAG,"此次下载完成的照片数量:"+result.getDesc().toString());
                                     LogUtil.e(TAG,"此次下载完成的照片数量:"+result.getDesc().toString());
 
@@ -443,7 +443,7 @@ public class ExamPresenterImpl extends BasePresenter<ExamContract.ExamView> impl
 
             @Override
             public void onNext(LinkLinkNetInfo linkLinkNetInfo) {
-                if(linkLinkNetInfo.getCode()==0){
+                if(linkLinkNetInfo.isSuccess()){
                     mView.uploadExamResultOnCompleted(true,null);
                 }
                 else {

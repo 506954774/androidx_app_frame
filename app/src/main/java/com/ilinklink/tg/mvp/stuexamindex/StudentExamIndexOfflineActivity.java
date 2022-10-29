@@ -14,7 +14,6 @@ import com.ilinklink.greendao.StudentExamRecord;
 import com.ilinklink.greendao.StudentInfo;
 import com.ilinklink.tg.base.BaseMvpActivity;
 import com.ilinklink.tg.dto.QueryStudentExamRecordDto;
-import com.ilinklink.tg.entity.ExamInfoResponse;
 import com.ilinklink.tg.entity.SubjectExamResult;
 import com.ilinklink.tg.green_dao.DBHelper;
 import com.ilinklink.tg.mvp.BasePresenter;
@@ -46,7 +45,7 @@ import androidx.recyclerview.widget.RecyclerView;
  * Des:
  * on 2018/12/6 15:43
  */
-public class StudentExamIndexActivity extends BaseMvpActivity<ActivityStudentExamIndexBinding> implements View.OnClickListener {
+public class StudentExamIndexOfflineActivity extends BaseMvpActivity<ActivityStudentExamIndexBinding> implements View.OnClickListener {
 
     public static final String TAG="StudentExamIndexActivity";
 
@@ -105,6 +104,7 @@ public class StudentExamIndexActivity extends BaseMvpActivity<ActivityStudentExa
         mStudentInfo=DBHelper.getInstance(this).getStudentInfo(FaceRecognizeResult.getInstance().getStudentId());
 
 
+
         /**
          * 此次考试的数据
          */
@@ -112,9 +112,14 @@ public class StudentExamIndexActivity extends BaseMvpActivity<ActivityStudentExa
         Log.i(TAG,"examRecordList:"+examRecordList);
 
         if(CollectionUtils.isNullOrEmpty(examRecordList)){
-            ToastUtils.showShort(getString(R.string.no_exam_right_now));
-            finish();
-            return;
+            ExamRecord examRecord=new ExamRecord();
+            examRecord.setExamRecordId("1");
+            examRecord.setExamUUID("1");
+            examRecord.setName("十月份大比武");
+            examRecord.setExamTime("2022-10-21 17:00");
+            DBHelper.getInstance(this).saveExamRecord(examRecord);
+
+            mExamRecord=examRecord;
         }
         else {
             mExamRecord=examRecordList.get(examRecordList.size()-1);
@@ -154,7 +159,7 @@ public class StudentExamIndexActivity extends BaseMvpActivity<ActivityStudentExa
             if(mExamRecord!=null){
 
                 QueryStudentExamRecordDto dto=new QueryStudentExamRecordDto();
-                dto.setExamRecordId(mExamRecord.getExamRecordId());
+                dto.setExamRecordId(mExamRecord.getExamUUID());
                 dto.setStudentUUID(mStudentInfo.getStudentUUID());
                 List<StudentExamRecord> studentRecord = DBHelper.getInstance(this).getStudentRecord(dto);
 
@@ -169,7 +174,7 @@ public class StudentExamIndexActivity extends BaseMvpActivity<ActivityStudentExa
                              * 写死科目
                              *
                              */
-                            String [] names=restSubjects( mExamRecord);
+                            String [] names={"单杠引体向上","双杠臂屈伸","俯卧撑","仰卧起坐"};
                             for(String name :names){
                                 ExamInfo s1=new ExamInfo();
                                 s1.setName(name);
@@ -249,12 +254,12 @@ public class StudentExamIndexActivity extends BaseMvpActivity<ActivityStudentExa
                 ExamInfo mExam = examInfoList.get(position);
                 if(mExam!=null){
 
-                    Intent intent=new Intent(StudentExamIndexActivity.this, ExamActivity2.class);
+                    Intent intent=new Intent(StudentExamIndexOfflineActivity.this, ExamActivity2.class);
                     //EXAM_DATA
 
                     StudentExamRecord studentExamRecord=new StudentExamRecord();
 
-                    studentExamRecord.setStudentExamRecordId(UUID.randomUUID().toString().replace("-",""));
+                    studentExamRecord.setStudentExamRecordId(UUID.randomUUID().toString());
                     studentExamRecord.setExamRecordId(mExamRecord.getExamRecordId());
 
                     SimpleDateFormat simpleDateFormat=new SimpleDateFormat("yyyy-MM-dd HH:mm");
@@ -303,27 +308,12 @@ public class StudentExamIndexActivity extends BaseMvpActivity<ActivityStudentExa
          * 写死科目
          *
          */
-        String [] names=restSubjects( mExamRecord);
+        String [] names={"单杠引体向上","双杠臂屈伸","俯卧撑","仰卧起坐"};
         for(String name :names){
             ExamInfo s1=new ExamInfo();
             s1.setName(name);
             examInfoList.add(s1);
         }
-    }
-
-    private String [] restSubjects(ExamRecord mExamRecord){
-        if(mExamRecord!=null){
-            //  //使用预留字段，存储此次考试的科目集合json串
-            List<ExamInfoResponse.SubjectsDTO> subs=Json.jsonToArrayList(mExamRecord.getReservedColumn(), ExamInfoResponse.SubjectsDTO.class);
-            if(!CollectionUtils.isNullOrEmpty(subs)){
-                String [] names=new String[subs.size()];
-                for (int i = 0; i < names.length; i++) {
-                    names[i]=subs.get(i).getSuName();
-                }
-                return names;
-            }
-        }
-        return new String[] {"单杠引体向上","双杠臂屈伸","俯卧撑","仰卧起坐"};
     }
 
     @Override

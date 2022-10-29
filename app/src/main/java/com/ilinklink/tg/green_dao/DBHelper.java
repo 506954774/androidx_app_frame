@@ -465,4 +465,29 @@ public class DBHelper {
     public void saveStudentExamRecord(StudentExamRecord dto) {
         mStudentExamRecordDao.insertOrReplace(dto);
     }
+
+    /**
+     * 查询考试列表
+     * @return
+     */
+    public void clearAllExamRecordList() {
+        mExamRecordDao.deleteAll();
+    }
+
+
+    /**
+     * 根据学生的人脸token查询最后那个学生
+     * @return
+     */
+    public StudentInfo getStudentInfoByFaceToken(String faceToken) {
+        QueryBuilder<StudentInfo> mqBuilder = mStudentInfoDao.queryBuilder();
+        List<StudentInfo> list = mqBuilder.where(StudentInfoDao.Properties.FaceToken.eq(faceToken))
+                .orderDesc(StudentInfoDao.Properties.UpdateTime)
+                .limit(1)
+                .list();
+        if (list != null && list.size() > 0) {
+            return list.get(0);
+        }
+        return null;
+    }
 }

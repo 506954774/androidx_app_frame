@@ -4,10 +4,12 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 
 import com.blankj.utilcode.util.ToastUtils;
 import com.ilinklink.greendao.ExamInfo;
+import com.ilinklink.greendao.ExamRecord;
 import com.ilinklink.tg.base.BaseMvpActivity;
 import com.ilinklink.tg.green_dao.DBHelper;
 import com.ilinklink.tg.mvp.BasePresenter;
@@ -15,10 +17,12 @@ import com.ilinklink.tg.mvp.exam.BasePoseActivity2;
 import com.ilinklink.tg.mvp.exam.ExamActivity2;
 
 import com.ilinklink.tg.mvp.facerecognize.FaceResultActivity;
+import com.ilinklink.tg.mvp.facerecognize.WsFaceRecognizeActivity;
 import com.ilinklink.tg.mvp.stuexamindex.StudentExamIndexActivity;
 
 import com.ilinklink.tg.mvp.history.ExamListHistoryActivity;
 
+import com.ilinklink.tg.utils.CollectionUtils;
 import com.qdong.communal.library.module.BaseRefreshableListFragment.adapter.BaseQuickAdapter2;
 import com.qdong.communal.library.util.DensityUtil;
 import com.spc.pose.demo.BR;
@@ -190,8 +194,19 @@ public class SelectSubjectActivity extends BaseMvpActivity<ActivitySelectSubject
                 break;
             case R.id.tv_enter_exam:
                 //ToastUtils.showShort("tv_enter_exam");
-                startActivity(new Intent(this, FaceResultActivity.class));
+                //startActivity(new Intent(this, FaceResultActivity.class));
+                /**
+                 * 此次考试的数据
+                 */
+                List<ExamRecord> oldExamRecordList = DBHelper.getInstance(getApplicationContext()).getExamRecordList();
+                Log.i(TAG,"oldExamRecordList:"+oldExamRecordList);
 
+                if(CollectionUtils.isNullOrEmpty(oldExamRecordList)){
+                    ToastUtils.showShort(getString(R.string.no_exam_right_now));
+                }
+                else {
+                    startActivity(new Intent(this, WsFaceRecognizeActivity.class));
+                }
 
                 break;
 

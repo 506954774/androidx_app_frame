@@ -56,7 +56,11 @@ import com.android.volley.Response;
 import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.HttpHeaderParser;
 import com.android.volley.toolbox.ImageLoader;
+import com.ilinklink.greendao.StudentInfo;
+import com.ilinklink.tg.communal.AppLoader;
+import com.ilinklink.tg.green_dao.DBHelper;
 import com.ilinklink.tg.mvp.selectsubject.SelectSubjectActivity;
+import com.ilinklink.tg.utils.LogUtil;
 import com.spc.pose.demo.R;
 
 import org.apache.http.HttpEntity;
@@ -117,7 +121,7 @@ public class WsFaceRecognizeActivity extends Activity implements CameraManager.C
 
     private static FacePassSDKMode SDK_MODE = FacePassSDKMode.MODE_OFFLINE;
 
-    private static final String DEBUG_TAG = "FacePassDemo";
+    private static final String DEBUG_TAG = "WsFace";
 
     // 需要客户根据自己需求配置
     private static final String authIP = "https://api-cn.faceplusplus.com";
@@ -259,10 +263,10 @@ public class WsFaceRecognizeActivity extends Activity implements CameraManager.C
         if (!hasPermission()) {
             requestPermission();
         } else {
-            initFacePassSDK();
+            initFacePassSDK2();
         }
 
-        initFaceHandler();
+        initFaceHandler2();
 
         mRecognizeThread = new RecognizeThread();
         mRecognizeThread.start();
@@ -284,6 +288,14 @@ public class WsFaceRecognizeActivity extends Activity implements CameraManager.C
         FacePassHandler.getAuth(authIP, apiKey, apiSecret, true);
         Log.d("FacePassDemo", FacePassHandler.getVersion());
 
+    }
+    private void initFacePassSDK2()  {
+        mFacePassHandler= AppLoader.getInstance().getmFacePassHandler();
+
+    }
+
+    private void initFaceHandler2() {
+        checkGroup();
     }
 
     private void initFaceHandler() {
@@ -1049,8 +1061,6 @@ public class WsFaceRecognizeActivity extends Activity implements CameraManager.C
         mRecoToast.show();
 
 
-        startActivity(new Intent(this, SelectSubjectActivity.class));
-        finish();
     }
 
     private static final int REQUEST_CODE_CHOOSE_PICK = 1;
@@ -1112,6 +1122,24 @@ public class WsFaceRecognizeActivity extends Activity implements CameraManager.C
 
         Log.i("demo","trackId:"+trackId+",faceToken:"+faceToken);
 
+        StudentInfo selectedStu = DBHelper.getInstance(getApplicationContext()).getStudentInfoByFaceToken(faceToken);
+
+        LogUtil.e("selectedStu","================selectedStu："+selectedStu);
+
+        mAndroidHandler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+
+                // StudentInfo selectedStu = DBHelper.getInstance(getApplicationContext()).getStudentInfoByFaceToken(faceToken);
+
+
+                if(selectedStu!=null){
+                    FaceRecognizeResult.getInstance().setStudentId(selectedStu.getStudentUUID());
+                    startActivity(new Intent(WsFaceRecognizeActivity.this, FaceResultActivity.class));
+                    finish();
+                }
+            }
+        },2000);
 
         try {
             final Bitmap bitmap = mFacePassHandler.getFaceImage(faceToken.getBytes());
@@ -1119,7 +1147,11 @@ public class WsFaceRecognizeActivity extends Activity implements CameraManager.C
                 @Override
                 public void run() {
                     Log.i(DEBUG_TAG, "getFaceImageByFaceToken cache is null");
-                    showToast("ID = " + String.valueOf(trackId), Toast.LENGTH_SHORT, true, bitmap);
+                    if(selectedStu!=null){
+                        selectedStu.getName();
+                        showToast(selectedStu.getName(), Toast.LENGTH_SHORT, true, bitmap);
+                    }
+                   // showToast("ID = " + String.valueOf(trackId), Toast.LENGTH_SHORT, true, bitmap);
                 }
             });
             if (bitmap != null) {
@@ -1128,6 +1160,10 @@ public class WsFaceRecognizeActivity extends Activity implements CameraManager.C
         } catch (FacePassException e) {
             e.printStackTrace();
         }
+
+
+
+
     }
 
 

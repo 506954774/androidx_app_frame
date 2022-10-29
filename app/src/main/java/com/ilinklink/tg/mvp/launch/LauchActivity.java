@@ -264,8 +264,10 @@ public class LauchActivity extends BaseMvpActivity<ActivityLaunchBinding> implem
 
                 //人脸识别界面
                 //startActivity(new Intent( LauchActivity.this, MainActivity.class));
-                startActivity(new Intent( LauchActivity.this, WsFaceRecognizeActivity.class));
+                //startActivity(new Intent( LauchActivity.this, WsFaceRecognizeActivity.class));
 
+                startActivity(new Intent(LauchActivity.this, SelectSubjectActivity.class));
+                //startActivity(new Intent(LauchActivity.this, WsFaceRecognizeActivity.class));
                 finish();
             }
         },1000);

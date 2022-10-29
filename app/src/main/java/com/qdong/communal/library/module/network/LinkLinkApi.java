@@ -262,4 +262,30 @@ public interface LinkLinkApi {
     /********************************************************************************
      * 姿态识别  end
      */
+
+
+
+    /**************************************************************************************************************************************************
+     * ******************************************************************
+     * 新兵体态识别系统  start
+     */
+
+    //https://174y9539y5.zicp.fun/mgr-backend/app/examination/down
+    //拉取考试信息
+    @GET(Constants.ILINK_APP_SERVICE + "examination/down")
+    Observable<LinkLinkNetInfo> getExamInfoList();
+
+
+    //https://174y9539y5.zicp.fun/mgr-backend/app/person/down
+    //拉取考生信息
+    @GET(Constants.ILINK_APP_SERVICE + "person/down")
+    Observable<LinkLinkNetInfo> getStuInfoList();
+
+
+
+    /********************************************************************************
+     * 新兵体态识别系统  end
+     */
+
+
 }

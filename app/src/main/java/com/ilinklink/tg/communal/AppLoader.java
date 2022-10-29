@@ -24,14 +24,19 @@ import android.util.Log;
 import android.view.View;
 
 import com.blankj.utilcode.util.Utils;
+import com.google.common.base.Joiner;
 import com.google.common.base.Throwables;
 import com.ilinklink.greendao.DaoMaster;
 import com.ilinklink.greendao.DaoSession;
 import com.ilinklink.greendao.ExamInfo;
+import com.ilinklink.greendao.ExamRecord;
 import com.ilinklink.greendao.LoginModel;
 
 import com.ilinklink.greendao.StudentExam;
 import com.ilinklink.greendao.StudentInfo;
+import com.ilinklink.tg.entity.ExamInfoResponse;
+import com.ilinklink.tg.entity.PersionImageRespons;
+import com.ilinklink.tg.entity.SysConfig;
 import com.ilinklink.tg.entity.ZtsbExamListData;
 import com.ilinklink.tg.enums.ActivityLifecycleStatus;
 import com.ilinklink.tg.green_dao.CustomDbUpdateHelper;
@@ -45,19 +50,27 @@ import com.ilinklink.tg.utils.Json;
 import com.ilinklink.tg.utils.LogUtil;
 import com.ilinklink.tg.utils.PackageUtil;
 import com.ilinklink.tg.utils.SdCardLogUtil;
+import com.ilinklink.tg.utils.Tools;
 import com.qdong.communal.library.module.network.LinkLinkApi;
 import com.qdong.communal.library.module.network.LinkLinkNetInfo;
 import com.qdong.communal.library.module.network.RetrofitAPIManager;
 import com.qdong.communal.library.module.network.RxHelper;
+import com.qdong.communal.library.util.FileUtils;
+import com.qdong.communal.library.util.JsonUtil;
+import com.qdong.communal.library.util.OkHttpUtil;
 import com.qdong.communal.library.util.SharedPreferencesUtil;
 
 import com.spc.pose.demo.BuildConfig;
 import com.tencent.smtt.sdk.QbSdk;
 
+import org.json.JSONException;
+
 import java.io.File;
 import java.io.InputStreamReader;
 import java.io.LineNumberReader;
 import java.net.NetworkInterface;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -112,6 +125,11 @@ public class AppLoader extends Application{
      * 手机屏幕宽度
      **/
     public static int SCREEN_WIDTH;//在LuanchActivity里赋值
+
+    /**
+     * 读取到host配置文件之后，初始化api实例
+     **/
+    private LinkLinkApi mApi;
 
     public static AppLoader getInstance() {
         return ourInstance;
@@ -533,13 +551,19 @@ public class AppLoader extends Application{
             // 捕获未知异常
             CrashHandler.getInstance().init();
 
+            //从sd卡读取配置文件
+            //initConfig();
+
 
             // 初始化人脸sdk
-            //initFacePassSDK();
-            //initFaceHandler();
+            initFacePassSDK();
+            initFaceHandler();
 
-            //定时拉取数据
-            //syncData();
+            //定时拉取考试数据
+            syncExamData();
+
+            //定时拉取学生数据
+            syncStudentData();
 
         } catch (Exception e) {
             LogUtil.e("JPush", "准备调用父类的onCreate,初始化各种SDK");
@@ -761,12 +785,13 @@ public class AppLoader extends Application{
 
 
     private Subscription mSubscriptionSyncData;
+    private Subscription mSubscriptionSyncStudentData;
 
+    private SimpleDateFormat simpleDateFormat=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//2022-10-27 10:25:45
 
 
     /**
-     * @method name:同步服务器数据，先调用接口，拉取考试信息，如果服务器可访问，则继续拉取学生照片数据。
-     *              拉取学生照片后，对比本地数据，增量写入到数据库并调用特征值api
+     * @method name:同步服务器数据，先调用接口，拉取考试信息，存入sqlite
      * @des:
      * @param :
      * @return type:
@@ -774,19 +799,22 @@ public class AppLoader extends Application{
      * @author Chuck
      **/
 
-    protected void syncData() {
+    protected void syncExamData() {
 
-        String TAG="syncData";
+        String TAG="syncExamData";
 
-        LinkLinkApi mApi = RetrofitAPIManager.provideClientApi(this);
 
         Action1<? super Long> observer = new Action1<Long>() {
             @Override
             public void call(Long aLong) {
                 try {
 
+                    if(mApi==null){
+                        mApi = RetrofitAPIManager.provideClientApi(getApplicationContext());
+                    }
+
                     //调用接口
-                    mApi.getExamInfo()
+                    mApi.getExamInfoList()
                             .subscribeOn(Schedulers.io())
                             //写入SQLite数据库
                             .map(new Func1<LinkLinkNetInfo, LinkLinkNetInfo>() {
@@ -796,22 +824,88 @@ public class AppLoader extends Application{
                                     LogUtil.i(TAG,"================getExamInfo,call,线程id:{0}",Thread.currentThread().getId());
 
                                     LinkLinkNetInfo result=new LinkLinkNetInfo();
-                                    result.setCode(0);
+                                    result.setCode(LinkLinkNetInfo.SUCESS_CODE);
 
-                                    ZtsbExamListData ztsbExamListData = Json.fromJson(linkLinkNetInfo.getData(), ZtsbExamListData.class);
+                                    ArrayList<ExamInfoResponse> examInfoResponses =null;
 
-                                    LogUtil.i(TAG,"ztsbExamListData==null?:"+ztsbExamListData==null);
+                                    try {
+                                        examInfoResponses = Json.toList(linkLinkNetInfo.getData(), ExamInfoResponse.class);
+                                        LogUtil.i(TAG,"================examInfoResponses:{0}",examInfoResponses);
+
+                                    } catch (JSONException e) {
+
+                                    }
+
+                                    LogUtil.i(TAG,"examInfoResponses==null?:"+examInfoResponses==null);
 
 
-                                    if(ztsbExamListData==null|| CollectionUtils.isNullOrEmpty(ztsbExamListData.getContentExamEmps())){
-                                        result.setCode(1);
+                                    if(  CollectionUtils.isNullOrEmpty(examInfoResponses )){
+
+                                        DBHelper.getInstance(getApplicationContext()).clearAllExamRecordList();
+
+                                        result.setCode(LinkLinkNetInfo.FAIL_CODE);
                                         result.setMessage("暂无考试信息");
+                                        LogUtil.i(TAG,"暂无考试信息" );
 
                                         return result;
                                     }
+                                    else {
+
+                                        //考试信息入库
+                                        ExamInfoResponse examInfoResponse = examInfoResponses.get(0);
+
+                                        ExamRecord examRecord=new ExamRecord();
+                                        examRecord.setExamRecordId(String.valueOf(examInfoResponse.getExId()));
+                                        examRecord.setExamUUID(String.valueOf(examInfoResponse.getExId()));
+                                        examRecord.setName(examInfoResponse.getExName());
+                                        examRecord.setExamTime(examInfoResponse.getExTime());
+
+                                        String json= Json.toJson(examInfoResponse.getSubjects());
+                                        //使用预留字段，存储此次考试的科目集合json串
+                                        examRecord.setReservedColumn(json);
+
+                                        if(!CollectionUtils.isNullOrEmpty(examInfoResponse.getPersons())){
+                                            ArrayList<String> stuIds=new ArrayList<>();
+                                            for (ExamInfoResponse.PersonsDTO dto:examInfoResponse.getPersons()){
+                                                stuIds.add(dto.getEhpId()+"");
+                                            }
+                                            //使用预留字段2来存储此次参加考试的学生
+                                            examRecord.setReservedColumn2(Joiner.on(",").join(stuIds));
+                                        }
+
+                                        /**
+                                         * 此次考试的数据
+                                         */
+                                        List<ExamRecord> oldExamRecordList = DBHelper.getInstance(getApplicationContext()).getExamRecordList();
+                                        Log.i(TAG,"oldExamRecordList:"+oldExamRecordList);
+
+                                        if(CollectionUtils.isNullOrEmpty(oldExamRecordList)){
+                                            DBHelper.getInstance(getApplicationContext()).saveExamRecord(examRecord);
+                                            LogUtil.i(TAG,"插入一条考试数据：" +examRecord);
+                                        }
+                                        else {
+
+                                            ExamRecord oldExamInfo = oldExamRecordList.get(0);
+
+                                           //对比id，不一致则删除
+                                           if(String.valueOf(examInfoResponse.getExId()).equals(oldExamInfo.getExamUUID())){
+                                               LogUtil.i(TAG,"对比id，不一致则删除：" +examRecord);
+                                               DBHelper.getInstance(getApplicationContext()).clearAllExamRecordList();
+                                               DBHelper.getInstance(getApplicationContext()).saveExamRecord(examRecord);
+                                           }
+                                           //id一致则更新
+                                           else {
+                                               //此id是数据库框架自动生成的id
+                                               examRecord.setId(oldExamInfo.getId());
+                                               DBHelper.getInstance(getApplicationContext()).saveExamRecord(examRecord);
+
+                                               LogUtil.i(TAG,"对比id，id一致则更新：" +examRecord);
+                                           }
+                                        }
 
 
 
+                                    }
 
                                     return result;
                                 }
@@ -846,7 +940,7 @@ public class AppLoader extends Application{
                 }
             }
         };
-        mSubscriptionSyncData = Observable.interval(1, 5, TimeUnit.SECONDS)
+        mSubscriptionSyncData = Observable.interval(1, 60, TimeUnit.SECONDS)
                 .subscribeOn(Schedulers.io())
                 .observeOn(Schedulers.io())//指定观察者的执行线程,最终来到主线程执行
                 .subscribe(observer);//订阅
@@ -854,6 +948,352 @@ public class AppLoader extends Application{
     }
 
 
+    /**
+     * @method name:同步服务器数据，先调用接口，拉取学生照片数据。
+     *              拉取学生照片后，对比本地数据，增量写入到数据库并调用特征值api
+     * @des:
+     * @param :
+     * @return type:
+     * @date 创建时间:2022/10/26
+     * @author Chuck
+     **/
+
+    protected void syncStudentData() {
+
+        String TAG="syncStudentData";
+
+        long timeBefore=System.currentTimeMillis();
+
+        Action1<? super Long> observer = new Action1<Long>() {
+            @Override
+            public void call(Long aLong) {
+                try {
+
+                    if(mApi==null){
+                        mApi = RetrofitAPIManager.provideClientApi(getApplicationContext());
+                    }
+
+                    //调用接口
+                    mApi.getStuInfoList()
+                            .subscribeOn(Schedulers.io())
+
+                            .map(new Func1<LinkLinkNetInfo, LinkLinkNetInfo>() {
+                                @Override
+                                public LinkLinkNetInfo call(LinkLinkNetInfo linkLinkNetInfo) {
+
+                                    while (FacePassHandler.isAvailable()==false||mFacePassHandler==null){
+                                        LogUtil.i(TAG,"FacePassHandler.isAvailable()==false，while循环将线程阻塞" );
+                                        try {
+                                            Thread.sleep(200);
+                                        } catch (InterruptedException e) {
+                                            e.printStackTrace();
+                                        }
+                                    }
+
+                                    if(!FacePassHandler.isAvailable()){
+                                        LogUtil.i(TAG,"FacePassHandler.isAvailable() ==false " );
+                                        return null;
+                                    }
+
+                                    if(mFacePassHandler==null){
+                                        LogUtil.i(TAG,"mFacePassHandler==null" );
+                                        return null;
+                                    }
+
+                                    LogUtil.i(TAG,"================getStuInfoList,call,线程id:{0}",Thread.currentThread().getId());
+
+                                    LinkLinkNetInfo result=new LinkLinkNetInfo();
+                                    result.setCode(LinkLinkNetInfo.SUCESS_CODE);
+
+                                    ArrayList<PersionImageRespons> persionImageRespons =null;
+
+                                    try {
+                                         persionImageRespons = Json.toList(linkLinkNetInfo.getData(), PersionImageRespons.class);
+                                         //LogUtil.i(TAG,"================getStuInfoList:{0}",persionImageRespons);
+
+                                    } catch (JSONException e) {
+
+                                    }
+
+                                    LogUtil.i(TAG,"persionImageRespons==null?:"+persionImageRespons==null);
+
+
+
+                                    if(  CollectionUtils.isNullOrEmpty(persionImageRespons )){
+                                        result.setCode(LinkLinkNetInfo.FAIL_CODE);
+                                        result.setMessage("暂无考生信息");
+
+                                        return result;
+                                    }
+                                    else {
+
+                                        //对比数据数据，
+                                        for( PersionImageRespons person :persionImageRespons){
+
+                                            if(person.getPeId()<13){
+                                                continue;
+                                            }
+
+                                            StudentInfo old = DBHelper.getInstance(getApplicationContext()).getStudentInfo(person.getPeId()+"");
+                                            if(old==null){
+                                                LogUtil.i(TAG,"sqlite中没有此id的考生，PeId:"+person.getPeId());
+                                                indertOrUpdateStudentInfo(person);
+                                            }
+                                            else {
+                                                boolean versionTheSame=false;
+                                                boolean sdCardImageExsit=false;
+                                                boolean hasFaceToken=!TextUtils.isEmpty(old.getFaceToken());
+
+                                                if(person.getPeUtime()==null){
+                                                    versionTheSame=true;
+                                                }
+                                                else {
+                                                    try {
+                                                        LogUtil.i(TAG,"person.getPeUtime():"+person.getPeUtime());
+                                                        versionTheSame=old.getUpdateTime().equals(simpleDateFormat.parse(person.getPeUtime()));
+                                                    } catch (ParseException e) {
+                                                    }
+                                                }
+
+                                                String oldImagePath= com.qdong.communal.library.util.Constants.FACE_IMAGES_PATH+ File.separator+person.getPeId()+".jpg";
+                                                File oldFile=new File( oldImagePath);
+                                                sdCardImageExsit = oldFile.exists();
+
+                                                //如果版本一致，且文件存在，token也存在，则跳出循环
+                                                if(versionTheSame&&sdCardImageExsit&&hasFaceToken){
+                                                    continue;
+                                                }
+                                                else {
+                                                    //先remove文件
+                                                    if(sdCardImageExsit){
+                                                        oldFile.deleteOnExit();
+                                                    }
+
+                                                    if(!TextUtils.isEmpty(old.getFaceToken())){
+                                                        try {
+                                                            mFacePassHandler.unBindGroup(group_name,old.getFaceToken().getBytes());
+                                                        } catch (FacePassException e) {
+                                                            LogUtil.i(TAG,"解绑人脸token失败" );
+                                                        }
+
+                                                    }
+
+
+                                                    indertOrUpdateStudentInfo(person);
+
+                                                }
+
+                                            }
+
+                                        }
+                                    }
+
+                                    return result;
+                                }
+                            })
+
+
+
+                            .observeOn(Schedulers.io())
+                            .subscribe(new Observer<LinkLinkNetInfo>() {
+                                @Override
+                                public void onCompleted() {
+                                    LogUtil.e(TAG,"================getStuInfoList,onCompleted()");
+
+                                    LogUtil.i(TAG,"================getStuInfoList,总耗时:{0}",(System.currentTimeMillis()-timeBefore)+"毫秒");
+
+                                }
+
+                                @Override
+                                public void onError(Throwable e) {
+                                    LogUtil.e(TAG,"================getStuInfoList,onError:"+ e.getMessage());
+                                }
+
+                                @Override
+                                public void onNext(LinkLinkNetInfo result) {
+                                    LogUtil.i(TAG,"================getStuInfoList,Observer,onNext,线程id:{0}",Thread.currentThread().getId());
+                                    LogUtil.i(TAG,"================getStuInfoList,Observer,onNext,result:{0}",result);
+
+                                }
+                            });
+
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        };
+        mSubscriptionSyncStudentData = Observable.interval(1, 500, TimeUnit.SECONDS)
+                .subscribeOn(Schedulers.io())
+                .observeOn(Schedulers.io())//指定观察者的执行线程,最终来到主线程执行
+                .subscribe(observer);//订阅
+
+    }
+
+
+    /**
+     * 插入或者更新数据
+     * @param person
+     */
+    private void indertOrUpdateStudentInfo(PersionImageRespons person ){
+      //下载图片，构造考生数据，入库
+        StudentInfo studentInfo=new StudentInfo();
+        studentInfo.setStudentUUID(person.getPeId()+"");
+        studentInfo.setName(person.getPeName());
+        studentInfo.setGender(person.getPeSex()==1?"男":"女");
+        studentInfo.setImageUrl(person.getPePhotoUrl());
+        studentInfo.setBirthday(person.getPeBirthday());
+        studentInfo.setDeptId("");
+        studentInfo.setDeptName("");
+        studentInfo.setImageSdCardPath("");
+        studentInfo.setFaceToken("");
+        studentInfo.setDesc(person.getPeNo());
+        String ut=person.getPeCtime();
+        if(!TextUtils.isEmpty(person.getPeUtime())){
+            ut=person.getPeUtime();
+        }
+        person.setPeUtime(ut);
+        try {
+            studentInfo.setUpdateTime(simpleDateFormat.parse(person.getPeUtime()).getTime());
+        } catch (Exception e) {
+
+        }
+
+        //下载图片，刷新人脸特征值
+        insertAndDownloadImage(studentInfo);
+    }
+
+    /**
+     * 先下载图片，然后添加到人脸特征值数据
+     * @param stu
+     */
+    private void insertAndDownloadImage(StudentInfo stu){
+        String TAG="syncStudentData";
+
+        if(mFacePassHandler==null){
+            LogUtil.e(TAG,"insertAndDownloadImage,人脸sdk没有初始化，mFacePassHandler==null");
+            return;
+        }
+        if(TextUtils.isEmpty(stu.getImageUrl())){
+            LogUtil.e(TAG,"insertAndDownloadImage,考生图片为空==null");
+            return;
+        }
+
+        //删sd图片 ,考生的照片的绝对路径 /sdcard/Face-Import/123.jpg
+        //删旧的学生信息（如果存在）
+        //再插入一条sqlite
+        //下载一张图片
+        //加载特征值
+
+        //如果旧的存在，先删除
+        String oldImagePath= com.qdong.communal.library.util.Constants.FACE_IMAGES_PATH+ File.separator+stu.getStudentUUID()+".jpg";
+        File oldFile=new File( oldImagePath);
+        oldFile.deleteOnExit();
+
+        // 1、获取导入目录 /sdcard/Face-Import
+        File batchImportDir = FileUtils.getBatchImportDirectory();
+
+        StudentInfo old = DBHelper.getInstance(getApplicationContext()).getStudentInfo(stu.getStudentUUID());
+
+        if(old!=null){
+            SdCardLogUtil.logInSdCard(TAG,"insertAndDownloadImage,================studentInfo!=null");
+
+            stu.setId(old.getId());
+
+            if(!batchImportDir.exists()){
+                batchImportDir.mkdir();
+            }
+        }
+
+        //考生图片地址
+        String url = com.qdong.communal.library.util.Constants.FILE_URL + File.separator+stu.getImageUrl();
+
+        LogUtil.e(TAG,"insertAndDownloadImage,================图片完整路径,url:"+url);
+
+        String path = null;
+        try {
+            path = OkHttpUtil.downloadFile(url, oldImagePath);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        if(!TextUtils.isEmpty(path)){
+
+            LogUtil.e(TAG,"insertAndDownloadImage,================下载成功:"+path);
+
+            boolean isSuccess = false;
+            try {
+                isSuccess = mFacePassHandler.createLocalGroup(group_name);
+            } catch (FacePassException e) {
+                e.printStackTrace();
+            }
+
+
+            stu.setImageDownloadTime(System.currentTimeMillis());
+
+
+            String imagePath= oldImagePath;
+
+            Log.i(TAG,"imagePath:"+imagePath );
+
+            Bitmap bitmap = BitmapFactory.decodeFile(imagePath);
+
+            try {
+                FacePassAddFaceResult result = mFacePassHandler.addFace(bitmap);
+
+                if (result != null) {
+                    if (result.result == 0) {
+                        //toast("add face successfully！");
+                        Log.i(TAG,"add face successfully！,faceToken："+new String(result.faceToken));
+
+                        byte[] faceToken =result.faceToken;
+                        if (faceToken == null || faceToken.length == 0 || TextUtils.isEmpty(group_name)) {
+                            Log.i(TAG,"bindGroup,params error！" );
+
+                        }
+                        try {
+                            boolean b = mFacePassHandler.bindGroup(group_name, faceToken);
+                            String bindGroupResult = b ? "success " : "failed";
+                            Log.i(TAG,"bindGroupResult:  " + bindGroupResult);
+
+                            if(b){
+                                stu.setImageSdCardPath(path);
+                                stu.setFaceToken(new String(faceToken));
+
+                                Log.i(TAG,"===========================================绑定faceToken成功:  " + bindGroupResult);
+
+                                //更新数据
+                                DBHelper.getInstance(getApplicationContext()).saveStudentInfo(stu);
+                            }
+
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                            Log.e(TAG,"bindGroupResult,Exception:  " + e.getMessage());
+                            SdCardLogUtil.logInSdCard(TAG,"bindGroupResult,===============Exception :"+e.getMessage());
+                        }
+
+
+                    } else if (result.result == 1) {
+                        // toast("no face ！");
+                        Log.i(TAG,"add face failed,no face ！" );
+
+                    } else {
+                        Log.i(TAG,"add face failed,quality problem！" );
+
+                    }
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+                Log.i(TAG,"bindGroupResult,FacePassException:"+e.getMessage() );
+                SdCardLogUtil.logInSdCard(TAG,"bindGroupResult,===============Exception :"+e.getMessage());
+
+            }
+
+        }
+        else {
+            LogUtil.e(TAG,"insertAndDownloadImage,================下载图片失败 url:"+url);
+        }
+    }
 
     /* SDK 实例对象 */
     FacePassHandler mFacePassHandler;
@@ -873,12 +1313,12 @@ public class AppLoader extends Application{
     private boolean isLocalGroupExist = false;
 
 
-    private enum FacePassSDKMode {
+    private  enum FacePassSDKMode {
         MODE_ONLINE,
         MODE_OFFLINE
     }
 
-    private enum FacePassCameraType{
+    private  enum FacePassCameraType{
         FACEPASS_SINGLECAM,
         FACEPASS_DUALCAM
     };
@@ -894,7 +1334,7 @@ public class AppLoader extends Application{
     }
 
     private void initFaceHandler() {
-        String TAG="syncData";
+        String TAG="initFaceHandler";
 
         new Thread() {
             @Override
@@ -967,7 +1407,8 @@ public class AppLoader extends Application{
 
                             checkGroup();
 
-                            initFaceFeatrue();
+                            //initFaceFeatrue();
+
                         } catch (FacePassException e) {
                             e.printStackTrace();
                             Log.d(DEBUG_TAG, "FacePassHandler is null");
@@ -1014,7 +1455,7 @@ public class AppLoader extends Application{
     }
 
     private void initFaceFeatrue(){
-        String TAG="syncData";
+        String TAG="initFaceFeatrue";
 
         new Thread(){
             @Override
@@ -1197,5 +1638,117 @@ public class AppLoader extends Application{
 
             }
         }.start();
+    }
+
+    boolean looper=true;
+    private void initConfig(){
+
+        String TAG="initConfig";
+        new Thread() {
+            @Override
+            public void run() {
+                while (looper ) {
+                    while (FacePassHandler.isAvailable()&&looper) {
+
+                        try {
+                            //SysConfig
+                            //String json = Tools.readLocalJson(this, getQDongDir() + "cofig.json");
+
+                            //   String sdCardRoot=Environment.getExternalStorageDirectory().getAbsolutePath();
+                            //
+                            //            String  jsonPath=Environment.getExternalStorageDirectory() + "/"  + "cofig.json";
+//Environment.getExternalStorageDirectory()
+
+                            String  jsonPath=null;
+
+                            File sdRootFile = FileUtils.getSDRootFile();
+                            File file = null;
+                            if (sdRootFile != null && sdRootFile.exists()) {
+
+                                com.qdong.communal.library.util.LogUtil.i(TAG,"jsonPath,===============getExternalStorageDirectory.getAbsolutePath,sdCardRoot:"+sdRootFile.getAbsolutePath());
+
+                                SdCardLogUtil.logInSdCard(TAG,"jsonPath,===============getExternalStorageDirectory.getAbsolutePath,sdCardRoot:"+sdRootFile.getAbsolutePath());
+
+
+                                file = new File(sdRootFile, "config.json");
+                                String configPath=Environment
+                                        .getExternalStorageDirectory().getPath()
+                                         + File.separator
+                                        + "config.json";
+                                com.qdong.communal.library.util.LogUtil.i(TAG,"jsonPath,===============configPath:"+configPath);
+
+                                file = new File( configPath);
+                                if (file.exists()) {
+                                    SdCardLogUtil.logInSdCard(TAG,"jsonPath,===============config.json文件存在,路径:"+file.getAbsolutePath() );
+
+                                    jsonPath=file.getAbsolutePath();
+                                }
+                                else {
+                                    SdCardLogUtil.logInSdCard(TAG,"jsonPath,===============config.json文件不存在" );
+                                    mApi = RetrofitAPIManager.provideClientApi(getApplicationContext());
+                                    looper=false;
+
+                                }
+                            }
+
+                            File jsonFile=new File(jsonPath);
+
+                            com.qdong.communal.library.util.LogUtil.i(TAG,"jsonPath,===============jsonPath:"+jsonPath);
+                            com.qdong.communal.library.util.LogUtil.i(TAG,"jsonPath,===============jsonFile.exsit:"+jsonFile.exists());
+
+                            SdCardLogUtil.logInSdCard(TAG,"jsonPath,===============jsonPath:"+jsonPath);
+                            SdCardLogUtil.logInSdCard(TAG,"jsonPath,===============jsonFile.exsit:"+jsonFile.exists());
+
+
+                            //读取配置文件
+                            String json = Tools.readLocalJson(getApplicationContext(), jsonPath);
+                            if(!TextUtils.isEmpty(json)){
+                                SysConfig config= JsonUtil.fromJson(json,SysConfig.class);
+
+                                SdCardLogUtil.logInSdCard("initConfig","===============加载配置文件,config:"+config);
+
+                                com.qdong.communal.library.util.LogUtil.i(TAG,"===============加载配置文件,config:"+config);
+
+
+                                if(config!=null){
+                                    com.qdong.communal.library.util.Constants.DEBUG_HOST=config.getHost();
+                                    com.qdong.communal.library.util.Constants.PRODUCTION_HOST=config.getHost();
+                                    com.qdong.communal.library.util.Constants.FILE_URL=config.getFileHost();
+
+                                    com.qdong.communal.library.util.Constants.SERVER_URL = com.qdong.communal.library.util.Constants.DEBUG_HOST+com.qdong.communal.library.util.Constants.DEBUG_PORT;
+
+                                    mApi = RetrofitAPIManager.provideClientApi(getApplicationContext());
+
+                                    looper=false;
+
+                                }
+                            }
+                            else {
+
+                                SdCardLogUtil.logInSdCard("initConfig","============没有发现配置文件");
+
+                                com.qdong.communal.library.util.LogUtil.i(TAG,"============没有发现配置文件");
+                                looper=false;
+
+                            }
+                        } catch (Exception e) {
+
+                            SdCardLogUtil.logInSdCard("initConfig","===============加载配置文件,失败:"+e.getMessage());
+
+                            com.qdong.communal.library.util.LogUtil.i(TAG,"===============加载配置文件,失败:"+e.getMessage());
+                        }
+
+                    }
+                }
+            }
+        }.start();
+
+
+
+    }
+
+
+    public FacePassHandler getmFacePassHandler() {
+        return mFacePassHandler;
     }
 }
