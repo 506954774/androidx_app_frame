@@ -549,10 +549,16 @@ public class WsFaceRecognizeActivity extends Activity implements CameraManager.C
                 }
                 long endTime = System.currentTimeMillis(); //结束时间
                 long runTime = endTime - startTime;
-                for (int i = 0; i < detectionResult.faceList.length; ++i) {
-                    Log.i("DEBUG_TAG", "rect[" + i + "] = (" + detectionResult.faceList[i].rect.left + ", " + detectionResult.faceList[i].rect.top + ", " + detectionResult.faceList[i].rect.right + ", " + detectionResult.faceList[i].rect.bottom);
+                try {
+                    if(detectionResult.faceList!=null&&detectionResult.faceList.length>0){
+                        for (int i = 0; i < detectionResult.faceList.length; ++i) {
+                            Log.i("DEBUG_TAG", "rect[" + i + "] = (" + detectionResult.faceList[i].rect.left + ", " + detectionResult.faceList[i].rect.top + ", " + detectionResult.faceList[i].rect.right + ", " + detectionResult.faceList[i].rect.bottom);
+                        }
+                        Log.i("]time", String.format("feedfream %d ms", runTime));
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
                 }
-                Log.i("]time", String.format("feedfream %d ms", runTime));
             }
         }
 
@@ -746,7 +752,8 @@ public class WsFaceRecognizeActivity extends Activity implements CameraManager.C
                         Toast.makeText(getApplicationContext(), "需要开启摄像头网络文件存储权限", Toast.LENGTH_SHORT).show();
                     }
             } else {
-                initFacePassSDK();
+                //initFacePassSDK();
+                initFacePassSDK2();
             }
         }
     }
@@ -933,9 +940,10 @@ public class WsFaceRecognizeActivity extends Activity implements CameraManager.C
             mAndroidHandler.removeCallbacksAndMessages(null);
         }
 
-        if (mFacePassHandler != null) {
+        //不需要在此界面释放，此对象在application里面。每次直接从application里面取
+        /*if (mFacePassHandler != null) {
             mFacePassHandler.release();
-        }
+        }*/
         super.onDestroy();
     }
 
