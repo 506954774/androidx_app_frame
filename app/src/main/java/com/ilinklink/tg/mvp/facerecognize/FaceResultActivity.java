@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
+import android.text.format.DateUtils;
 import android.util.Log;
 import android.view.View;
 
@@ -21,6 +22,7 @@ import com.ilinklink.tg.mvp.stuexamindex.ExamSubjectAdapter;
 import com.ilinklink.tg.mvp.stuexamindex.SpaceItemDecoration;
 import com.ilinklink.tg.mvp.stuexamindex.StudentExamIndexActivity;
 import com.ilinklink.tg.utils.CollectionUtils;
+import com.ilinklink.tg.utils.DateFormatuUtil;
 import com.qdong.communal.library.module.BaseRefreshableListFragment.adapter.BaseQuickAdapter2;
 import com.qdong.communal.library.util.BitmapUtil;
 import com.qdong.communal.library.util.Constants;
@@ -117,6 +119,8 @@ public class FaceResultActivity extends BaseMvpActivity<ActivityFaceresultBindin
         if(mStudentInfo!=null){
             mViewBind.tvStuName.setText("姓名："+mStudentInfo.getName());
             mViewBind.tvStuSn.setText("编号："+mStudentInfo.getDesc());
+
+            mViewBind.tvStuAge.setText("年龄："+ DateFormatuUtil.getAgeByBirthday(mStudentInfo.getBirthday()));
 
             // Constants.FACE_IMAGES_PATH+File.separator+imagesPaths[i]
 

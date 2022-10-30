@@ -3,6 +3,7 @@ package com.ilinklink.tg.utils;
 import android.text.TextUtils;
 
 import java.text.DecimalFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -128,4 +129,37 @@ public class DateFormatuUtil {
         return format.format(num);
         /** Bugfix-修改格式化方式-LHD-20160427-LHD-END */
     }
+
+
+    // 1971-01-01 08:00:00的时间戳
+    private static final long TIME = 31536_000_000L;
+    public static Integer getAge(Long birth) {
+        if (birth == null) {
+            return null;
+        }
+
+        Long now = System.currentTimeMillis();
+        if (birth > now) {
+            return 0;
+        }
+
+        if (birth > 0) {
+            Double age = Math.ceil((now - birth) / TIME);
+            return age.intValue();
+        }
+        return null;
+    }
+
+    private static SimpleDateFormat simpleDateFormat=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//2022-10-27 10:25:45
+
+    public static Integer getAgeByBirthday(String birth) {
+        Long time= null;
+        try {
+            time = simpleDateFormat.parse(birth).getTime();
+        } catch (ParseException e) {
+            return 20;
+        }
+        return getAge(time);
+    }
+
 }
