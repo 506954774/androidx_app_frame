@@ -40,11 +40,13 @@ import android.widget.ToggleButton;
 import com.blankj.utilcode.util.ToastUtils;
 import com.google.mlkit.vision.pose.Pose;
 import com.ilinklink.greendao.ExamInfo;
+import com.ilinklink.greendao.ExamRecord;
 import com.ilinklink.greendao.StudentExam;
 import com.ilinklink.greendao.StudentExamRecord;
 import com.ilinklink.greendao.StudentInfo;
 import com.ilinklink.tg.base.BaseMvpActivity;
 import com.ilinklink.tg.dto.QueryStudentExamRecordDto;
+import com.ilinklink.tg.entity.ExamInfoResponse;
 import com.ilinklink.tg.entity.SubjectExamResult;
 import com.ilinklink.tg.green_dao.DBHelper;
 import com.ilinklink.tg.mvp.BasePresenter;
@@ -141,6 +143,9 @@ public  class BasePoseActivity2 extends BaseMvpActivity<ActivityFuwochengBinding
     //人为点击了结束按钮
     protected boolean mArtificialStoped;
 
+
+    //sqlite里面存储的科目信息
+    private ExamInfoResponse.SubjectsDTO mSubjectsDTO ;
 
     // 设置考试科目
     private void resetSubject() {
@@ -549,11 +554,10 @@ public  class BasePoseActivity2 extends BaseMvpActivity<ActivityFuwochengBinding
 
         String examSetting = ExamSettingUtils.getExamSetting(this, selectedModel);
 
-        if(!TextUtils.isEmpty(examSetting)){
+       /* if(!TextUtils.isEmpty(examSetting)){
             mThreshold=Float.parseFloat(examSetting);
-        }
+        }*/
 
-        LogUtil.i("BasePoseActivity", "mThreshold:" + mThreshold);
 
 
 
@@ -605,6 +609,42 @@ public  class BasePoseActivity2 extends BaseMvpActivity<ActivityFuwochengBinding
 
             mViewBind.tvStuName.setText("考生："+mStudentExamRecord.getStudentName());
 
+            //设置考试难度和倒计时值
+            List<ExamRecord> oldExamRecordList = DBHelper.getInstance(getApplicationContext()).getExamRecordList();
+            if(!CollectionUtils.isNullOrEmpty(oldExamRecordList)){
+                ExamRecord mExamRecord=oldExamRecordList.get(0);
+                if(mExamRecord!=null){
+                    //  //使用预留字段，存储此次考试的科目集合json串
+                    List<ExamInfoResponse.SubjectsDTO> subs=Json.jsonToArrayList(mExamRecord.getReservedColumn(), ExamInfoResponse.SubjectsDTO.class);
+                    if(!CollectionUtils.isNullOrEmpty(subs)){
+
+                        for (int i = 0; i < subs.size(); i++) {
+                            if(selectedModel.equals(subs.get(i).getSuName())){
+                                mSubjectsDTO = subs.get(i);
+                                break;
+                            }
+                        }
+                    }
+                }
+            }
+            if(mSubjectsDTO!=null){
+                mThreshold=1.0f*mSubjectsDTO.getEhsDifficulty();
+                mTimer=mSubjectsDTO.getEhsAssessmentAmount();
+
+                LogUtil.i("BasePoseActivity", "mThreshold:" + mThreshold);
+                LogUtil.i("BasePoseActivity", "mTimer:" + mTimer);
+
+                mViewBind.sbDifficultyCoefficient.setProgress((int) (100*mThreshold/100));
+
+
+                if(mSubjectsDTO.getEhsAssessmentAmount()>0){
+                    mViewBind.tvTime.setText(String.valueOf(mTimer) + "秒");
+                }
+
+
+            }
+
+
         }
 
         setStatus(false);
@@ -620,9 +660,11 @@ public  class BasePoseActivity2 extends BaseMvpActivity<ActivityFuwochengBinding
             mViewBind.tvStatusValue.setText(getString(R.string.not_started));
 
             mViewBind.tvRedoExam.setVisibility(View.GONE);
-            mViewBind.tvStartExam.setVisibility(View.VISIBLE);
+            mViewBind.tvStartExam.setVisibility(View.GONE);
             mViewBind.tvStopExam.setVisibility(View.GONE);
             mViewBind.tvExamCompelated.setVisibility(View.GONE);
+
+            mViewBind.tvStartExam.setVisibility(View.VISIBLE);
         }
         else {
             //训练
@@ -631,8 +673,10 @@ public  class BasePoseActivity2 extends BaseMvpActivity<ActivityFuwochengBinding
 
                 mViewBind.tvRedoExam.setVisibility(View.GONE);
                 mViewBind.tvStartExam.setVisibility(View.GONE);
-                mViewBind.tvStopExam.setVisibility(View.VISIBLE);
+                mViewBind.tvStopExam.setVisibility(View.GONE);
                 mViewBind.tvExamCompelated.setVisibility(View.GONE);
+
+                mViewBind.tvStopExam.setVisibility(View.VISIBLE);
             }
             //考核
             else {
@@ -640,8 +684,10 @@ public  class BasePoseActivity2 extends BaseMvpActivity<ActivityFuwochengBinding
 
                 mViewBind.tvRedoExam.setVisibility(View.GONE);
                 mViewBind.tvStartExam.setVisibility(View.GONE);
-                mViewBind.tvStopExam.setVisibility(View.VISIBLE);
+                mViewBind.tvStopExam.setVisibility(View.GONE);
                 mViewBind.tvExamCompelated.setVisibility(View.GONE);
+
+                mViewBind.tvStopExam.setVisibility(View.VISIBLE);
             }
         }
 
@@ -739,9 +785,20 @@ public  class BasePoseActivity2 extends BaseMvpActivity<ActivityFuwochengBinding
         mViewBind.sbDifficultyCoefficient.setSelected(true);
         mViewBind.sbDifficultyCoefficient.setFocusable(true);
 
+
         if(mStudentExamRecord==null){
             return;
         }
+
+
+
+        mViewBind.tvRedoExam.setVisibility(View.GONE);
+        mViewBind.tvStartExam.setVisibility(View.GONE);
+        mViewBind.tvStopExam.setVisibility(View.GONE);
+        mViewBind.tvExamCompelated.setVisibility(View.GONE);
+
+        mViewBind.tvRedoExam.setVisibility(View.VISIBLE);
+        mViewBind.tvExamCompelated.setVisibility(View.VISIBLE);
 
         QueryStudentExamRecordDto dto=new QueryStudentExamRecordDto();
         dto.setExamRecordId(mStudentExamRecord.getExamRecordId());

@@ -119,6 +119,15 @@ public  class ExamActivity2 extends BasePoseActivity2{
             case R.id.tv_commit_exam_result:
                 ToastUtils.showShort("该功能尚未开启");
                 break;
+            case R.id.tv_redo_exam:
+                startExam();
+                break;
+            case R.id.tv_stop_exam:
+                finish();
+                break;
+            case R.id.tv_exam_compelated:
+                finish();
+                break;
 
 
         }
