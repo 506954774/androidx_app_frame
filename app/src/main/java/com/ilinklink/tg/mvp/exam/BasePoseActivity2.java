@@ -90,7 +90,15 @@ import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action1;
 import rx.schedulers.Schedulers;
 
-
+/**
+ * 训练和考试公用此界面
+ * 训练时，开始后状态显示为“训练中”，倒计时走完之后数据不存储
+ * 考试时，开始后状态显示为“考试中”，考试中途点击结束按钮，数据不存储。正常结束则成绩会存储到本地sqlite数据库
+ * 责任人:  Chuck
+ * 修改人： Chuck
+ * 创建/修改时间: 2022/10/30  16:51
+ * Copyright : 2014-2020深圳令令科技有限公司-版权所有
+ **/
 public  class BasePoseActivity2 extends BaseMvpActivity<ActivityFuwochengBinding> implements View.OnClickListener  ,OnRequestPermissionsResultCallback, OnItemSelectedListener, CompoundButton.OnCheckedChangeListener, ExamContract
         .ExamView {
 
@@ -573,10 +581,21 @@ public  class BasePoseActivity2 extends BaseMvpActivity<ActivityFuwochengBinding
     }
 
     //重置界面
-    private void initView() {
+    protected void initView() {
         mViewBind.setClick(this);
 
         mViewBind.ivSetting.setVisibility(View.INVISIBLE);
+
+        mViewBind.tvExamSucessedCount.setText(String.valueOf(0));
+        mViewBind.tvCountTotal.setText(String.valueOf(0));
+        mViewBind.tvExamFailedCount.setText(String.valueOf(0));
+
+        if(mTimer>0){
+            mViewBind.tvTime.setText(String.valueOf(mTimer) + "秒");
+        }
+        else {
+            mViewBind.tvTime.setText( "不限");
+        }
 
         mViewBind.sbDifficultyCoefficient.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
@@ -747,15 +766,8 @@ public  class BasePoseActivity2 extends BaseMvpActivity<ActivityFuwochengBinding
                         mViewBind.progressbarHint.setProgress((int) (100 * aLong / mTimer));
                         mViewBind.tvStartExam.setVisibility(View.INVISIBLE);
                     } else {
-                        mViewBind.tvStartExam.setVisibility(View.VISIBLE);
 
-                        mIsExamming=false;
-                        mIsCountDown=false;
-                        mViewBind.tvTime.setText(String.valueOf(0) + "秒");
-                        mViewBind.progressbarHint.setProgress(100);
-
-                        /**取消此任务**/
-                        RxHelper.getInstance(BasePoseActivity2.this).unsubscribe(mSubscriptionCount);
+                        stopCount();
 
                         onExamFinished();
                     }
@@ -773,6 +785,22 @@ public  class BasePoseActivity2 extends BaseMvpActivity<ActivityFuwochengBinding
 
     }
 
+    protected void stopCount(){
+        mViewBind.tvStartExam.setVisibility(View.VISIBLE);
+
+        mViewBind.sbDifficultyCoefficient.setClickable(true);
+        mViewBind.sbDifficultyCoefficient.setEnabled(true);
+        mViewBind.sbDifficultyCoefficient.setSelected(true);
+        mViewBind.sbDifficultyCoefficient.setFocusable(true);
+
+        mIsExamming=false;
+        mIsCountDown=false;
+        mViewBind.tvTime.setText(String.valueOf(0) + "秒");
+        mViewBind.progressbarHint.setProgress(100);
+
+        /**取消此任务**/
+        RxHelper.getInstance(BasePoseActivity2.this).unsubscribe(mSubscriptionCount);
+    }
 
     private void onExamFinished(){
         Log.i(TAG,"onExamFinished,===============" );
@@ -817,8 +845,13 @@ public  class BasePoseActivity2 extends BaseMvpActivity<ActivityFuwochengBinding
 
         Integer count=Integer.parseInt(mViewBind.tvExamSucessedCount.getText().toString());
         int pass=0;
+        int passMark=10;
+        //根据后台返回的数据，判断此次是否合格
+        if(mSubjectsDTO!=null&&mSubjectsDTO.getEhsQualifiedNum()>0){
+            passMark=mSubjectsDTO.getEhsQualifiedNum();
+        }
         if(count!=null){
-            if(count.compareTo(new Integer(10))>0){
+            if(count.compareTo(new Integer(passMark))>=0){
                 pass=1;
             }
         }

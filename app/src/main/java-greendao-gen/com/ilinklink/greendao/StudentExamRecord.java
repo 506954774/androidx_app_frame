@@ -39,11 +39,11 @@ public class StudentExamRecord {
      */
     private String desc;
     /**
-     * 预留字段
+     * 预留字段 实际值：学习的编号
      */
     private String reservedColumn;
     /**
-     * 预留字段2
+     * 预留字段2 实际值：此数据是否已经上传到服务器
      */
     private String reservedColumn2;
 

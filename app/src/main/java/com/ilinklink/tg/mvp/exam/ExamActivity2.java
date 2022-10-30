@@ -82,7 +82,7 @@ public  class ExamActivity2 extends BasePoseActivity2{
              super.startExam();
 
 
-            mViewBind.tvExamStatus.setText(getString(R.string.exam_status_examming));
+            //mViewBind.tvExamStatus.setText(getString(R.string.exam_status_examming));
 
 
             mIsExamming=true;
@@ -123,7 +123,8 @@ public  class ExamActivity2 extends BasePoseActivity2{
                 startExam();
                 break;
             case R.id.tv_stop_exam:
-                finish();
+                stopCount();
+                initView();
                 break;
             case R.id.tv_exam_compelated:
                 finish();
