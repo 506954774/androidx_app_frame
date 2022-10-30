@@ -265,6 +265,9 @@ public class StudentExamIndexActivity extends BaseMvpActivity<ActivityStudentExa
                     // TODO: 2022/10/21 此处应该加字段，最好不用用desc作为学生编号
                     studentExamRecord.setReservedColumn(mStudentInfo.getDesc());
 
+                    // 考试的科目信息
+                    studentExamRecord.setDesc(mExamRecord.getReservedColumn());
+
                     intent.putExtra(BasePoseActivity2.EXAM_DATA,Json.toJson(studentExamRecord));
 
 

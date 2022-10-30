@@ -108,10 +108,10 @@ public  class BasePoseActivity2 extends BaseMvpActivity<ActivityFuwochengBinding
     public static final String EXAM_UUID = "EXAM_UUID";
     public static final String EXAM_NAME = "EXAM_NAME";
 
-    private static final String POSE_DETECTION_1 = "仰卧起坐计数";
-    private static final String POSE_DETECTION_2 = "俯卧撑";
-    private static final String POSE_DETECTION_3 = "单杠引体向上";
-    private static final String POSE_DETECTION_4 = "双杠臂屈伸";
+    public static final String POSE_DETECTION_1 = "仰卧起坐计数";
+    public static final String POSE_DETECTION_2 = "俯卧撑";
+    public static final String POSE_DETECTION_3 = "单杠引体向上";
+    public static final String POSE_DETECTION_4 = "双杠臂屈伸";
     private static final String TAG = "BasePoseActivity2";
     private static final int PERMISSION_REQUESTS = 1;
     protected static final int GO_TO_SETTING = 110;

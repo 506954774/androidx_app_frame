@@ -490,4 +490,36 @@ public class DBHelper {
         }
         return null;
     }
+
+
+    /**
+     * 查询针对某场考试的记录,尚未上传的本地数据
+     * @return
+     */
+    public List<StudentExamRecord> getExamRecordNotUploaded(String examRecordId) {
+        QueryBuilder<StudentExamRecord> mqBuilder = mStudentExamRecordDao.queryBuilder();
+        List<StudentExamRecord> list = mqBuilder
+                .where(StudentExamRecordDao.Properties.ExamRecordId.eq(examRecordId),
+                        StudentExamRecordDao.Properties.ReservedColumn2.isNull()
+                )
+                .orderDesc(StudentExamRecordDao.Properties.Id)
+                .list();
+        return list;
+    }
+
+
+    /**
+     * 查询考试信息
+     * @return
+     */
+    public ExamRecord getExamRecordById(String examUUID) {
+        QueryBuilder<ExamRecord> mqBuilder = mExamRecordDao.queryBuilder();
+        List<ExamRecord> list = mqBuilder.where(ExamRecordDao.Properties.ExamUUID.eq(examUUID))
+                .orderDesc(ExamRecordDao.Properties.Id)
+                .list();
+        if (list != null && list.size() > 0) {
+            return list.get(0);
+        }
+        return null;
+    }
 }

@@ -24,6 +24,7 @@ import com.blankj.utilcode.util.ToastUtils;
 import com.ilinklink.greendao.StudentExam;
 import com.ilinklink.greendao.StudentInfo;
 import com.ilinklink.tg.green_dao.DBHelper;
+import com.ilinklink.tg.moudle.exam.ExamResultUploadHanlde;
 import com.ilinklink.tg.mvp.BasePresenter;
 import com.ilinklink.tg.mvp.exam.setting.ExamSettingActivity;
 import com.ilinklink.tg.mvp.facerecognize.FaceRecognizeResult;
@@ -91,6 +92,7 @@ public  class ExamActivity2 extends BasePoseActivity2{
 
 
 
+
     }
 
     @Override
@@ -104,6 +106,13 @@ public  class ExamActivity2 extends BasePoseActivity2{
             case R.id.iv_setting:
                 ToastUtils.showShort("该功能尚未开启");
 
+                ExamResultUploadHanlde.ResultCallback callback=new ExamResultUploadHanlde.ResultCallback() {
+                    @Override
+                    public void onResult(boolean sussesed, String msg) {
+
+                    }
+                };
+                ExamResultUploadHanlde.getInstance().uploadExamResult(this,"1",callback);
                 break;
             case R.id.tv_go_2_select_subject:
                 startActivity(new Intent( this, SelectSubjectActivity.class));

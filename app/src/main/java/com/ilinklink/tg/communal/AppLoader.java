@@ -841,7 +841,6 @@ public class AppLoader extends Application{
 
                                     if(  CollectionUtils.isNullOrEmpty(examInfoResponses )){
 
-                                        DBHelper.getInstance(getApplicationContext()).clearAllExamRecordList();
 
                                         result.setCode(LinkLinkNetInfo.FAIL_CODE);
                                         result.setMessage("暂无考试信息");
@@ -865,12 +864,13 @@ public class AppLoader extends Application{
                                         examRecord.setReservedColumn(json);
 
                                         if(!CollectionUtils.isNullOrEmpty(examInfoResponse.getPersons())){
-                                            ArrayList<String> stuIds=new ArrayList<>();
-                                            for (ExamInfoResponse.PersonsDTO dto:examInfoResponse.getPersons()){
-                                                stuIds.add(dto.getEhpId()+"");
+                                           ArrayList<String> stuIds=new ArrayList<>();
+                                           for (ExamInfoResponse.PersonsDTO dto:examInfoResponse.getPersons()){
+                                                stuIds.add(dto.getEhpId()+"-"+dto.getPeId());
                                             }
                                             //使用预留字段2来存储此次参加考试的学生
                                             examRecord.setReservedColumn2(Joiner.on(",").join(stuIds));
+
                                         }
 
                                         /**
@@ -889,8 +889,7 @@ public class AppLoader extends Application{
 
                                            //对比id，不一致则删除
                                            if(String.valueOf(examInfoResponse.getExId()).equals(oldExamInfo.getExamUUID())){
-                                               LogUtil.i(TAG,"对比id，不一致则删除：" +examRecord);
-                                               DBHelper.getInstance(getApplicationContext()).clearAllExamRecordList();
+                                               LogUtil.i(TAG,"对比id，不一致");
                                                DBHelper.getInstance(getApplicationContext()).saveExamRecord(examRecord);
                                            }
                                            //id一致则更新

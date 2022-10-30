@@ -27,11 +27,11 @@ public class ExamRecord {
      */
     private String desc;
     /**
-     * 预留字段
+     * 预留字段 实际存储 考试科目json串
      */
     private String reservedColumn;
     /**
-     * 预留字段2
+     * 预留字段2 实际存储此次考试的考生关联，格式：  "1-2,2-3"  ehpId-peId，ehpId-peId
      */
     private String reservedColumn2;
     /**

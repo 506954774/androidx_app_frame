@@ -35,11 +35,11 @@ public class StudentExamRecord {
      */
     private String subResultJson;
     /**
-     * 描述
+     * 描述 实际存考试的科目id信息
      */
     private String desc;
     /**
-     * 预留字段 实际值：学习的编号
+     * 预留字段 实际值：学生的编号
      */
     private String reservedColumn;
     /**

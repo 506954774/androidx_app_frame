@@ -282,6 +282,11 @@ public interface LinkLinkApi {
     Observable<LinkLinkNetInfo> getStuInfoList();
 
 
+    //http://112.74.87.88:10089/mgr-backend/app/examData/upload
+    //提交考试成绩
+    @POST(Constants.COURSE_SERVICE + "examData/upload222")
+    Observable<LinkLinkNetInfo> uploadExamResult(@Body String jsonArray);
+
 
     /********************************************************************************
      * 新兵体态识别系统  end
