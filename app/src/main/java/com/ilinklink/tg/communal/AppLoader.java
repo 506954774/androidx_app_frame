@@ -1031,7 +1031,7 @@ public class AppLoader extends Application{
                                         for( PersionImageRespons person :persionImageRespons){
 
                                             if(person.getPeId()<13){
-                                                continue;
+                                                //continue;
                                             }
 
                                             StudentInfo old = DBHelper.getInstance(getApplicationContext()).getStudentInfo(person.getPeId()+"");
@@ -1188,7 +1188,10 @@ public class AppLoader extends Application{
         //如果旧的存在，先删除
         String oldImagePath= com.qdong.communal.library.util.Constants.FACE_IMAGES_PATH+ File.separator+stu.getStudentUUID()+".jpg";
         File oldFile=new File( oldImagePath);
-        oldFile.deleteOnExit();
+        LogUtil.e(TAG,"insertAndDownloadImage,文件是否存在？"+oldFile.exists());
+        if(oldFile.exists()){
+            oldFile.delete();
+        }
 
         // 1、获取导入目录 /sdcard/Face-Import
         File batchImportDir = FileUtils.getBatchImportDirectory();

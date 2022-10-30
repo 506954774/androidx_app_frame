@@ -130,7 +130,7 @@ public class OkHttpUtil {
 				log(tag,"!file.getParentFile().exists(),准备mkdirs");
 				file.getParentFile().mkdirs();
 			}
-			FileOutputStream os = new FileOutputStream(file,true);
+			FileOutputStream os = new FileOutputStream(file);
 			long fileSize=body.contentLength();
 
 			log(tag,"fileSize:"+fileSize);
