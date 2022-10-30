@@ -957,12 +957,11 @@ public class AppLoader extends Application{
      * @date 创建时间:2022/10/26
      * @author Chuck
      **/
-
+    long timeBefore=System.currentTimeMillis();
     protected void syncStudentData() {
 
         String TAG="syncStudentData";
 
-        long timeBefore=System.currentTimeMillis();
 
         Action1<? super Long> observer = new Action1<Long>() {
             @Override
@@ -999,6 +998,8 @@ public class AppLoader extends Application{
                                         LogUtil.i(TAG,"mFacePassHandler==null" );
                                         return null;
                                     }
+
+                                    timeBefore=System.currentTimeMillis();
 
                                     LogUtil.i(TAG,"================getStuInfoList,call,线程id:{0}",Thread.currentThread().getId());
 
@@ -1050,7 +1051,7 @@ public class AppLoader extends Application{
                                                 else {
                                                     try {
                                                         LogUtil.i(TAG,"person.getPeUtime():"+person.getPeUtime());
-                                                        versionTheSame=old.getUpdateTime().equals(simpleDateFormat.parse(person.getPeUtime()));
+                                                        versionTheSame=old.getUpdateTime().equals(simpleDateFormat.parse(person.getPeUtime()).getTime());
                                                     } catch (ParseException e) {
                                                     }
                                                 }
@@ -1058,6 +1059,8 @@ public class AppLoader extends Application{
                                                 String oldImagePath= com.qdong.communal.library.util.Constants.FACE_IMAGES_PATH+ File.separator+person.getPeId()+".jpg";
                                                 File oldFile=new File( oldImagePath);
                                                 sdCardImageExsit = oldFile.exists();
+
+                                                LogUtil.i(TAG,"================versionTheSame:{0},sdCardImageExsit:{1},hasFaceToken:{2}",versionTheSame,sdCardImageExsit,hasFaceToken);
 
                                                 //如果版本一致，且文件存在，token也存在，则跳出循环
                                                 if(versionTheSame&&sdCardImageExsit&&hasFaceToken){
@@ -1123,7 +1126,7 @@ public class AppLoader extends Application{
                 }
             }
         };
-        mSubscriptionSyncStudentData = Observable.interval(1, 500, TimeUnit.SECONDS)
+        mSubscriptionSyncStudentData = Observable.interval(1, 300, TimeUnit.SECONDS)
                 .subscribeOn(Schedulers.io())
                 .observeOn(Schedulers.io())//指定观察者的执行线程,最终来到主线程执行
                 .subscribe(observer);//订阅
@@ -1136,7 +1139,10 @@ public class AppLoader extends Application{
      * @param person
      */
     private void indertOrUpdateStudentInfo(PersionImageRespons person ){
-      //下载图片，构造考生数据，入库
+        String TAG="syncStudentData";
+
+
+        //下载图片，构造考生数据，入库
         StudentInfo studentInfo=new StudentInfo();
         studentInfo.setStudentUUID(person.getPeId()+"");
         studentInfo.setName(person.getPeName());
@@ -1155,6 +1161,7 @@ public class AppLoader extends Application{
         person.setPeUtime(ut);
         try {
             studentInfo.setUpdateTime(simpleDateFormat.parse(person.getPeUtime()).getTime());
+            LogUtil.i(TAG,"================更新时间:{0},{1}",studentInfo.getStudentUUID(),person.getPeUtime());
         } catch (Exception e) {
 
         }
