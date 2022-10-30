@@ -888,7 +888,7 @@ public class AppLoader extends Application{
                                             ExamRecord oldExamInfo = oldExamRecordList.get(0);
 
                                            //对比id，不一致则删除
-                                           if(String.valueOf(examInfoResponse.getExId()).equals(oldExamInfo.getExamUUID())){
+                                           if(!String.valueOf(examInfoResponse.getExId()).equals(oldExamInfo.getExamUUID())){
                                                LogUtil.i(TAG,"对比id，不一致");
                                                DBHelper.getInstance(getApplicationContext()).saveExamRecord(examRecord);
                                            }
