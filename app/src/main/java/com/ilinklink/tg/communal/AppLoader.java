@@ -826,20 +826,20 @@ public class AppLoader extends Application{
                                     LinkLinkNetInfo result=new LinkLinkNetInfo();
                                     result.setCode(LinkLinkNetInfo.SUCESS_CODE);
 
-                                    ArrayList<ExamInfoResponse> examInfoResponses =null;
+                                    ExamInfoResponse response =null;
 
                                     try {
-                                        examInfoResponses = Json.toList(linkLinkNetInfo.getData(), ExamInfoResponse.class);
-                                        LogUtil.i(TAG,"================examInfoResponses:{0}",examInfoResponses);
+                                        response = Json.fromJson(linkLinkNetInfo.getData(), ExamInfoResponse.class);
+                                        LogUtil.i(TAG,"================examInfoResponses:{0}",response);
 
-                                    } catch (JSONException e) {
+                                    } catch (Exception e) {
 
                                     }
 
-                                    LogUtil.i(TAG,"examInfoResponses==null?:"+examInfoResponses==null);
+                                    LogUtil.i(TAG,"response==null?:"+response==null);
 
 
-                                    if(  CollectionUtils.isNullOrEmpty(examInfoResponses )){
+                                    if(  response==null){
 
 
                                         result.setCode(LinkLinkNetInfo.FAIL_CODE);
@@ -851,7 +851,7 @@ public class AppLoader extends Application{
                                     else {
 
                                         //考试信息入库
-                                        ExamInfoResponse examInfoResponse = examInfoResponses.get(0);
+                                        ExamInfoResponse examInfoResponse = response;
 
                                         ExamRecord examRecord=new ExamRecord();
                                         examRecord.setExamRecordId(String.valueOf(examInfoResponse.getExId()));
