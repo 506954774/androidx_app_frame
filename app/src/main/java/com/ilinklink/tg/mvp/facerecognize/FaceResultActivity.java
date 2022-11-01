@@ -119,6 +119,7 @@ public class FaceResultActivity extends BaseMvpActivity<ActivityFaceresultBindin
         if(mStudentInfo!=null){
             mViewBind.tvStuName.setText("姓名："+mStudentInfo.getName());
             mViewBind.tvStuSn.setText("编号："+mStudentInfo.getDesc());
+            mViewBind.tvStuDept.setText("机构："+mStudentInfo.getDeptName());
 
             mViewBind.tvStuAge.setText("年龄："+ DateFormatuUtil.getAgeByBirthday(mStudentInfo.getBirthday()));
 

@@ -18,6 +18,7 @@ package com.ilinklink.tg.mvp.exam;
 
 import android.content.Intent;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 
 import com.blankj.utilcode.util.ToastUtils;
@@ -106,13 +107,21 @@ public  class ExamActivity2 extends BasePoseActivity2{
             case R.id.iv_setting:
                 ToastUtils.showShort("该功能尚未开启");
 
+                //上传考试结果的回调，将在主线程执行
                 ExamResultUploadHanlde.ResultCallback callback=new ExamResultUploadHanlde.ResultCallback() {
+                    /**
+                     * 结果回调
+                     * @param sussesed true成功  false失败
+                     * @param msg 失败原因
+                     */
                     @Override
                     public void onResult(boolean sussesed, String msg) {
+                        Log.i("uploadExamResult","界面收到回调,===============sussesed: " +sussesed+",msg:"+msg);
 
                     }
                 };
-                ExamResultUploadHanlde.getInstance().uploadExamResult(this,"1",callback);
+                //第一个参数上下文，第二个参数examRecordId，第三个参数回调接口
+                ExamResultUploadHanlde.getInstance().uploadExamResult(this,mStudentExamRecord.getExamRecordId(),callback);
                 break;
             case R.id.tv_go_2_select_subject:
                 startActivity(new Intent( this, SelectSubjectActivity.class));

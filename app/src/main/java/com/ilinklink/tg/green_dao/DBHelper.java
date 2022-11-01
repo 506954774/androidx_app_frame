@@ -21,6 +21,7 @@ import com.ilinklink.greendao.WifiModel;
 import com.ilinklink.greendao.WifiModelDao;
 import com.ilinklink.tg.communal.AppLoader;
 import com.ilinklink.tg.dto.QueryStudentExamRecordDto;
+import com.ilinklink.tg.utils.CollectionUtils;
 
 import java.util.List;
 
@@ -463,6 +464,18 @@ public class DBHelper {
      * @return
      */
     public void saveStudentExamRecord(StudentExamRecord dto) {
+
+        QueryBuilder<StudentExamRecord> mqBuilder = mStudentExamRecordDao.queryBuilder();
+        List<StudentExamRecord> list = mqBuilder
+                .where(StudentExamRecordDao.Properties.ExamRecordId.eq(dto.getExamRecordId())
+                        ,StudentExamRecordDao.Properties.StudentUUID.eq(dto.getStudentUUID())
+                )
+                .orderDesc(StudentExamRecordDao.Properties.Id)
+                .list();
+        //针对一个考试，每个学生，永远只存一条数据
+        if(!CollectionUtils.isNullOrEmpty(list)){
+            dto.setId(list.get(0).getId());
+        }
         mStudentExamRecordDao.insertOrReplace(dto);
     }
 
@@ -521,5 +534,27 @@ public class DBHelper {
             return list.get(0);
         }
         return null;
+    }
+
+    /**
+     * 修改某个考试记录的上传标识
+     * @return
+     */
+    public boolean changeExamRecordUploadedStatus(StudentExamRecord qo) {
+        QueryBuilder<StudentExamRecord> mqBuilder = mStudentExamRecordDao.queryBuilder();
+        List<StudentExamRecord> list = mqBuilder
+                .where(StudentExamRecordDao.Properties.StudentExamRecordId.eq(qo.getStudentExamRecordId())
+                )
+                .orderDesc(StudentExamRecordDao.Properties.Id)
+                .list();
+
+        if(!CollectionUtils.isNullOrEmpty(list)){
+            StudentExamRecord studentExamRecord = list.get(0);
+            studentExamRecord.setReservedColumn2(System.currentTimeMillis()+"");
+            mStudentExamRecordDao.insertOrReplace(studentExamRecord);
+            return true;
+        }
+
+        return false;
     }
 }

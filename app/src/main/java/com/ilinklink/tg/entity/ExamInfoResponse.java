@@ -126,16 +126,16 @@ public class ExamInfoResponse implements Serializable {
     }
 
     public static class PersonsDTO implements Serializable{
-        private Object peId;
+        private int peId;
         private int ehpId;
-        private Object peName;
-        private Object peNo;
+        private String peName;
+        private String peNo;
 
-        public Object getPeId() {
+        public int getPeId() {
             return peId;
         }
 
-        public void setPeId(Object peId) {
+        public void setPeId(int peId) {
             this.peId = peId;
         }
 
@@ -147,19 +147,19 @@ public class ExamInfoResponse implements Serializable {
             this.ehpId = ehpId;
         }
 
-        public Object getPeName() {
+        public String getPeName() {
             return peName;
         }
 
-        public void setPeName(Object peName) {
+        public void setPeName(String peName) {
             this.peName = peName;
         }
 
-        public Object getPeNo() {
+        public String getPeNo() {
             return peNo;
         }
 
-        public void setPeNo(Object peNo) {
+        public void setPeNo(String peNo) {
             this.peNo = peNo;
         }
     }

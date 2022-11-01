@@ -14,6 +14,7 @@ public class PersionImageRespons implements Serializable {
     private int peId;
     private String orgId;
     private String peName;
+    private String orgName;
     private int peSex;
     private String peBirthday;
     private String peNo;
@@ -111,12 +112,21 @@ public class PersionImageRespons implements Serializable {
         this.peUtime = peUtime;
     }
 
+    public String getOrgName() {
+        return orgName;
+    }
+
+    public void setOrgName(String orgName) {
+        this.orgName = orgName;
+    }
+
     @Override
     public String toString() {
         return "PersionImageRespons{" +
                 "peId=" + peId +
                 ", orgId='" + orgId + '\'' +
                 ", peName='" + peName + '\'' +
+                ", orgName='" + orgName + '\'' +
                 ", peSex=" + peSex +
                 ", peBirthday='" + peBirthday + '\'' +
                 ", peNo='" + peNo + '\'' +

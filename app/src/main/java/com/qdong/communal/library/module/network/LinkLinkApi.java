@@ -1,8 +1,10 @@
 package com.qdong.communal.library.module.network;
 
+import com.ilinklink.tg.entity.ExamResultUploadQo;
 import com.ilinklink.tg.entity.ZtsbAuthResponse;
 import com.qdong.communal.library.util.Constants;
 
+import java.util.ArrayList;
 import java.util.Map;
 
 import okhttp3.MultipartBody;
@@ -10,6 +12,7 @@ import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.Field;
 import retrofit2.http.FieldMap;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
@@ -284,8 +287,11 @@ public interface LinkLinkApi {
 
     //http://112.74.87.88:10089/mgr-backend/app/examData/upload
     //提交考试成绩
-    @POST(Constants.COURSE_SERVICE + "examData/upload222")
+    @POST(Constants.ILINK_APP_SERVICE + "examData/upload")
     Observable<LinkLinkNetInfo> uploadExamResult(@Body String jsonArray);
+
+    @POST(Constants.ILINK_APP_SERVICE + "examData/upload")
+    Observable<LinkLinkNetInfo> uploadExamResult2(@Field("qos[]")  ArrayList<ExamResultUploadQo> qos   );
 
 
     /********************************************************************************

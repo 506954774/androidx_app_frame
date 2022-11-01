@@ -584,7 +584,7 @@ public  class BasePoseActivity2 extends BaseMvpActivity<ActivityFuwochengBinding
     protected void initView() {
         mViewBind.setClick(this);
 
-        mViewBind.ivSetting.setVisibility(View.INVISIBLE);
+        mViewBind.ivSetting.setVisibility(View.VISIBLE);
 
         mViewBind.tvExamSucessedCount.setText(String.valueOf(0));
         mViewBind.tvCountTotal.setText(String.valueOf(0));
@@ -834,7 +834,7 @@ public  class BasePoseActivity2 extends BaseMvpActivity<ActivityFuwochengBinding
         List<StudentExamRecord> studentRecord = DBHelper.getInstance(this).getStudentRecord(dto);
 
         if(!CollectionUtils.isNullOrEmpty(studentRecord)){
-            mStudentExamRecord = studentRecord.get(studentRecord.size()-1);
+            mStudentExamRecord = studentRecord.get(0);
         }
 
 

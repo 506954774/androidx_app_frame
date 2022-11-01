@@ -52,6 +52,7 @@ public class ExamResultUploadHanlde {
     public void uploadExamResult(Activity act,String examRecordId,ResultCallback callback){
 
         String TAG="uploadExamResult";
+        LogUtil.i(TAG,"examRecordId:"+examRecordId );
 
         List<StudentExamRecord> examInfoList = DBHelper.getInstance(act).getExamRecordNotUploaded(examRecordId);
         if(CollectionUtils.isNullOrEmpty(examInfoList)){
@@ -161,27 +162,40 @@ public class ExamResultUploadHanlde {
 
         LogUtil.i(TAG,"准备调用分数上传接口:"+jsonArray );
 
-
-        mApi.uploadExamResult(jsonArray)
+        //ExamResultUploadQo[] objects = (ExamResultUploadQo[]) qos.toArray();
+        mApi.uploadExamResult2(qos)
+        //mApi.uploadExamResult(jsonArray)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<LinkLinkNetInfo>() {
                     @Override
                     public void onCompleted() {
+                        Log.i(TAG,"onCompleted,=============== " );
 
                     }
 
                     @Override
                     public void onError(Throwable e) {
-                      if(callback!=null){
+                        Log.i(TAG,"onError,=============== " +e.getMessage());
+
+                        if(callback!=null){
                           callback.onResult(false,e.getMessage());
                       }
                     }
 
                     @Override
                     public void onNext(LinkLinkNetInfo linkLinkNetInfo) {
+                        Log.i(TAG,"onError,=============== " +linkLinkNetInfo);
+
                         if(callback!=null){
                             if(linkLinkNetInfo.isSuccess()){
+
+                                //遍历数据，把数据给改为已上传到服务器
+                                for (StudentExamRecord record:examInfoList){
+                                    boolean changed = DBHelper.getInstance(act).changeExamRecordUploadedStatus(record);
+                                    Log.i(TAG,"修改本地考试记录的上传标识,===============changed: " +changed);
+                                }
+
                                 callback.onResult(true,null);
                             }
                             else {

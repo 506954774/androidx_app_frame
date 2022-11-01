@@ -117,7 +117,7 @@ public class StudentExamIndexActivity extends BaseMvpActivity<ActivityStudentExa
             return;
         }
         else {
-            mExamRecord=examRecordList.get(examRecordList.size()-1);
+            mExamRecord=examRecordList.get(0);
         }
 
 
@@ -160,7 +160,7 @@ public class StudentExamIndexActivity extends BaseMvpActivity<ActivityStudentExa
 
                 if(!CollectionUtils.isNullOrEmpty(studentRecord)){
 
-                    StudentExamRecord studentExamRecord = studentRecord.get(studentRecord.size()-1);
+                    StudentExamRecord studentExamRecord = studentRecord.get(0);
 
                     if(studentExamRecord!=null){
                         SubjectExamResult result= Json.fromJson(studentExamRecord.getSubResultJson(),SubjectExamResult.class);
@@ -254,7 +254,7 @@ public class StudentExamIndexActivity extends BaseMvpActivity<ActivityStudentExa
 
                     StudentExamRecord studentExamRecord=new StudentExamRecord();
 
-                    studentExamRecord.setStudentExamRecordId(UUID.randomUUID().toString().replace("-",""));
+                    studentExamRecord.setStudentExamRecordId(mExamRecord.getExamUUID()+"_"+mStudentInfo.getStudentUUID());
                     studentExamRecord.setExamRecordId(mExamRecord.getExamRecordId());
 
                     SimpleDateFormat simpleDateFormat=new SimpleDateFormat("yyyy-MM-dd HH:mm");

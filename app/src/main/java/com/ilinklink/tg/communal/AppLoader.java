@@ -1149,7 +1149,7 @@ public class AppLoader extends Application{
         studentInfo.setImageUrl(person.getPePhotoUrl());
         studentInfo.setBirthday(person.getPeBirthday());
         studentInfo.setDeptId("");
-        studentInfo.setDeptName("");
+        studentInfo.setDeptName(person.getOrgName());
         studentInfo.setImageSdCardPath("");
         studentInfo.setFaceToken("");
         studentInfo.setDesc(person.getPeNo());
