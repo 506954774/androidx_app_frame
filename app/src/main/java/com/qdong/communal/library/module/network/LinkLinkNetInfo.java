@@ -51,7 +51,7 @@ public class LinkLinkNetInfo implements Serializable {
         }
         return SUCESS_CODE.equals(errorCode);*/
         //return code==0;
-        return SUCESS_CODE.equals(errorCode);
+        return SUCESS_CODE.equals(code);
     }
 
 

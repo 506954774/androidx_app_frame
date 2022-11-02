@@ -584,7 +584,7 @@ public  class BasePoseActivity2 extends BaseMvpActivity<ActivityFuwochengBinding
     protected void initView() {
         mViewBind.setClick(this);
 
-        mViewBind.ivSetting.setVisibility(View.VISIBLE);
+        mViewBind.ivSetting.setVisibility(View.INVISIBLE);
 
         mViewBind.tvExamSucessedCount.setText(String.valueOf(0));
         mViewBind.tvCountTotal.setText(String.valueOf(0));
@@ -885,6 +885,7 @@ public  class BasePoseActivity2 extends BaseMvpActivity<ActivityFuwochengBinding
 
         }
 
+        mStudentExamRecord.setReservedColumn2(null);
         mStudentExamRecord.setSubResultJson(Json.toJson(result));
 
         Log.i(TAG,"onExamFinished,===============准备存入此次考试成绩："+ mStudentExamRecord);

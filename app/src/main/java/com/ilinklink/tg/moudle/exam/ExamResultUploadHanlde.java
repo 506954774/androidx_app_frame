@@ -21,6 +21,7 @@ import com.qdong.communal.library.module.network.RetrofitAPIManager;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import rx.Observer;
 import rx.android.schedulers.AndroidSchedulers;
@@ -163,7 +164,9 @@ public class ExamResultUploadHanlde {
         LogUtil.i(TAG,"准备调用分数上传接口:"+jsonArray );
 
         //ExamResultUploadQo[] objects = (ExamResultUploadQo[]) qos.toArray();
-        mApi.uploadExamResult2(qos)
+        Map<String, Object> qoMap=new HashMap<>();
+        qoMap.put("params",qos);
+        mApi.uploadExamResult2(qoMap)
         //mApi.uploadExamResult(jsonArray)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -185,7 +188,7 @@ public class ExamResultUploadHanlde {
 
                     @Override
                     public void onNext(LinkLinkNetInfo linkLinkNetInfo) {
-                        Log.i(TAG,"onError,=============== " +linkLinkNetInfo);
+                        Log.i(TAG,"onNext,=============== " +linkLinkNetInfo);
 
                         if(callback!=null){
                             if(linkLinkNetInfo.isSuccess()){

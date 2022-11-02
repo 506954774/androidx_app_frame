@@ -475,6 +475,7 @@ public class DBHelper {
         //针对一个考试，每个学生，永远只存一条数据
         if(!CollectionUtils.isNullOrEmpty(list)){
             dto.setId(list.get(0).getId());
+            dto.setReservedColumn2(null);
         }
         mStudentExamRecordDao.insertOrReplace(dto);
     }

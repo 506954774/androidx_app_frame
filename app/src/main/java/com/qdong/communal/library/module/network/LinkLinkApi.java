@@ -291,7 +291,7 @@ public interface LinkLinkApi {
     Observable<LinkLinkNetInfo> uploadExamResult(@Body String jsonArray);
 
     @POST(Constants.ILINK_APP_SERVICE + "examData/upload")
-    Observable<LinkLinkNetInfo> uploadExamResult2(@Field("qos[]")  ArrayList<ExamResultUploadQo> qos   );
+    Observable<LinkLinkNetInfo> uploadExamResult2(@Body Map<String, Object> map );
 
 
     /********************************************************************************
