@@ -13,7 +13,7 @@ import android.widget.FrameLayout;
 import android.widget.TextView;
 
 
-import com.spc.pose.demo.R;
+import com.ilinklink.app.fw.R;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;

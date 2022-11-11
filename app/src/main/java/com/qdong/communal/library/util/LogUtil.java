@@ -2,7 +2,7 @@ package com.qdong.communal.library.util;
 
 import android.util.Log;
 
-import com.spc.pose.demo.BuildConfig;
+import com.ilinklink.app.fw.BuildConfig;
 
 
 /**

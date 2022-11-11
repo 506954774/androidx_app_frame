@@ -16,7 +16,7 @@ import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
 import android.util.TypedValue;
 
-import com.spc.pose.demo.R;
+import com.ilinklink.app.fw.R;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.AppCompatImageView;

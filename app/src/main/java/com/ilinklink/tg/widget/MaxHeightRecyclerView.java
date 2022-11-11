@@ -5,7 +5,7 @@ import android.content.res.TypedArray;
 import android.util.AttributeSet;
 import android.view.View;
 
-import com.spc.pose.demo.R;
+import com.ilinklink.app.fw.R;
 
 import androidx.recyclerview.widget.RecyclerView;
 

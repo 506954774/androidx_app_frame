@@ -35,7 +35,7 @@ import android.widget.ImageView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.load.resource.bitmap.CenterCrop;
-import com.spc.pose.demo.R;
+import com.ilinklink.app.fw.R;
 
 
 import java.io.BufferedOutputStream;

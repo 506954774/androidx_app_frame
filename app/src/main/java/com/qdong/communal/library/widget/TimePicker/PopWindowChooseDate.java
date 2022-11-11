@@ -16,7 +16,7 @@ import com.qdong.communal.library.widget.TimePicker.timePicker.adapter.NumericWh
 import com.qdong.communal.library.widget.TimePicker.timePicker.interfaces.OnWheelScrollListener;
 import com.qdong.communal.library.widget.TimePicker.timePicker.interfaces.TimeChoseFinishedListener;
 import com.qdong.communal.library.widget.TimePicker.timePicker.view.WheelView;
-import com.spc.pose.demo.R;
+import com.ilinklink.app.fw.R;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;

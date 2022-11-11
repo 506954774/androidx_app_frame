@@ -16,8 +16,8 @@ import com.ilinklink.tg.interfaces.CallBack;
 import com.ilinklink.tg.utils.SdCardLogUtil;
 import com.ilinklink.tg.widget.CircularProgressView;
 import com.qdong.communal.library.util.BitmapUtil;
-import com.spc.pose.demo.R;
-import com.spc.pose.demo.databinding.DialogCustom3Binding;
+import com.ilinklink.app.fw.R;
+import com.ilinklink.app.fw.databinding.DialogCustom3Binding;
 
 import java.text.MessageFormat;
 

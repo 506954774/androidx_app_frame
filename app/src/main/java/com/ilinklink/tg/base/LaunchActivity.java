@@ -22,7 +22,7 @@ import com.qdong.communal.library.util.DensityUtil;
 import com.qdong.communal.library.util.LogUtil;
 import com.qdong.communal.library.util.NetworkUtil;
 import com.qdong.communal.library.util.SharedPreferencesUtil;
-import com.spc.pose.demo.R;
+import com.ilinklink.app.fw.R;
 import com.tbruyelle.rxpermissions2.Permission;
 
 import java.util.HashMap;

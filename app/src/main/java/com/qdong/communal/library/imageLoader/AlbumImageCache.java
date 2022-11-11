@@ -11,7 +11,7 @@ import android.util.LruCache;
 import android.widget.ImageView;
 
 
-import com.spc.pose.demo.R;
+import com.ilinklink.app.fw.R;
 
 import java.lang.ref.SoftReference;
 import java.util.LinkedHashMap;

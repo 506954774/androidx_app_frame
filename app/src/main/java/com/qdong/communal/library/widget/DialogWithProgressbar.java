@@ -8,7 +8,7 @@ import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import com.spc.pose.demo.R;
+import com.ilinklink.app.fw.R;
 
 import com.qdong.communal.library.util.LogUtil;
 import com.qdong.communal.library.widget.progressbar.NumberProgressBar;

@@ -30,7 +30,7 @@ import android.view.MotionEvent;
 import android.view.View;
 
 import com.ilinklink.tg.utils.LogUtil;
-import com.spc.pose.demo.R;
+import com.ilinklink.app.fw.R;
 
 import androidx.core.content.ContextCompat;
 

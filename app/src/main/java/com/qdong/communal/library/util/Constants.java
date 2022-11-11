@@ -13,7 +13,7 @@ package com.qdong.communal.library.util;
 import android.os.Environment;
 
 
-import com.spc.pose.demo.BuildConfig;
+import com.ilinklink.app.fw.BuildConfig;
 
 import java.io.File;
 

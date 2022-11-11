@@ -32,8 +32,8 @@ import android.widget.ImageView;
 import com.qdong.communal.library.util.Constants;
 import com.qdong.communal.library.util.FileUtils;
 import com.qdong.communal.library.util.LogUtil;
-import com.spc.pose.demo.BuildConfig;
-import com.spc.pose.demo.R;
+import com.ilinklink.app.fw.BuildConfig;
+import com.ilinklink.app.fw.R;
 
 import java.io.BufferedInputStream;
 import java.io.ByteArrayOutputStream;

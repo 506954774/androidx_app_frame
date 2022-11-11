@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.spc.pose.demo"
+    package="com.ilinklink.app.fw"
     android:installLocation="auto">
 
     <uses-sdk tools:overrideLibrary="
@@ -46,170 +46,43 @@
             android:name="com.google.mlkit.vision.DEPENDENCIES"
             android:value="barcode,face,ocr,ica" />
 
-        <activity
-            android:name=".preference.activity.LivePreviewActivity"
-            android:exported="true"
-            android:theme="@style/AppTheme">
-
-        </activity>
-
-        <activity
-            android:name=".preference.activity.SettingsActivity"
-            android:exported="false" />
-
 
         <activity
             android:name="com.ilinklink.tg.demo.list.CollectCourseActivity"
              >
-
-
-    </activity>
+       </activity>
 
         <activity
             android:name="com.ilinklink.tg.mvp.login.LoginActivity"
             android:screenOrientation="landscape"
              >
-
+        </activity>
 
     <!--实际的actiity ***************************************************************-->
     <!--实际的actiity ***************************************************************-->
     <!--实际的actiity start-->
 
-    </activity>
+
         <activity
             android:name="com.ilinklink.tg.mvp.launch.LauchActivity"
-            android:screenOrientation="landscape"
-             >
+            >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+
+
+
+    <activity
+        android:name="com.ilinklink.tg.demo.room.RoomTestActivity"
+        >
+
     </activity>
 
-        <activity
-            android:name="com.ilinklink.tg.mvp.init.InitActivity"
-            android:screenOrientation="landscape"
-             >
-
-    </activity>
-
-
-
-        <activity
-            android:name="com.ilinklink.tg.mvp.selectsubject.SelectSubjectActivity"
-            android:screenOrientation="landscape"
-            >
-
-
-
-        </activity>
-        <activity
-            android:name="com.ilinklink.tg.mvp.fuwocheng.FuwochengActivity"
-            android:screenOrientation="landscape"
-            >
-
-        </activity>
-
-        <activity
-            android:name="com.ilinklink.tg.mvp.shuanggang.ShuanggangActivity"
-            android:screenOrientation="landscape"
-            >
-
-        </activity>
-        <activity
-            android:name="com.ilinklink.tg.mvp.yintixiangshang.YintixiangshangActivity"
-            android:screenOrientation="landscape"
-            >
-
-        </activity>
-        <activity
-            android:name="com.ilinklink.tg.mvp.initfacefeatrue.InitFaceFeatrueActivity"
-            android:screenOrientation="landscape"
-            >
-
-        </activity>
-
-
-
-        <activity
-            android:name="com.ilinklink.tg.mvp.exam.BasePoseActivity"
-            android:screenOrientation="landscape"
-            >
-
-        </activity>
-
-        <activity
-            android:name="com.ilinklink.tg.mvp.exam.BasePoseActivity2"
-            android:screenOrientation="landscape"
-            >
-
-        </activity>
-
-        <activity
-            android:name="com.ilinklink.tg.mvp.exam.ExamActivity"
-            android:screenOrientation="landscape"
-            >
-
-        </activity>
-        <activity
-            android:name="com.ilinklink.tg.mvp.exam.ExamActivity2"
-            android:screenOrientation="landscape"
-            >
-
-        </activity>
-
-        <activity
-            android:name="com.ilinklink.tg.mvp.exam.setting.ExamSettingActivity"
-            android:screenOrientation="landscape"
-            android:windowSoftInputMode="stateVisible"
-            >
-
-        </activity>
 
         <!--实际的actiity ***************************************************************-->
-
-        <activity android:name="megvii.testfacepass.MainActivity"
-            android:screenOrientation="landscape"
-            >
-        </activity>
-        <activity android:name="com.ilinklink.tg.mvp.facerecognize.WsFaceRecognizeActivity"
-            android:screenOrientation="landscape"
-            >
-        </activity>
-
-
-        <activity
-            android:name="com.ilinklink.tg.mvp.initfacefeatrue.InitFaceFeatrueAct2"
-            android:screenOrientation="landscape"
-            >
-
-        </activity>
-        <activity
-            android:name="com.ilinklink.tg.mvp.initfacefeatrue.InitFaceFeatrueAct3"
-            android:screenOrientation="landscape"
-            >
-
-        </activity>
-        <activity
-            android:name="com.ilinklink.tg.mvp.stuexamindex.StudentExamIndexActivity"
-            android:screenOrientation="landscape"
-            >
-
-        </activity>
-        <activity
-            android:name="com.ilinklink.tg.mvp.facerecognize.FaceResultActivity"
-            android:screenOrientation="landscape"
-            >
-
-        </activity>
-
-        <activity android:name="com.ilinklink.tg.mvp.history.ExamListHistoryActivity"
-            android:screenOrientation="landscape"/>
-
-        <activity android:name="com.ilinklink.tg.mvp.history.ExamInfoHistoryActivity"
-            android:screenOrientation="landscape"/>
-        <!--实际的actiity ***************************************************************-->
-        <!--实际的actiity end-->
+        <!--实际的actiity end  -->
 
 
 

@@ -11,7 +11,7 @@ import android.widget.HorizontalScrollView;
 import android.widget.RadioButton;
 import android.widget.TextView;
 
-import com.spc.pose.demo.R;
+import com.ilinklink.app.fw.R;
 
 
 

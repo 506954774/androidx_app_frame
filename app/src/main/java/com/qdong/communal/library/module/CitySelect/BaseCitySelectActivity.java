@@ -19,7 +19,7 @@ import com.qdong.communal.library.util.PinyinComparator;
 import com.qdong.communal.library.widget.ClearEditText;
 import com.qdong.communal.library.widget.custommask.CustomMaskLayerView;
 import com.qdong.communal.library.widget.SideBar;
-import com.spc.pose.demo.R;
+import com.ilinklink.app.fw.R;
 
 import java.util.ArrayList;
 import java.util.Collections;

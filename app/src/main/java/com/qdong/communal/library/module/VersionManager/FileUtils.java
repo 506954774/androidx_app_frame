@@ -5,7 +5,7 @@ import android.os.Environment;
 
 
 import com.qdong.communal.library.util.LogUtil;
-import com.spc.pose.demo.BuildConfig;
+import com.ilinklink.app.fw.BuildConfig;
 
 import java.io.BufferedWriter;
 import java.io.File;

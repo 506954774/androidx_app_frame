@@ -10,7 +10,7 @@ import android.graphics.RectF;
 import android.graphics.Shader;
 import android.util.AttributeSet;
 
-import com.spc.pose.demo.R;
+import com.ilinklink.app.fw.R;
 
 import androidx.annotation.Nullable;
 

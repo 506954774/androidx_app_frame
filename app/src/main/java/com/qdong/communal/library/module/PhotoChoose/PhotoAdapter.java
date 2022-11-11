@@ -7,7 +7,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
-import com.spc.pose.demo.R;
+import com.ilinklink.app.fw.R;
 
 
 import java.util.ArrayList;

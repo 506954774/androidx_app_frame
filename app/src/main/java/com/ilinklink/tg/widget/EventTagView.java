@@ -7,7 +7,7 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.spc.pose.demo.R;
+import com.ilinklink.app.fw.R;
 
 import androidx.core.content.ContextCompat;
 

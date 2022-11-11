@@ -21,7 +21,7 @@ import com.qdong.communal.library.module.BaseRefreshableListFragment.adapter.Sim
 import com.qdong.communal.library.module.network.LinkLinkNetInfo;
 import com.qdong.communal.library.module.network.RxHelper;
 import com.qdong.communal.library.util.Constants;
-import com.spc.pose.demo.R;
+import com.ilinklink.app.fw.R;
 import com.tbruyelle.rxpermissions2.Permission;
 
 import java.util.HashMap;

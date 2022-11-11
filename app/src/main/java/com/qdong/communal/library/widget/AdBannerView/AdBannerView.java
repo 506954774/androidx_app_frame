@@ -17,7 +17,7 @@ import android.widget.ImageView.ScaleType;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.spc.pose.demo.R;
+import com.ilinklink.app.fw.R;
 import com.qdong.communal.library.util.BitmapUtil;
 
 import java.util.ArrayList;

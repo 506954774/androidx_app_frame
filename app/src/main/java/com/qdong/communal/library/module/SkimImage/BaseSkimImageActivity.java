@@ -10,7 +10,7 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.spc.pose.demo.R;
+import com.ilinklink.app.fw.R;
 
 import com.qdong.communal.library.module.base.BaseActivity;
 

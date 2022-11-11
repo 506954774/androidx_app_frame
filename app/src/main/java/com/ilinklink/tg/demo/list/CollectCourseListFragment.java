@@ -19,8 +19,8 @@ import com.qdong.communal.library.module.BaseRefreshableListFragment.adapter.Bas
 import com.qdong.communal.library.module.network.LinkLinkApi;
 import com.qdong.communal.library.module.network.LinkLinkNetInfo;
 import com.qdong.communal.library.module.network.RetrofitAPIManager;
-import com.spc.pose.demo.BR;
-import com.spc.pose.demo.R;
+import com.ilinklink.app.fw.BR;
+import com.ilinklink.app.fw.R;
 
 import org.json.JSONException;
 

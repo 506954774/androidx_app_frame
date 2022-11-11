@@ -28,7 +28,7 @@ import android.widget.TextView;
 
 import com.qdong.communal.library.util.DensityUtil;
 import com.qdong.communal.library.util.LogUtil;
-import com.spc.pose.demo.R;
+import com.ilinklink.app.fw.R;
 
 
 /**

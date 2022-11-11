@@ -7,6 +7,7 @@ import android.content.res.TypedArray;
 import android.util.AttributeSet;
 import android.widget.LinearLayout;
 
+import com.ilinklink.app.fw.R;
 import com.ilinklink.tg.utils.LogUtil;
 
 /**
@@ -37,7 +38,7 @@ public class CustomClickLinearLayout extends LinearLayout {
         super(context, attrs);
         mResources = getResources();
         TypedArray mTypedArray = context.obtainStyledAttributes(attrs,
-                com.spc.pose.demo.R.styleable.ClickView);
+                 R.styleable.ClickView);
         init(mTypedArray);
     }
 
@@ -48,7 +49,7 @@ public class CustomClickLinearLayout extends LinearLayout {
         mResources = getResources();
         //fake();
         TypedArray mTypedArray = context.obtainStyledAttributes(attrs,
-                com.spc.pose.demo.R.styleable.ClickView);
+                 R.styleable.ClickView);
         init(mTypedArray);
 
     }
@@ -82,7 +83,7 @@ public class CustomClickLinearLayout extends LinearLayout {
      * 初始化一些常量
      */
     private void init(TypedArray mTypedArray) {
-        mCustomId=mTypedArray.getString(com.spc.pose.demo.R.styleable.ClickView_customId);
+        mCustomId=mTypedArray.getString( R.styleable.ClickView_customId);
         mTypedArray.recycle();
     }
 

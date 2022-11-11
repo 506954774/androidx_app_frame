@@ -28,7 +28,7 @@ import com.qdong.communal.library.util.FileUtils;
 import com.qdong.communal.library.util.SharedPreferencesUtil;
 import com.qdong.communal.library.widget.CustomTagView.Tag;
 import com.qdong.communal.library.widget.StarView4DataBinding.StarView4DataBinding;
-import com.spc.pose.demo.R;
+import com.ilinklink.app.fw.R;
 
 import java.io.ByteArrayOutputStream;
 import java.io.FileInputStream;

@@ -27,7 +27,7 @@ import android.graphics.Region;
 import android.graphics.drawable.Drawable;
 import android.view.View;
 
-import com.spc.pose.demo.R;
+import com.ilinklink.app.fw.R;
 
 
 // This class is used by CropImage to display a highlighted cropping rectangle

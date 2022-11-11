@@ -10,7 +10,7 @@ import android.widget.TextView;
 
 import com.ilinklink.tg.communal.AppLoader;
 import com.qdong.communal.library.util.BitmapUtil;
-import com.spc.pose.demo.R;
+import com.ilinklink.app.fw.R;
 
 /**
  * FileName: CourseView

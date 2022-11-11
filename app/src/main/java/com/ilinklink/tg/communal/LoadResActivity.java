@@ -7,7 +7,7 @@ import android.util.Log;
 import android.view.Window;
 import android.view.WindowManager;
 
-import com.spc.pose.demo.R;
+import com.ilinklink.app.fw.R;
 
 import androidx.multidex.MultiDex;
 

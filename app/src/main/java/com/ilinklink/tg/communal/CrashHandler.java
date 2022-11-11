@@ -14,7 +14,7 @@ import com.ilinklink.tg.utils.Constants;
 import com.ilinklink.tg.utils.LogUtil;
 import com.qdong.communal.library.util.BitmapUtil;
 import com.qdong.communal.library.util.SharedPreferencesUtil;
-import com.spc.pose.demo.R;
+import com.ilinklink.app.fw.R;
 
 import java.io.File;
 import java.io.FileOutputStream;

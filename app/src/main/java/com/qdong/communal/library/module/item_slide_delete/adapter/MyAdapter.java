@@ -6,7 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.spc.pose.demo.R;
+import com.ilinklink.app.fw.R;
 
 import com.qdong.communal.library.module.item_slide_delete.SlidingButtonView;
 import com.qdong.communal.library.util.DensityUtil;

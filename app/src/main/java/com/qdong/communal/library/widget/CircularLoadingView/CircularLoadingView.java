@@ -13,7 +13,7 @@ import android.view.animation.AccelerateDecelerateInterpolator;
 import android.view.animation.Interpolator;
 import android.widget.RelativeLayout;
 
-import com.spc.pose.demo.R;
+import com.ilinklink.app.fw.R;
 
 import com.qdong.communal.library.widget.CircularLoadingView.painter.InternalCirclePainter;
 import com.qdong.communal.library.widget.CircularLoadingView.painter.InternalCirclePainterImp2;

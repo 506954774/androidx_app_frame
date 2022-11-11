@@ -25,7 +25,7 @@ import android.util.Log;
 import android.widget.Toast;
 
 
-import com.spc.pose.demo.BuildConfig;
+import com.ilinklink.app.fw.BuildConfig;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;

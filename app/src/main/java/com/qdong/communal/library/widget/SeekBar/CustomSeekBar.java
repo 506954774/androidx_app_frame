@@ -16,7 +16,7 @@ import android.widget.TextView;
 
 
 import com.qdong.communal.library.util.DateFormatUtil;
-import com.spc.pose.demo.R;
+import com.ilinklink.app.fw.R;
 
 /**
  *

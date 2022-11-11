@@ -4,7 +4,7 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Environment;
 
-import com.spc.pose.demo.R;
+import com.ilinklink.app.fw.R;
 
 
 import java.io.File;

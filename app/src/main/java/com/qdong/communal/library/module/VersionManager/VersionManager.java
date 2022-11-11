@@ -17,7 +17,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 
-import com.spc.pose.demo.R;
+import com.ilinklink.app.fw.R;
 
 import com.qdong.communal.library.module.network.LinkLinkNetInfo;
 import com.qdong.communal.library.module.network.RetrofitAPIManager;

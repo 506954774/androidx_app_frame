@@ -39,7 +39,7 @@ import com.qdong.communal.library.widget.TimePicker.timePicker.controller.WheelS
 import com.qdong.communal.library.widget.TimePicker.timePicker.interfaces.OnWheelChangedListener;
 import com.qdong.communal.library.widget.TimePicker.timePicker.interfaces.OnWheelClickedListener;
 import com.qdong.communal.library.widget.TimePicker.timePicker.interfaces.OnWheelScrollListener;
-import com.spc.pose.demo.R;
+import com.ilinklink.app.fw.R;
 
 import java.util.HashMap;
 import java.util.LinkedList;

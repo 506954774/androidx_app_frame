@@ -12,7 +12,7 @@ import android.widget.PopupWindow;
 
 import com.qdong.communal.library.widget.TimePicker.timePicker.adapter.NumericWheelAdapter;
 import com.qdong.communal.library.widget.TimePicker.timePicker.view.WheelView;
-import com.spc.pose.demo.R;
+import com.ilinklink.app.fw.R;
 
 /**
  * @author LHD

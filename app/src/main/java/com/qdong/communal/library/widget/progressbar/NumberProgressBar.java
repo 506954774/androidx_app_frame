@@ -11,7 +11,7 @@ import android.os.Parcelable;
 import android.util.AttributeSet;
 import android.view.View;
 
-import com.spc.pose.demo.R;
+import com.ilinklink.app.fw.R;
 
 
 import static com.qdong.communal.library.widget.progressbar.NumberProgressBar.ProgressTextVisibility.Invisible;

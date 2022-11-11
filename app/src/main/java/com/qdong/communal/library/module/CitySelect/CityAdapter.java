@@ -12,7 +12,7 @@ import android.widget.LinearLayout;
 import android.widget.SectionIndexer;
 import android.widget.TextView;
 
-import com.spc.pose.demo.R;
+import com.ilinklink.app.fw.R;
 
 import com.qdong.communal.library.util.Constants;
 import com.qdong.communal.library.util.SharedPreferencesUtil;

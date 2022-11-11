@@ -10,7 +10,6 @@ import com.ilinklink.tg.entity.ExamInfoResponse;
 import com.ilinklink.tg.entity.ExamResultUploadQo;
 import com.ilinklink.tg.entity.SubjectExamResult;
 import com.ilinklink.tg.green_dao.DBHelper;
-import com.ilinklink.tg.mvp.exam.BasePoseActivity2;
 import com.ilinklink.tg.utils.CollectionUtils;
 import com.ilinklink.tg.utils.Json;
 import com.ilinklink.tg.utils.LogUtil;
@@ -27,7 +26,6 @@ import rx.Observer;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
-import static com.ilinklink.tg.mvp.exam.BasePoseActivity2.POSE_DETECTION_1;
 
 /**
  * ExamResultUploadHanlde
@@ -112,29 +110,7 @@ public class ExamResultUploadHanlde {
                                 qo.setSuId(subject.getSuId());
 
                                 try {
-                                    //   分数格式：     String score=count+","+pass;
-                                    if (subject.getSuName().equals(BasePoseActivity2.POSE_DETECTION_1)) {
 
-                                       // Log.i(TAG,"onExamFinished,===============设置规则,仰卧起坐" );
-                                        qo.setEdExamineNum(Integer.parseInt(score.getSithUpsScore().split(",")[0]));
-
-                                    } else if (subject.getSuName().equals(BasePoseActivity2.POSE_DETECTION_2)) {
-                                       // Log.i(TAG,"onExamFinished,===============设置规则,俯卧撑" );
-
-                                        qo.setEdExamineNum(Integer.parseInt(score.getPushUpsScore().split(",")[0]));
-
-                                    } else if (subject.getSuName().equals(BasePoseActivity2.POSE_DETECTION_3)) {
-                                       // Log.i(TAG,"onExamFinished,===============设置规则,单杠引体向上" );
-
-                                        qo.setEdExamineNum(Integer.parseInt(score.getPullUpsScore().split(",")[0]));
-
-
-                                    } else if (subject.getSuName().equals(BasePoseActivity2.POSE_DETECTION_4)) {
-                                       // Log.i(TAG,"onExamFinished,===============设置规则,双杠臂屈伸" );
-
-                                        qo.setEdExamineNum(Integer.parseInt(score.getParallelBarsScore().split(",")[0]));
-
-                                    }
                                 } catch (Exception e) {
                                     LogUtil.i(TAG,"解析分数出错：score:"+score );
                                 }

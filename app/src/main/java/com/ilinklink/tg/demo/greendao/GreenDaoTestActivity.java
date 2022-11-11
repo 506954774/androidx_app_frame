@@ -6,7 +6,7 @@ import com.ilinklink.tg.demo.list.CollectCourseListFragment;
 import com.ilinklink.tg.green_dao.DBHelper;
 import com.ilinklink.tg.widget.WifiView;
 import com.qdong.communal.library.util.LogUtil;
-import com.spc.pose.demo.R;
+import com.ilinklink.app.fw.R;
 
 import java.util.List;
 

@@ -17,7 +17,7 @@ import android.widget.TextView;
 
 
 import com.qdong.communal.library.widget.RefreshRecyclerView.manager.RecyclerMode;
-import com.spc.pose.demo.R;
+import com.ilinklink.app.fw.R;
 
 
 /**

@@ -25,7 +25,7 @@ import android.util.Log;
 import android.util.TypedValue;
 import android.view.View;
 
-import com.spc.pose.demo.R;
+import com.ilinklink.app.fw.R;
 
 import androidx.core.content.ContextCompat;
 

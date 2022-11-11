@@ -8,7 +8,7 @@ import android.util.AttributeSet;
 import android.widget.Button;
 
 import com.ilinklink.tg.utils.LogUtil;
-import com.spc.pose.demo.R;
+import com.ilinklink.app.fw.R;
 
 /**
  * 埋点控件,友盟统计点击事件
@@ -86,7 +86,7 @@ public class CustomClickBtn extends Button {
      * 初始化一些常量
      */
     private void init(TypedArray mTypedArray) {
-        mCustomId=mTypedArray.getString(com.spc.pose.demo.R.styleable.ClickView_customId);
+        mCustomId=mTypedArray.getString( R.styleable.ClickView_customId);
         mTypedArray.recycle();
     }
 

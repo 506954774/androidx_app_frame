@@ -11,7 +11,7 @@ import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
 
 
-import com.spc.pose.demo.R;
+import com.ilinklink.app.fw.R;
 
 import cn.bingoogolapple.badgeview.BGABadgeRadioButton;
 

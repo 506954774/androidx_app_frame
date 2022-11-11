@@ -154,7 +154,7 @@ android {
             abiFilters "armeabi-v7a" // "armeabi", "x86", "arm64-v8a"
         }
 
-        applicationId "com.ilinklink.ztsb.easy"
+        applicationId "com.ilinklink.app.fw"
         minSdkVersion 23
         multiDexEnabled true
         targetSdkVersion 30
@@ -257,7 +257,7 @@ repositories {
 
 dependencies {
     implementation fileTree( include: ['*.jar','*.aar'], dir: 'libs')
-    compileOnly(name:'poseSDK-release5',ext:'aar')
+
 
     implementation 'androidx.constraintlayout:constraintlayout:1.1.2'
 
@@ -265,20 +265,9 @@ dependencies {
     implementation 'org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.4.31'
     implementation 'androidx.multidex:multidex:2.0.1'
 
-    // Barcode model
-    implementation 'com.google.mlkit:barcode-scanning:17.0.0'
-    // Or comment the dependency above and uncomment the dependency below to
-    // use unbundled model that depends on Google Play Services
-    // implementation 'com.google.android.gms:play-services-mlkit-barcode-scanning:16.2.1'
 
-    // Object detection feature with bundled default classifier
-    implementation 'com.google.mlkit:object-detection:16.2.6'
 
-    // Object detection feature with custom classifier support
-    implementation 'com.google.mlkit:object-detection-custom:16.3.3'
 
-    // Face features
-    implementation 'com.google.mlkit:face-detection:16.1.2'
     // Or comment the dependency above and uncomment the dependency below to
     // use unbundled model that depends on Google Play Services
     // implementation 'com.google.android.gms:play-services-mlkit-face-detection:16.2.0'
@@ -287,28 +276,8 @@ dependencies {
     implementation 'com.google.android.gms:play-services-mlkit-text-recognition:17.0.0'
     // Or comment the dependency above and uncomment the dependency below to
     // use bundled model.
-    // implementation 'com.google.mlkit:text-recognition:16.0.0-beta1'
-    implementation 'com.google.mlkit:text-recognition-chinese:16.0.0-beta1'
-    implementation 'com.google.mlkit:text-recognition-devanagari:16.0.0-beta1'
-    implementation 'com.google.mlkit:text-recognition-japanese:16.0.0-beta1'
-    implementation 'com.google.mlkit:text-recognition-korean:16.0.0-beta1'
 
-    // Image labeling
-    implementation 'com.google.mlkit:image-labeling:17.0.5'
-    // Or comment the dependency above and uncomment the dependency below to
-    // use unbundled model that depends on Google Play Services
-    // implementation 'com.google.android.gms:play-services-mlkit-image-labeling:16.0.5'
 
-    // Image labeling custom
-    implementation 'com.google.mlkit:image-labeling-custom:16.3.1'
-
-    // Pose detection with default models
-    implementation 'com.google.mlkit:pose-detection:17.0.1-beta5'
-    // Pose detection with accurate models
-    implementation 'com.google.mlkit:pose-detection-accurate:17.0.1-beta5'
-
-    // Selfie segmentation
-    implementation 'com.google.mlkit:segmentation-selfie:16.0.0-beta2'
 
     implementation 'com.google.mlkit:camera:16.0.0-beta1'
 
@@ -320,15 +289,8 @@ dependencies {
 
     // For how to setup gradle dependencies in Android X, see:
     // https://developer.android.com/training/testing/set-up-project#gradle-dependencies
-    // Core library
-    androidTestImplementation 'androidx.test:core:1.3.0'
 
-    // AndroidJUnitRunner and JUnit Rules
-    androidTestImplementation 'androidx.test:runner:1.3.0'
-    androidTestImplementation 'androidx.test:rules:1.3.0'
 
-    // Assertions
-    androidTestImplementation 'androidx.test.ext:junit:1.1.2'
 
     // ViewModel and LiveData
     implementation "androidx.lifecycle:lifecycle-livedata:2.3.1"
@@ -411,10 +373,7 @@ dependencies {
 //    api 'com.github.chrisbanes:PhotoView:2.1.4'
 
 
-    /***
-     * 微视人脸识别start
-     */
-    compileOnly(name: 'FacePassAndroidSDK-year-release', ext: 'aar')
+
     compileOnly('org.apache.httpcomponents:httpmime:4.3') {
         exclude module: "httpclient"
     }
@@ -422,9 +381,10 @@ dependencies {
     api 'org.apache.httpcomponents:httpcore:4.3.3'
 
 
-    /***
-     * 微视人脸识别end
-     */
+    //要想使用room需要导入room的支持
+    def room_version = "2.2.0-alpha01"
+    implementation "androidx.room:room-runtime:$room_version"
+    annotationProcessor "androidx.room:room-compiler:$room_version" //room的注解解释器
 }
 
 configurations {

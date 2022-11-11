@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.text.TextUtils;
 
 import com.qdong.communal.library.util.SharedPreferencesUtil;
-import com.spc.posesdk.bean.ActionRules;
 
 import java.util.ArrayList;
 

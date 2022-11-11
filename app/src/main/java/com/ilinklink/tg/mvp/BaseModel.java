@@ -12,7 +12,7 @@ import com.ilinklink.tg.utils.Tools;
 import com.qdong.communal.library.module.network.LinkLinkApi;
 import com.qdong.communal.library.module.network.LinkLinkNetInfo;
 import com.qdong.communal.library.module.network.RxHelper;
-import com.spc.pose.demo.R;
+import com.ilinklink.app.fw.R;
 
 import java.util.ArrayList;
 import java.util.HashMap;

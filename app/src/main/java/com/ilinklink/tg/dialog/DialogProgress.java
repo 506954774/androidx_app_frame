@@ -13,8 +13,8 @@ import android.view.WindowManager;
 
 
 import com.ilinklink.tg.interfaces.CallBack;
-import com.spc.pose.demo.R;
-import com.spc.pose.demo.databinding.DialogProgressBinding;
+import com.ilinklink.app.fw.R;
+import com.ilinklink.app.fw.databinding.DialogProgressBinding;
 
 import androidx.databinding.DataBindingUtil;
 

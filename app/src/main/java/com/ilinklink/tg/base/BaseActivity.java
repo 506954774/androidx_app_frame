@@ -60,7 +60,7 @@ import com.qdong.communal.library.util.DateFormatUtil;
 import com.qdong.communal.library.util.SharedPreferencesUtil;
 import com.qdong.communal.library.widget.custommask.CustomMaskLayerView;
 import com.qdong.communal.library.widget.custommask.CustomMaskLayerView2;
-import com.spc.pose.demo.R;
+import com.ilinklink.app.fw.R;
 import com.tbruyelle.rxpermissions2.Permission;
 
 import org.json.JSONException;

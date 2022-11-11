@@ -10,7 +10,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
-import com.spc.pose.demo.R;
+import com.ilinklink.app.fw.R;
 
 
 import java.util.ArrayList;

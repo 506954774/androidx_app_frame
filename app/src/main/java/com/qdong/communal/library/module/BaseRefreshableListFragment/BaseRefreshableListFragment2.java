@@ -28,7 +28,7 @@ import com.qdong.communal.library.util.NetworkUtil;
 import com.qdong.communal.library.widget.custommask.CustomMaskLayerView;
 import com.qdong.communal.library.widget.RefreshRecyclerView.manager.RecyclerMode;
 import com.qdong.communal.library.widget.refresh.CGBHeader;
-import com.spc.pose.demo.R;
+import com.ilinklink.app.fw.R;
 
 import org.json.JSONException;
 

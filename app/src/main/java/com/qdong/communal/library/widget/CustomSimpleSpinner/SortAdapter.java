@@ -10,7 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.qdong.communal.library.widget.CustomTagView.Tag;
-import com.spc.pose.demo.R;
+import com.ilinklink.app.fw.R;
 
 import java.util.ArrayList;
 

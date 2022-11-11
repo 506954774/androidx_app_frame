@@ -28,7 +28,7 @@ import android.view.View;
 import android.view.animation.DecelerateInterpolator;
 
 
-import com.spc.pose.demo.R;
+import com.ilinklink.app.fw.R;
 
 import java.lang.ref.WeakReference;
 import java.math.BigDecimal;

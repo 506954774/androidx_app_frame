@@ -22,7 +22,7 @@ import android.view.animation.Interpolator;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 
-import com.spc.pose.demo.R;
+import com.ilinklink.app.fw.R;
 
 
 

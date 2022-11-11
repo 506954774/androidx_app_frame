@@ -27,7 +27,7 @@ import android.util.TypedValue;
 import android.view.View;
 
 
-import com.spc.pose.demo.R;
+import com.ilinklink.app.fw.R;
 
 import java.lang.ref.WeakReference;
 

@@ -5,7 +5,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.view.View;
 
-import com.spc.pose.demo.R;
+import com.ilinklink.app.fw.R;
 
 /**
  * 上传数据成功dialog

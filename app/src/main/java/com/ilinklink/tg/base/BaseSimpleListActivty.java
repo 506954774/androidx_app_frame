@@ -4,8 +4,8 @@ import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 
-import com.spc.pose.demo.R;
-import com.spc.pose.demo.databinding.BaseActivitySimpleListBinding;
+import com.ilinklink.app.fw.R;
+import com.ilinklink.app.fw.databinding.BaseActivitySimpleListBinding;
 
 import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;

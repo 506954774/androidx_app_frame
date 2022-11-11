@@ -8,7 +8,7 @@ import android.graphics.YuvImage;
 import android.os.Environment;
 import android.util.Log;
 
-import com.spc.pose.demo.BuildConfig;
+import com.ilinklink.app.fw.BuildConfig;
 
 import java.io.BufferedInputStream;
 import java.io.ByteArrayInputStream;

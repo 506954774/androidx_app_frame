@@ -30,7 +30,7 @@ import com.qdong.communal.library.widget.RefreshRecyclerView.listener.OnPullDown
 import com.qdong.communal.library.widget.RefreshRecyclerView.manager.RecyclerMode;
 import com.qdong.communal.library.widget.RefreshRecyclerView.manager.RecyclerViewManager;
 import com.qdong.communal.library.widget.RefreshRecyclerView.manager.RefreshRecyclerAdapterManager;
-import com.spc.pose.demo.R;
+import com.ilinklink.app.fw.R;
 
 import org.json.JSONException;
 

@@ -13,7 +13,7 @@ import com.ilinklink.tg.utils.Json;
 import com.ilinklink.tg.utils.LogUtil;
 import com.ilinklink.tg.utils.ToastHelper;
 import com.qdong.communal.library.module.network.LinkLinkNetInfo;
-import com.spc.pose.demo.R;
+import com.ilinklink.app.fw.R;
 
 
 import java.util.Map;

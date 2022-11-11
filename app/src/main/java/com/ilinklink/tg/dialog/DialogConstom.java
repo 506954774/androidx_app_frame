@@ -18,8 +18,8 @@ import android.view.WindowManager;
 
 
 import com.ilinklink.tg.interfaces.CallBack;
-import com.spc.pose.demo.R;
-import com.spc.pose.demo.databinding.DialogCustomBinding;
+import com.ilinklink.app.fw.R;
+import com.ilinklink.app.fw.databinding.DialogCustomBinding;
 
 import androidx.databinding.DataBindingUtil;
 

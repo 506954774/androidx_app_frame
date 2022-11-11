@@ -42,7 +42,7 @@ import com.qdong.communal.library.module.network.LinkLinkNetInfo;
 import com.qdong.communal.library.module.network.RetrofitAPIManager;
 import com.qdong.communal.library.module.network.RxHelper;
 import com.qdong.communal.library.widget.custommask.CustomMaskLayerView;
-import com.spc.pose.demo.R;
+import com.ilinklink.app.fw.R;
 import com.tbruyelle.rxpermissions2.Permission;
 
 

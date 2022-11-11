@@ -11,7 +11,7 @@ import com.qdong.communal.library.util.Constants;
 import com.qdong.communal.library.util.JsonUtil;
 import com.qdong.communal.library.util.LogUtil;
 import com.qdong.communal.library.util.SharedPreferencesUtil;
-import com.spc.pose.demo.BuildConfig;
+import com.ilinklink.app.fw.BuildConfig;
 
 import java.io.IOException;
 import java.util.HashMap;

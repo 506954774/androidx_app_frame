@@ -3,7 +3,7 @@ package com.qdong.communal.library.util;
 import android.content.Context;
 import android.content.SharedPreferences;
 
-import com.spc.pose.demo.BuildConfig;
+import com.ilinklink.app.fw.BuildConfig;
 
 
 public class SharedPreferencesUtil {

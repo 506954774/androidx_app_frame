@@ -7,8 +7,8 @@ import com.ilinklink.tg.entity.RecommendCourse;
 import com.qdong.communal.library.module.BaseRefreshableListFragment.adapter.BaseViewHolder2;
 import com.qdong.communal.library.module.BaseRefreshableListFragment.adapter.CustomSingleQuickAdapter;
 import com.qdong.communal.library.util.BitmapUtil;
-import com.spc.pose.demo.R;
-import com.spc.pose.demo.databinding.ItemCollectCourseBinding;
+import com.ilinklink.app.fw.R;
+import com.ilinklink.app.fw.databinding.ItemCollectCourseBinding;
 
 import java.util.List;
 

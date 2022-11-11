@@ -10,7 +10,8 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.spc.pose.demo.R;
+import com.ilinklink.app.fw.R;
+
 
 
 
