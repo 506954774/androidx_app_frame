@@ -1,1 +1,1 @@
-pad端demo，仅供前期pad端边缘计算调试用
+androidx,app开发框架
